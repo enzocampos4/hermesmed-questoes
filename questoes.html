@@ -179,14 +179,12 @@
   .explicacao strong { color: var(--accent2); display: block; margin-bottom: 6px; font-size: 0.85rem; }
   .explicacao p { line-height: 1.6; font-size: 0.9rem; color: #ccc; }
   .explicacao .exp-images { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
-  .explicacao .exp-images img,
-  #qImagens img {
+  .explicacao .exp-images img {
     max-width: 100%; border-radius: 12px; cursor: pointer;
     border: 1px solid rgba(255,255,255,0.06);
     transition: 0.2s;
   }
-  .explicacao .exp-images img:hover,
-  #qImagens img:hover { opacity: 0.9; transform: scale(1.01); }
+  .explicacao .exp-images img:hover { opacity: 0.9; transform: scale(1.01); }
 
   /* Action buttons */
   .actions {
@@ -389,7 +387,6 @@
         <span class="tag" id="qDificuldade"></span>
       </div>
       <div class="enunciado" id="qEnunciado"></div>
-      <div id="qImagens" style="margin-bottom:16px;"></div>
       <div class="alternativas" id="qAlternativas"></div>
       <div class="explicacao" id="qExplicacao">
         <strong>📖 Explicação</strong>
@@ -655,23 +652,6 @@ function showQuestion(index) {
 
   // Enunciado
   document.getElementById('qEnunciado').innerHTML = q.enunciado;
-
-  // Imagens da questão
-  const imgContainer = document.getElementById('qImagens');
-  imgContainer.innerHTML = '';
-  if (q.imagens && q.imagens.length > 0) {
-    q.imagens.forEach(src => {
-      const wrapper = document.createElement('div');
-      wrapper.style.cssText = 'margin-bottom:8px;';
-      const img = document.createElement('img');
-      img.src = src;
-      img.style.cssText = 'max-width:100%;border-radius:12px;cursor:pointer;border:1px solid rgba(255,255,255,0.06);';
-      img.onclick = () => window.open(src, '_blank');
-      img.loading = 'lazy';
-      wrapper.appendChild(img);
-      imgContainer.appendChild(wrapper);
-    });
-  }
 
   // Alternativas
   const altsEl = document.getElementById('qAlternativas');
