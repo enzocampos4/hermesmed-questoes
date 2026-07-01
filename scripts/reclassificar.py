@@ -27,10 +27,10 @@ AREA_PDF_MAP = {
     'Pediatria': 'pediatria',
     'Ginecologia e Obstetrícia': None,  # will split below
     'Medicina Preventiva': 'medicina-preventiva',
-    'Oftalmologia': 'oftalmologia',
-    'Ortopedia': 'ortopedia',
-    'Otorrinolaringologia': 'otorrino',
-    'Psiquiatria': 'psiquiatria',
+    'Oftalmologia': 'clinica-medica',
+    'Ortopedia': 'clinica-medica',
+    'Otorrinolaringologia': 'clinica-medica',
+    'Psiquiatria': 'clinica-medica',
     'Dermatologia': 'clinica-medica',
     'Nefrologia': 'clinica-medica',
     'Neurologia': 'clinica-medica',
@@ -42,11 +42,22 @@ AREA_PDF_MAP = {
     'Endocrinologia': 'clinica-medica',
     'Hematologia': 'clinica-medica',
     'Gastroenterologia': 'clinica-medica',
-    'Pediatria -  Otorrinolaringologia': 'otorrino',
+    'Pediatria -  Otorrinolaringologia': 'clinica-medica',
     'Cirurgia - Hepatologia': 'cirurgia',
 }
 
-STANDALONE_AREAS = {k: v['nome'] for k, v in HIERARCHY.items() if k not in ('cirurgia', 'clinica-medica', 'ginecologia', 'obstetricia', 'medicina-preventiva', 'pediatria')}
+# Specialties that will be folded into Clínica Médica
+SUBCATEGORY_OF_CLINICA = ['oftalmologia', 'ortopedia', 'otorrino', 'psiquiatria']
+
+# Build SUBAREA_KW entries for specialties folded into clinica-medica
+CLINICA_SPECIALTY_KW = {
+    'Otorrinolaringologia': ['otite', 'otorrino', 'amigdalite', 'faringite', 'tonsilite', 'ouvido', 'audição', 'surdez', 'zumbido', 'labirintite', 'sinusite', 'rinite', 'tuba auditiva', 'orelha', 'nariz', 'garganta', 'laringe', 'faringe', 'petéquias no palato', 'exsudato purulento', 'penicilina benzatina'],
+    'Psiquiatria': ['psiquiatria', 'psiquiátrica', 'transtorno mental', 'depressão', 'ansiedade', 'abstinência alcoólica', 'benzodiazepínico', 'antidepressivo', 'antipsicótico', 'internação psiquiátrica', 'lítio', 'suicídio', 'delirium', 'demência psiquiátrica', 'transtorno de personalidade', 'transtorno do pânico', 'transtorno obsessivo-compulsivo', 'transtorno bipolar', 'alucinação', 'delírio', 'manía'],
+    'Ortopedia': ['ortopedia', 'ortopédico', 'fratura', 'luxação', 'osso', 'articulação', 'coluna', 'instabilidade atlantoaxial', 'síndrome de down ortopedia', 'pé cavo', 'pé plano', 'geno valgo', 'sarcopenia', 'osteopenia', 'quadril', 'joelho'],
+    'Oftalmologia': ['oftalmologia', 'oftálmico', 'olho', 'visão', 'catarata', 'glaucoma', 'retina', 'córnea', 'conjuntivite', 'ceratocone', 'retinopatia', 'estrabismo', 'pterígio'],
+}
+
+STANDALONE_AREAS = {k: v['nome'] for k, v in HIERARCHY.items() if k not in ('cirurgia', 'clinica-medica', 'ginecologia', 'obstetricia', 'medicina-preventiva', 'pediatria') and k not in SUBCATEGORY_OF_CLINICA}
 
 # ─── 3. Ginecologia vs Obstetrícia classifier ───
 GO_KEYWORDS = {
@@ -155,6 +166,10 @@ SUBAREA_KW = {
         'Neurologia': ['avc', 'derrame', 'cefaleia', 'convulsão', 'epilepsia', 'demência', 'parkinson', 'alzheimer', 'esclerose múltipla', 'miastenia', 'coma'],
         'Pneumologia': ['pulmonar', 'asma', 'dpoc', 'pleural', 'tromboembolismo', 'tep', 'câncer de pulmão', 'pneumotórax', 'bronquiectasia'],
         'Reumatologia': ['artrite', 'lúpus', 'vasculite', 'gota', 'espondilite', 'reumatóide', 'síndrome de sjögren', 'esclerodermia', 'dermatomiosite'],
+        'Otorrinolaringologia': ['otite', 'amigdalite', 'faringite', 'tonsilite', 'ouvido', 'surdez', 'zumbido', 'labirintite', 'sinusite', 'rinite', 'tuba auditiva', 'exsudato purulento', 'penicilina benzatina'],
+        'Psiquiatria': ['psiquiatria', 'psiquiátrica', 'transtorno mental', 'depressão', 'ansiedade', 'abstinência alcoólica', 'benzodiazepínico', 'antidepressivo', 'antipsicótico', 'internação psiquiátrica', 'delirium', 'alucinação'],
+        'Ortopedia': ['ortopedia', 'ortopédico', 'fratura', 'luxação', 'instabilidade atlantoaxial', 'síndrome de down ortopedia', 'pé cavo', 'pé plano', 'geno valgo', 'sarcopenia', 'osteopenia'],
+        'Oftalmologia': ['oftalmologia', 'oftálmico', 'catarata', 'glaucoma', 'retina', 'córnea', 'conjuntivite', 'retinopatia', 'estrabismo'],
     },
     'ginecologia': {
         'Ginecologia básica': ['consulta ginecológica', 'exame ginecológico', 'preventivo', 'papanicolau'],

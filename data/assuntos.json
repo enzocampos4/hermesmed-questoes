@@ -68,7 +68,7 @@
   },
   "clinica-medica": {
     "nome": "Clínica Médica",
-    "total": 149,
+    "total": 154,
     "subcategorias": {
       "cardiologia": {
         "nome": "Cardiologia",
@@ -113,6 +113,22 @@
       "reumatologia": {
         "nome": "Reumatologia",
         "total": 3
+      },
+      "otorrinolaringologia": {
+        "nome": "Otorrinolaringologia",
+        "total": 2
+      },
+      "ortopedia": {
+        "nome": "Ortopedia",
+        "total": 1
+      },
+      "psiquiatria": {
+        "nome": "Psiquiatria",
+        "total": 2
+      },
+      "oftalmologia": {
+        "nome": "Oftalmologia",
+        "total": 0
       }
     },
     "subdetalhes": {
@@ -455,30 +471,6 @@
         "total": 2
       }
     },
-    "subdetalhes": {}
-  },
-  "oftalmologia": {
-    "nome": "Oftalmologia",
-    "total": 0,
-    "subcategorias": {},
-    "subdetalhes": {}
-  },
-  "ortopedia": {
-    "nome": "Ortopedia",
-    "total": 1,
-    "subcategorias": {},
-    "subdetalhes": {}
-  },
-  "otorrino": {
-    "nome": "Otorrinolaringologia",
-    "total": 2,
-    "subcategorias": {},
-    "subdetalhes": {}
-  },
-  "psiquiatria": {
-    "nome": "Psiquiatria",
-    "total": 2,
-    "subcategorias": {},
     "subdetalhes": {}
   },
   "medicina-legal": {

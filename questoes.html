@@ -355,6 +355,20 @@
   .sub-pill.active { background: var(--accent); color: white; border-color: var(--accent); }
   .sub-pill .count { opacity: 0.7; margin-left: 3px; }
 
+  /* Sub-subcategory filter pills (drill-down) */
+  .sub-filter-2 {
+    margin-left: 8px; margin-top: -8px; margin-bottom: 14px;
+    padding-left: 12px; border-left: 2px solid var(--accent2);
+  }
+  .sub-filter-2 .sub-pill {
+    font-size: 0.7rem; padding: 3px 10px;
+    border-color: var(--accent2);
+    opacity: 0.85;
+  }
+  .sub-filter-2 .sub-pill:hover { opacity: 1; }
+  .sub-filter-2 .sub-pill.active { background: var(--accent2); border-color: var(--accent2); color: #0f0f1a; }
+  .sub-filter-2 .sub-pill .count { font-size: 0.65rem; }
+
   /* Tag favorito */
   .tag-fav { background: rgba(255,215,0,0.15) !important; color: #ffd700 !important; cursor: pointer; transition: 0.2s; }
   .tag-fav:hover { transform: scale(1.15); }
@@ -536,6 +550,8 @@
 
     <!-- Subcategory filter -->
     <div class="sub-filter" id="subFilter"></div>
+    <!-- Sub-subcategory drill-down -->
+    <div class="sub-filter sub-filter-2" id="subFilter2" style="display:none;"></div>
 
     <!-- Filter mode + Shuffle + Lista -->
     <div class="filter-mode" id="filterMode" style="display:none;">
@@ -656,6 +672,7 @@ let answered = false;
 let modo = 'livre';
 let areaAtual = null;
 let subareaFiltro = null;
+let subSubareaFiltro = null; // sub-subcategoria (drill-down)
 let questoesFiltradas = [];
 let assuntoData = null;
 let filtroEstado = 'todas'; // 'todas' | 'acertou' | 'errou' | 'nao' | 'favoritas'
@@ -839,9 +856,7 @@ async function mostrarGrade() {
 const AREA_NAMES = {
   'clinica-medica': 'Clínica Médica', 'cirurgia': 'Cirurgia',
   'pediatria': 'Pediatria', 'ginecologia': 'Ginecologia e Obstetrícia',
-  'obstetricia': 'Obstetrícia', 'medicina-preventiva': 'Medicina Preventiva',
-  'oftalmologia': 'Oftalmologia', 'ortopedia': 'Ortopedia',
-  'otorrino': 'Otorrinolaringologia', 'psiquiatria': 'Psiquiatria'
+  'obstetricia': 'Obstetrícia', 'medicina-preventiva': 'Medicina Preventiva'
 };
 
 async function abrirArea(slug) {
@@ -887,6 +902,9 @@ async function abrirArea(slug) {
   }
   const subs = Object.entries(mergedSubs);
   const filterEl = document.getElementById('subFilter');
+  const filter2El = document.getElementById('subFilter2');
+  filter2El.style.display = 'none';
+  filter2El.innerHTML = '';
   const progresso = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
   const areaKey = slug === 'ginecologia' || slug === 'obstetricia' ? 'ginecologia' : slug;
   const progArea = progresso[areaKey] || {};
@@ -942,6 +960,10 @@ function _lookupSubNome(subSlug) {
   if (areaAtual === 'ginecologia' || areaAtual === 'obstetricia') {
     slugsToSearch = ['ginecologia', 'obstetricia'];
   }
+  // For clinica-medica, subcategorias incluem as especialidades migradas
+  if (areaAtual === 'clinica-medica') {
+    slugsToSearch = ['clinica-medica'];
+  }
   for (const s of slugsToSearch) {
     const found = assuntoData?.[s]?.subcategorias?.[subSlug]?.nome;
     if (found) return found;
@@ -951,10 +973,49 @@ function _lookupSubNome(subSlug) {
 
 function filtrarSubarea(subSlug) {
   subareaFiltro = subSlug || null;
+  subSubareaFiltro = null; // reset sub-subcategory filter
   document.querySelectorAll('#subFilter .sub-pill').forEach(p => {
     p.classList.toggle('active', p.dataset.sub === (subSlug || ''));
   });
 
+  // Show/hide sub-subcategory drill-down
+  const filter2El = document.getElementById('subFilter2');
+  if (subSlug && assuntoData?.[areaAtual]?.subdetalhes?.[subSlug]) {
+    const detalhes = assuntoData[areaAtual].subdetalhes[subSlug];
+    const subcats = detalhes.subcategorias || [];
+    if (subcats.length > 0) {
+      // Count questions per sub-subcategory
+      const subNome = _lookupSubNome(subSlug);
+      const qs = subNome ? questoes.filter(q => q.subarea && q.subarea.toLowerCase() === subNome.toLowerCase()) : questoes;
+      const subSubCounts = {};
+      qs.forEach(q => {
+        if (q.sub_subarea) {
+          subSubCounts[q.sub_subarea] = (subSubCounts[q.sub_subarea] || 0) + 1;
+        }
+      });
+
+      filter2El.innerHTML =
+        `<span class="sub-pill active" data-subsub="" onclick="filtrarSubSubarea('')">Todos <span class="count">(${qs.length})</span></span>` +
+        subcats.map(sc => {
+          const cnt = subSubCounts[sc] || 0;
+          return `<span class="sub-pill" data-subsub="${sc}" onclick="filtrarSubSubarea('${sc.replace(/'/g, "\\'")}')">${sc} <span class="count">(${cnt})</span></span>`;
+        }).join('');
+      filter2El.style.display = 'flex';
+    } else {
+      filter2El.style.display = 'none';
+    }
+  } else {
+    filter2El.style.display = 'none';
+  }
+
+  aplicarFiltros();
+}
+
+function filtrarSubSubarea(subSubNome) {
+  subSubareaFiltro = subSubNome || null;
+  document.querySelectorAll('#subFilter2 .sub-pill').forEach(p => {
+    p.classList.toggle('active', p.dataset.subsub === (subSubNome || ''));
+  });
   aplicarFiltros();
 }
 
@@ -1467,6 +1528,11 @@ function aplicarFiltros() {
   if (subareaFiltro) {
     const subNome = _lookupSubNome(subareaFiltro);
     lista = lista.filter(q => q.subarea && q.subarea.toLowerCase() === subNome.toLowerCase());
+  }
+
+  // Sub-subarea filter (drill-down)
+  if (subSubareaFiltro) {
+    lista = lista.filter(q => q.sub_subarea && q.sub_subarea === subSubareaFiltro);
   }
 
   // Shuffle
