@@ -18,7 +18,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Ginecologia endócrina",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s1-015",
@@ -41,7 +42,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Ginecologia básica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s1-027",
@@ -61,7 +63,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de colo de útero (CCU) — rastreio, HPV, Papanicolau"
     },
     {
       "id": "s1-037",
@@ -81,7 +84,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Infecções em ginecologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s1-046",
@@ -104,7 +108,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s1-057",
@@ -124,7 +129,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Mastologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de mama"
     },
     {
       "id": "s1-069",
@@ -144,7 +150,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s1-079",
@@ -164,7 +171,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Ginecologia endócrina",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s1-088",
@@ -184,7 +192,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Ginecologia endócrina",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Amenorreia"
     },
     {
       "id": "s1-097",
@@ -206,7 +215,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de colo de útero (CCU) — rastreio, HPV, Papanicolau"
     },
     {
       "id": "s11-003",
@@ -228,7 +238,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Mastologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de mama"
     },
     {
       "id": "s11-008",
@@ -248,7 +259,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de ovário"
     },
     {
       "id": "s11-022",
@@ -270,7 +282,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s11-037",
@@ -290,7 +303,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de endométrio"
     },
     {
       "id": "s11-057",
@@ -310,7 +324,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s11-065",
@@ -330,7 +345,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Infecções em ginecologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s11-067",
@@ -370,7 +386,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de endométrio"
     },
     {
       "id": "s11-086",
@@ -390,7 +407,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de colo de útero (CCU) — rastreio, HPV, Papanicolau"
     },
     {
       "id": "s11-096",
@@ -410,7 +428,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de colo de útero (CCU) — rastreio, HPV, Papanicolau"
     },
     {
       "id": "s14-029",
@@ -449,7 +468,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de colo de útero (CCU) — rastreio, HPV, Papanicolau"
     },
     {
       "id": "s14-062",
@@ -470,7 +490,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de endométrio"
     },
     {
       "id": "s14-070",
@@ -488,7 +509,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Mastologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de mama"
     },
     {
       "id": "s14-080",
@@ -506,7 +528,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de colo de útero (CCU) — rastreio, HPV, Papanicolau"
     },
     {
       "id": "s14-087",
@@ -524,7 +547,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Mastologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de mama"
     },
     {
       "id": "s14-089",
@@ -546,7 +570,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s14-094",
@@ -564,7 +589,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Ginecologia endócrina",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Endometriose"
     },
     {
       "id": "s14-097",
@@ -582,7 +608,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s3-006",
@@ -604,7 +631,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de colo de útero (CCU) — rastreio, HPV, Papanicolau"
     },
     {
       "id": "s3-018",
@@ -624,7 +652,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de ovário"
     },
     {
       "id": "s3-025",
@@ -644,7 +673,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Infecções em ginecologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s3-035",
@@ -664,7 +694,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de colo de útero (CCU) — rastreio, HPV, Papanicolau"
     },
     {
       "id": "s3-044",
@@ -684,7 +715,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Ginecologia endócrina",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s3-054",
@@ -704,7 +736,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Ginecologia geral",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Sangramento uterino anormal (SUA)"
     },
     {
       "id": "s3-062",
@@ -724,7 +757,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Ginecologia geral",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Dismenorreia e síndrome pré-menstrual"
     },
     {
       "id": "s3-070",
@@ -744,7 +778,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Infecções em ginecologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s3-080",
@@ -764,7 +799,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de endométrio"
     },
     {
       "id": "s3-096",
@@ -784,7 +820,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Ginecologia endócrina",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Amenorreia"
     },
     {
       "id": "s5-005",
@@ -804,7 +841,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Infecções em ginecologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s5-026",
@@ -826,7 +864,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Mastologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de mama"
     },
     {
       "id": "s5-034",
@@ -846,7 +885,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de endométrio"
     },
     {
       "id": "s5-036",
@@ -866,7 +906,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Mastologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de mama"
     },
     {
       "id": "s5-047",
@@ -888,7 +929,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Mastologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de mama"
     },
     {
       "id": "s5-057",
@@ -908,7 +950,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de endométrio"
     },
     {
       "id": "s5-061",
@@ -928,7 +971,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Sexualidade",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s5-063",
@@ -948,7 +992,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Infecções em ginecologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s5-068",
@@ -968,7 +1013,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de ovário"
     },
     {
       "id": "s5-079",
@@ -988,7 +1034,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de colo de útero (CCU) — rastreio, HPV, Papanicolau"
     },
     {
       "id": "s9-018",
@@ -1010,7 +1057,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s9-027",
@@ -1030,7 +1078,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Uroginecologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Incontinência urinária (IU)"
     },
     {
       "id": "s9-033",
@@ -1052,7 +1101,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Infecções em ginecologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Doença Inflamatória Pélvica (DIP)"
     },
     {
       "id": "s9-056",
@@ -1075,7 +1125,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Ginecologia endócrina",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Síndrome dos Ovários Policísticos (SOP)"
     },
     {
       "id": "s9-060",
@@ -1097,7 +1148,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Ginecologia básica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s9-064",
@@ -1117,7 +1169,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Sexualidade",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s9-069",
@@ -1139,7 +1192,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Infecções em ginecologia",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Doença Inflamatória Pélvica (DIP)"
     },
     {
       "id": "s9-077",
@@ -1161,7 +1215,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Câncer de colo de útero (CCU) — rastreio, HPV, Papanicolau"
     },
     {
       "id": "s9-082",
@@ -1185,7 +1240,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Ginecologia endócrina",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Amenorreia"
     },
     {
       "id": "s9-089",
@@ -1208,7 +1264,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Oncologia ginecológica",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": ""
     },
     {
       "id": "s9-098",
@@ -1230,7 +1287,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Ginecologia endócrina",
-      "_area_slug": "ginecologia"
+      "_area_slug": "ginecologia",
+      "sub_subarea": "Amenorreia"
     }
   ]
 }

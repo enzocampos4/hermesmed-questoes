@@ -790,6 +790,8 @@ function setNota(qId, texto) {
 const params = new URLSearchParams(window.location.search);
 modo = params.get('modo') || 'livre';
 const areaParam = params.get('area') || null;
+const subParam = params.get('sub') || null;
+const sub2Param = params.get('sub2') || null;
 
 document.getElementById('modeBadge').textContent =
   modo === 'prova' ? 'Prova' : modo === 'revisao' ? 'Revisão' : 'Livre';
@@ -808,6 +810,15 @@ async function init() {
   } else if (areaParam && assuntoData[areaParam]) {
     document.getElementById('areaGrid').style.display = 'none';
     await abrirArea(areaParam);
+    // Auto-apply sub filter if provided
+    if (subParam) {
+      setTimeout(() => {
+        filtrarSubarea(subParam);
+        if (sub2Param) {
+          setTimeout(() => filtrarSubSubarea(sub2Param), 50);
+        }
+      }, 50);
+    }
   } else {
     await mostrarGrade();
   }
@@ -881,7 +892,7 @@ async function mostrarGrade() {
 // ─── Abrir Área ───
 const AREA_NAMES = {
   'clinica-medica': 'Clínica Médica', 'cirurgia': 'Cirurgia',
-  'pediatria': 'Pediatria', 'ginecologia': 'Ginecologia e Obstetrícia',
+  'pediatria': 'Pediatria', 'ginecologia': 'Ginecologia',
   'obstetricia': 'Obstetrícia', 'medicina-preventiva': 'Medicina Preventiva'
 };
 

@@ -301,7 +301,57 @@
       "Mastologia",
       "Uroginecologia",
       "Sexualidade"
-    ]
+    ],
+    "subdetalhes": {
+      "Ginecologia básica": [
+        "Anatomia ginecológica",
+        "Semiologia ginecológica (exame especular, toque, PN)",
+        "Exames complementares (USG, histerossalpingografia)"
+      ],
+      "Ginecologia geral": [
+        "Ciclo menstrual",
+        "Sangramento uterino anormal (SUA)",
+        "Dismenorreia e síndrome pré-menstrual",
+        "Climatério e menopausa"
+      ],
+      "Ginecologia endócrina": [
+        "Síndrome dos Ovários Policísticos (SOP)",
+        "Endometriose",
+        "Infertilidade conjugal",
+        "Amenorreia",
+        "Hiperprolactinemia"
+      ],
+      "Infecções em ginecologia": [
+        "Vaginoses e vulvovaginites (candidíase, tricomoníase, vaginose bacteriana)",
+        "Doença Inflamatória Pélvica (DIP)",
+        "Infecções sexualmente transmissíveis (IST)",
+        "Cancro mole, sífilis, gonorreia"
+      ],
+      "Oncologia ginecológica": [
+        "Câncer de colo de útero (CCU) — rastreio, HPV, Papanicolau",
+        "Câncer de endométrio",
+        "Câncer de ovário",
+        "Neoplasia intraepitelial cervical (NIC)",
+        "Tumores trofoblásticos gestacionais"
+      ],
+      "Mastologia": [
+        "Exame das mamas e rastreio (USG, mamografia)",
+        "Nódulos mamários benignos (fibroadenoma, cistos)",
+        "Câncer de mama",
+        "Mastites e abscesso mamário",
+        "Ginecomastia"
+      ],
+      "Uroginecologia": [
+        "Incontinência urinária (IU)",
+        "Prolapso de órgãos pélvicos (POP)",
+        "Fístulas genitais"
+      ],
+      "Sexualidade": [
+        "Disfunções sexuais femininas",
+        "Anticoncepção (métodos hormonais, DIU, barreira)",
+        "Contracepção de emergência"
+      ]
+    }
   },
   "obstetricia": {
     "nome": "Obstetrícia",
@@ -370,7 +420,47 @@
       "Epidemiologia",
       "Ética Médica",
       "Saúde do Trabalhador"
-    ]
+    ],
+    "subdetalhes": {
+      "Sistema Único de Saúde (SUS)": [
+        "Princípios e diretrizes do SUS",
+        "Lei 8.080/90 e 8.142/90",
+        "Financiamento e pactuação (NOB, NOAS)",
+        "Níveis de atenção (primária, secundária, terciária)",
+        "Regionalização e Rede de Atenção à Saúde (RAS)",
+        "Controle social e participação popular"
+      ],
+      "Medicina de Família e Comunidade": [
+        "Atributos da APS (1º contato, longitudinalidade, integralidade, coordenação)",
+        "Estratégia Saúde da Família (ESF) e NASF",
+        "Territorialização e adscrição de clientela",
+        "Puericultura e acompanhamento do crescimento",
+        "Programas de saúde (hipertenso, diabético, criança, mulher)",
+        "Acolhimento e classificação de risco"
+      ],
+      "Epidemiologia": [
+        "Medidas de frequência (incidência, prevalência)",
+        "Medidas de associação (RR, OR, RAR)",
+        "Delineamento de estudos (coorte, caso-controle, transversal, ensaio clínico)",
+        "Testes diagnósticos (sensibilidade, especificidade, VPP, VPN)",
+        "Viés e confundimento",
+        "Curvas ROC e razão de verossimilhança"
+      ],
+      "Ética Médica": [
+        "Código de Ética Médica (sigilo, consentimento, autonomia)",
+        "Bioética (princípios: beneficência, não maleficência, autonomia, justiça)",
+        "Prontuário médico e atestados",
+        "Termo de Consentimento Livre e Esclarecido (TCLE)",
+        "Direitos do paciente"
+      ],
+      "Saúde do Trabalhador": [
+        "Doenças ocupacionais (LER/DORT, perda auditiva, pneumoconioses)",
+        "Riscos ocupacionais (físicos, químicos, biológicos, ergonômicos)",
+        "Exames admissionais, periódicos e demissionais (PCMSO, PPRA)",
+        "Comunicação de Acidente de Trabalho (CAT)",
+        "Afastamento e perícia"
+      ]
+    }
   },
   "pediatria": {
     "nome": "Pediatria",

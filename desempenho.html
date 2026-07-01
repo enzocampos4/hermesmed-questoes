@@ -248,7 +248,8 @@ const AREAS = [
   { id: 'clinica-medica',    icon: '🫁', name: 'Clínica Médica', cor: '#7c5cfc' },
   { id: 'cirurgia',          icon: '🔪', name: 'Cirurgia', cor: '#ff6b6b' },
   { id: 'pediatria',         icon: '👶', name: 'Pediatria', cor: '#5ac8fa' },
-  { id: 'ginecologia',       icon: '🩺', name: 'Ginecologia e Obstetrícia', cor: '#ff8a80' },
+  { id: 'ginecologia',       icon: '🩺', name: 'Ginecologia', cor: '#ff8a80' },
+  { id: 'obstetricia',       icon: '🤰', name: 'Obstetrícia', cor: '#ff6b9d' },
   { id: 'medicina-preventiva', icon: '🛡️', name: 'Medicina Preventiva', cor: '#34c759' },
   { id: 'medicina-intensiva', icon: '💉', name: 'Medicina Intensiva', cor: '#ff9500' },
   { id: 'emergencia',        icon: '🚑', name: 'Emergência e Trauma', cor: '#ff3b30' },
@@ -276,7 +277,8 @@ const mapAreaId = {
   'clinica-medica': 'Clínica Médica',
   'cirurgia': 'Cirurgia',
   'pediatria': 'Pediatria',
-  'ginecologia': 'Ginecologia e Obstetrícia',
+  'ginecologia': 'Ginecologia',
+  'obstetricia': 'Obstetrícia',
   'medicina-preventiva': 'Medicina Preventiva',
   'medicina-intensiva': 'Medicina Intensiva',
   'emergencia': 'Emergência e Trauma',
@@ -320,7 +322,7 @@ function escapeHtml(s) {
 function renderTreeArea(area, st, subdetalhes_globais) {
   const areaPctCls = pctClass(st.pct, st.respondidas);
   let html = `
-    <div class="tree-area" data-area="${escapeHtml(area.id)}">
+    <div class="tree-area" data-area-slug="${escapeHtml(area.id)}">
       <div class="tree-area-header" onclick="toggleArea(this)">
         <span class="caret">▶</span>
         <span class="name">${area.icon} ${escapeHtml(area.name)}</span>
@@ -376,7 +378,7 @@ function renderTreeArea(area, st, subdetalhes_globais) {
         const sp = item.stats.total > 0 ? Math.round(item.stats.acertos / item.stats.total * 100) : 0;
         const sCls = pctClass(sp, item.stats.total);
         html += `
-          <div class="tree-leaf">
+          <div class="tree-leaf" onclick="goToLeaf('${escapeHtml(area.id)}','${escapeHtml(subSlug)}','${escapeHtml(item.nome)}')" style="cursor:pointer;">
             <span class="dot"></span>
             <span class="name">${escapeHtml(item.nome)}</span>
             <span class="meta">${item.stats.acertos}/${item.stats.total}</span>
@@ -406,12 +408,22 @@ function toggleArea(headerEl) {
   const expanded = headerEl.classList.toggle('expanded');
   children.classList.toggle('open', expanded);
 }
+
 function toggleSub(rowEl) {
   const subSlug = rowEl.dataset.sub;
+  const areaSlug = rowEl.closest('[data-area-slug]').dataset.areaSlug;
   const children = rowEl.parentElement.querySelector(`[data-sub-children="${CSS.escape(subSlug)}"]`);
-  if (!children) return; // sem drill-down
+  if (!children) {
+    // Sem drill-down → navega direto para as questões da subcategoria
+    window.location.href = `questoes.html?area=${escapeHtml(areaSlug)}&sub=${escapeHtml(subSlug)}`;
+    return;
+  }
   const expanded = rowEl.classList.toggle('expanded');
   children.classList.toggle('open', expanded);
+}
+
+function goToLeaf(areaSlug, subSlug, sub2Nome) {
+  window.location.href = `questoes.html?area=${encodeURIComponent(areaSlug)}&sub=${encodeURIComponent(subSlug)}&sub2=${encodeURIComponent(sub2Nome)}`;
 }
 
 // ─── Carregar dados ───
@@ -668,6 +680,39 @@ async function carregar() {
     </div>
   `;
 
+  // ─── Card: Revisão Prioritária (top 5 piores subcategorias) ───
+  const prioridades = [];
+  for (const area of AREAS) {
+    const st = areasStats[area.id];
+    if (!st || st.respondidas === 0) continue;
+    for (const [subNome, subSt] of Object.entries(st.subareas)) {
+      if (subSt.total < 5) continue; // mínimo de amostra
+      const subPct = Math.round(subSt.acertos / subSt.total * 100);
+      if (subPct < 60) {
+        prioridades.push({
+          area: area, subNome, subSt, subPct
+        });
+      }
+    }
+  }
+  if (prioridades.length > 0) {
+    prioridades.sort((a, b) => a.subPct - b.subPct);
+    const top = prioridades.slice(0, 5);
+    html += `<div class="card" style="border-left:3px solid var(--wrong);">
+      <h2>🚨 Revisão prioritária</h2>
+      <div style="font-size:0.74rem;color:var(--muted);margin:-2px 0 10px;">Subcategorias com pior aproveitamento (mín. 5 questões)</div>`;
+    for (const p of top) {
+      const cls = p.subPct >= 40 ? 'warn' : 'bad';
+      html += `<div class="tree-row" onclick="window.location.href='questoes.html?area=${escapeHtml(p.area.id)}&sub=${escapeHtml(p.area.id === 'ginecologia' ? slugifySub(p.subNome) : slugifySub(p.subNome))}'" style="cursor:pointer;">
+        <span class="name" style="font-weight:600;">${p.area.icon} ${escapeHtml(p.subNome)}</span>
+        <span class="meta">${p.subSt.acertos}/${p.subSt.total}</span>
+        <div class="mini-bar"><div class="fill ${cls === 'bad' ? 'bad' : cls === 'warn' ? 'warn' : 'good'}" style="width:${p.subPct}%"></div></div>
+        <span class="pct ${cls}">${p.subPct}%</span>
+      </div>`;
+    }
+    html += `</div>`;
+  }
+
   // ─── Árvore hierárquica de desempenho (Área → Subcategoria → Tópico) ───
   const areasComDados = AREAS.filter(a => (areasStats[a.id]?.respondidas ?? 0) > 0);
   if (areasComDados.length > 0) {
@@ -834,6 +879,27 @@ async function carregar() {
   </div>`;
 
   content.innerHTML = html;
+
+  // Auto-expand: abre áreas com aproveitamento < 60%
+  document.querySelectorAll('.tree-area').forEach(el => {
+    const header = el.querySelector('.tree-area-header');
+    const pctText = header?.querySelector('.pct')?.textContent?.replace('%', '');
+    const pct = parseFloat(pctText);
+    if (!isNaN(pct) && pct < 60) {
+      toggleArea(header);
+    }
+    // Dentro das áreas expandidas, abre subcats com < 40%
+    const children = el.querySelector('.tree-children');
+    if (children?.classList.contains('open')) {
+      children.querySelectorAll('.tree-row').forEach(row => {
+        const rowPct = row.querySelector('.pct')?.textContent?.replace('%', '');
+        const rp = parseFloat(rowPct);
+        if (!isNaN(rp) && rp < 40) {
+          toggleSub(row);
+        }
+      });
+    }
+  });
 }
 
 // ═══ Sync / Settings ═══

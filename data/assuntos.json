@@ -504,7 +504,88 @@
         "total": 1
       }
     },
-    "subdetalhes": {}
+    "subdetalhes": {
+      "ginecologia-basica": {
+        "nome": "Ginecologia básica",
+        "subcategorias": [
+          "Anatomia ginecológica",
+          "Semiologia ginecológica (exame especular, toque, PN)",
+          "Exames complementares (USG, histerossalpingografia)"
+        ],
+        "total_questoes": 2
+      },
+      "ginecologia-geral": {
+        "nome": "Ginecologia geral",
+        "subcategorias": [
+          "Ciclo menstrual",
+          "Sangramento uterino anormal (SUA)",
+          "Dismenorreia e síndrome pré-menstrual",
+          "Climatério e menopausa"
+        ],
+        "total_questoes": 2
+      },
+      "ginecologia-endocrina": {
+        "nome": "Ginecologia endócrina",
+        "subcategorias": [
+          "Síndrome dos Ovários Policísticos (SOP)",
+          "Endometriose",
+          "Infertilidade conjugal",
+          "Amenorreia",
+          "Hiperprolactinemia"
+        ],
+        "total_questoes": 9
+      },
+      "infeccoes-em-ginecologia": {
+        "nome": "Infecções em ginecologia",
+        "subcategorias": [
+          "Vaginoses e vulvovaginites (candidíase, tricomoníase, vaginose bacteriana)",
+          "Doença Inflamatória Pélvica (DIP)",
+          "Infecções sexualmente transmissíveis (IST)",
+          "Cancro mole, sífilis, gonorreia"
+        ],
+        "total_questoes": 8
+      },
+      "oncologia-ginecologica": {
+        "nome": "Oncologia ginecológica",
+        "subcategorias": [
+          "Câncer de colo de útero (CCU) — rastreio, HPV, Papanicolau",
+          "Câncer de endométrio",
+          "Câncer de ovário",
+          "Neoplasia intraepitelial cervical (NIC)",
+          "Tumores trofoblásticos gestacionais"
+        ],
+        "total_questoes": 27
+      },
+      "mastologia": {
+        "nome": "Mastologia",
+        "subcategorias": [
+          "Exame das mamas e rastreio (USG, mamografia)",
+          "Nódulos mamários benignos (fibroadenoma, cistos)",
+          "Câncer de mama",
+          "Mastites e abscesso mamário",
+          "Ginecomastia"
+        ],
+        "total_questoes": 7
+      },
+      "uroginecologia": {
+        "nome": "Uroginecologia",
+        "subcategorias": [
+          "Incontinência urinária (IU)",
+          "Prolapso de órgãos pélvicos (POP)",
+          "Fístulas genitais"
+        ],
+        "total_questoes": 1
+      },
+      "sexualidade": {
+        "nome": "Sexualidade",
+        "subcategorias": [
+          "Disfunções sexuais femininas",
+          "Anticoncepção (métodos hormonais, DIU, barreira)",
+          "Contracepção de emergência"
+        ],
+        "total_questoes": 2
+      }
+    }
   },
   "obstetricia": {
     "nome": "Obstetrícia",
@@ -632,7 +713,66 @@
         "total": 3
       }
     },
-    "subdetalhes": {}
+    "subdetalhes": {
+      "sistema-unico-de-saude-sus": {
+        "nome": "Sistema Único de Saúde (SUS)",
+        "subcategorias": [
+          "Princípios e diretrizes do SUS",
+          "Lei 8.080/90 e 8.142/90",
+          "Financiamento e pactuação (NOB, NOAS)",
+          "Níveis de atenção (primária, secundária, terciária)",
+          "Regionalização e Rede de Atenção à Saúde (RAS)",
+          "Controle social e participação popular"
+        ],
+        "total_questoes": 38
+      },
+      "medicina-de-familia-e-comunidade": {
+        "nome": "Medicina de Família e Comunidade",
+        "subcategorias": [
+          "Atributos da APS (1º contato, longitudinalidade, integralidade, coordenação)",
+          "Estratégia Saúde da Família (ESF) e NASF",
+          "Territorialização e adscrição de clientela",
+          "Puericultura e acompanhamento do crescimento",
+          "Programas de saúde (hipertenso, diabético, criança, mulher)",
+          "Acolhimento e classificação de risco"
+        ],
+        "total_questoes": 13
+      },
+      "epidemiologia": {
+        "nome": "Epidemiologia",
+        "subcategorias": [
+          "Medidas de frequência (incidência, prevalência)",
+          "Medidas de associação (RR, OR, RAR)",
+          "Delineamento de estudos (coorte, caso-controle, transversal, ensaio clínico)",
+          "Testes diagnósticos (sensibilidade, especificidade, VPP, VPN)",
+          "Viés e confundimento",
+          "Curvas ROC e razão de verossimilhança"
+        ],
+        "total_questoes": 51
+      },
+      "etica-medica": {
+        "nome": "Ética Médica",
+        "subcategorias": [
+          "Código de Ética Médica (sigilo, consentimento, autonomia)",
+          "Bioética (princípios: beneficência, não maleficência, autonomia, justiça)",
+          "Prontuário médico e atestados",
+          "Termo de Consentimento Livre e Esclarecido (TCLE)",
+          "Direitos do paciente"
+        ],
+        "total_questoes": 3
+      },
+      "saude-do-trabalhador": {
+        "nome": "Saúde do Trabalhador",
+        "subcategorias": [
+          "Doenças ocupacionais (LER/DORT, perda auditiva, pneumoconioses)",
+          "Riscos ocupacionais (físicos, químicos, biológicos, ergonômicos)",
+          "Exames admissionais, periódicos e demissionais (PCMSO, PPRA)",
+          "Comunicação de Acidente de Trabalho (CAT)",
+          "Afastamento e perícia"
+        ],
+        "total_questoes": 3
+      }
+    }
   },
   "pediatria": {
     "nome": "Pediatria",

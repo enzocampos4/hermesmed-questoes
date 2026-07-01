@@ -18,7 +18,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Regionalização e Rede de Atenção à Saúde (RAS)"
     },
     {
       "id": "s1-012",
@@ -41,7 +42,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s1-016",
@@ -63,7 +65,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Medicina de Família e Comunidade",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Estratégia Saúde da Família (ESF) e NASF"
     },
     {
       "id": "s1-023",
@@ -83,7 +86,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s1-029",
@@ -103,7 +107,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s1-035",
@@ -123,7 +128,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s1-044",
@@ -143,7 +149,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s1-049",
@@ -165,7 +172,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Saúde do Trabalhador",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Comunicação de Acidente de Trabalho (CAT)"
     },
     {
       "id": "s1-055",
@@ -185,7 +193,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Medicina de Família e Comunidade",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s1-060",
@@ -205,7 +214,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Princípios e diretrizes do SUS"
     },
     {
       "id": "s1-065",
@@ -225,7 +235,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Ética Médica",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Direitos do paciente"
     },
     {
       "id": "s1-070",
@@ -245,7 +256,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s1-071",
@@ -265,7 +277,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Medidas de frequência (incidência, prevalência)"
     },
     {
       "id": "s1-076",
@@ -285,7 +298,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Níveis de atenção (primária, secundária, terciária)"
     },
     {
       "id": "s1-080",
@@ -305,7 +319,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s1-082",
@@ -325,7 +340,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s1-084",
@@ -347,7 +363,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s1-093",
@@ -367,7 +384,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s1-095",
@@ -387,7 +405,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s1-100",
@@ -409,7 +428,8 @@
       "_simulado": "1-simulado",
       "_edicao": "1",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Controle social e participação popular"
     },
     {
       "id": "s11-004",
@@ -429,7 +449,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Curvas ROC e razão de verossimilhança"
     },
     {
       "id": "s11-006",
@@ -449,7 +470,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Princípios e diretrizes do SUS"
     },
     {
       "id": "s11-009",
@@ -469,7 +491,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Medidas de associação (RR, OR, RAR)"
     },
     {
       "id": "s11-011",
@@ -489,7 +512,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Saúde do Trabalhador",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Comunicação de Acidente de Trabalho (CAT)"
     },
     {
       "id": "s11-017",
@@ -509,7 +533,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s11-025",
@@ -532,7 +557,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Testes diagnósticos (sensibilidade, especificidade, VPP, VPN)"
     },
     {
       "id": "s11-027",
@@ -552,7 +578,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s11-029",
@@ -572,7 +599,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Princípios e diretrizes do SUS"
     },
     {
       "id": "s11-031",
@@ -594,7 +622,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s11-033",
@@ -614,7 +643,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Controle social e participação popular"
     },
     {
       "id": "s11-039",
@@ -634,7 +664,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Curvas ROC e razão de verossimilhança"
     },
     {
       "id": "s11-044",
@@ -654,7 +685,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s11-047",
@@ -674,7 +706,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Delineamento de estudos (coorte, caso-controle, transversal, ensaio clínico)"
     },
     {
       "id": "s11-051",
@@ -694,7 +727,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s11-053",
@@ -714,7 +748,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s11-063",
@@ -736,7 +771,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s11-076",
@@ -756,7 +792,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Regionalização e Rede de Atenção à Saúde (RAS)"
     },
     {
       "id": "s11-080",
@@ -776,7 +813,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Níveis de atenção (primária, secundária, terciária)"
     },
     {
       "id": "s11-084",
@@ -796,7 +834,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s11-094",
@@ -816,7 +855,8 @@
       "_simulado": "11-simulado",
       "_edicao": "11",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Regionalização e Rede de Atenção à Saúde (RAS)"
     },
     {
       "id": "s14-004",
@@ -834,7 +874,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Medicina de Família e Comunidade",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Estratégia Saúde da Família (ESF) e NASF"
     },
     {
       "id": "s14-011",
@@ -852,7 +893,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Medidas de frequência (incidência, prevalência)"
     },
     {
       "id": "s14-015",
@@ -870,7 +912,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s14-028",
@@ -888,7 +931,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Medidas de associação (RR, OR, RAR)"
     },
     {
       "id": "s14-054",
@@ -909,7 +953,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Medicina de Família e Comunidade",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Estratégia Saúde da Família (ESF) e NASF"
     },
     {
       "id": "s14-067",
@@ -930,7 +975,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Medicina de Família e Comunidade",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Atributos da APS (1º contato, longitudinalidade, integralidade, coordenação)"
     },
     {
       "id": "s14-083",
@@ -951,7 +997,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Ética Médica",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Código de Ética Médica (sigilo, consentimento, autonomia)"
     },
     {
       "id": "s14-090",
@@ -969,7 +1016,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Medicina de Família e Comunidade",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Estratégia Saúde da Família (ESF) e NASF"
     },
     {
       "id": "s14-099",
@@ -990,7 +1038,8 @@
       "_simulado": "14-simulado",
       "_edicao": "14",
       "subarea": "Medicina de Família e Comunidade",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Estratégia Saúde da Família (ESF) e NASF"
     },
     {
       "id": "s3-003",
@@ -1010,7 +1059,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Saúde do Trabalhador",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Comunicação de Acidente de Trabalho (CAT)"
     },
     {
       "id": "s3-009",
@@ -1032,7 +1082,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s3-014",
@@ -1054,7 +1105,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Regionalização e Rede de Atenção à Saúde (RAS)"
     },
     {
       "id": "s3-017",
@@ -1074,7 +1126,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Ética Médica",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Termo de Consentimento Livre e Esclarecido (TCLE)"
     },
     {
       "id": "s3-022",
@@ -1094,7 +1147,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s3-027",
@@ -1116,7 +1170,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s3-031",
@@ -1136,7 +1191,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s3-038",
@@ -1156,7 +1212,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s3-042",
@@ -1178,7 +1235,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Regionalização e Rede de Atenção à Saúde (RAS)"
     },
     {
       "id": "s3-048",
@@ -1200,7 +1258,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s3-053",
@@ -1220,7 +1279,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Testes diagnósticos (sensibilidade, especificidade, VPP, VPN)"
     },
     {
       "id": "s3-059",
@@ -1243,7 +1303,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s3-064",
@@ -1263,7 +1324,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Medicina de Família e Comunidade",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s3-067",
@@ -1283,7 +1345,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Delineamento de estudos (coorte, caso-controle, transversal, ensaio clínico)"
     },
     {
       "id": "s3-073",
@@ -1303,7 +1366,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Princípios e diretrizes do SUS"
     },
     {
       "id": "s3-077",
@@ -1325,7 +1389,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Regionalização e Rede de Atenção à Saúde (RAS)"
     },
     {
       "id": "s3-081",
@@ -1345,7 +1410,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s3-085",
@@ -1365,7 +1431,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Regionalização e Rede de Atenção à Saúde (RAS)"
     },
     {
       "id": "s3-093",
@@ -1385,7 +1452,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s3-099",
@@ -1405,7 +1473,8 @@
       "_simulado": "3-simulado",
       "_edicao": "3",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Regionalização e Rede de Atenção à Saúde (RAS)"
     },
     {
       "id": "s5-002",
@@ -1427,7 +1496,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s5-009",
@@ -1449,7 +1519,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Curvas ROC e razão de verossimilhança"
     },
     {
       "id": "s5-011",
@@ -1469,7 +1540,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s5-016",
@@ -1492,7 +1564,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s5-018",
@@ -1512,7 +1585,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s5-023",
@@ -1534,7 +1608,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s5-027",
@@ -1556,7 +1631,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Medicina de Família e Comunidade",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Estratégia Saúde da Família (ESF) e NASF"
     },
     {
       "id": "s5-031",
@@ -1576,7 +1652,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s5-033",
@@ -1596,7 +1673,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Regionalização e Rede de Atenção à Saúde (RAS)"
     },
     {
       "id": "s5-037",
@@ -1616,7 +1694,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Princípios e diretrizes do SUS"
     },
     {
       "id": "s5-043",
@@ -1636,7 +1715,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s5-052",
@@ -1656,7 +1736,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Princípios e diretrizes do SUS"
     },
     {
       "id": "s5-054",
@@ -1676,7 +1757,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s5-055",
@@ -1696,7 +1778,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Regionalização e Rede de Atenção à Saúde (RAS)"
     },
     {
       "id": "s5-064",
@@ -1718,7 +1801,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Princípios e diretrizes do SUS"
     },
     {
       "id": "s5-071",
@@ -1741,7 +1825,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Regionalização e Rede de Atenção à Saúde (RAS)"
     },
     {
       "id": "s5-081",
@@ -1763,7 +1848,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s5-085",
@@ -1783,7 +1869,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Regionalização e Rede de Atenção à Saúde (RAS)"
     },
     {
       "id": "s5-092",
@@ -1803,7 +1890,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s5-098",
@@ -1823,7 +1911,8 @@
       "_simulado": "5-simulado",
       "_edicao": "5",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Regionalização e Rede de Atenção à Saúde (RAS)"
     },
     {
       "id": "s9-004",
@@ -1845,7 +1934,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Lei 8.080/90 e 8.142/90"
     },
     {
       "id": "s9-005",
@@ -1865,7 +1955,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Medicina de Família e Comunidade",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Estratégia Saúde da Família (ESF) e NASF"
     },
     {
       "id": "s9-011",
@@ -1889,7 +1980,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s9-013",
@@ -1914,7 +2006,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s9-022",
@@ -1934,7 +2027,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Medicina de Família e Comunidade",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Estratégia Saúde da Família (ESF) e NASF"
     },
     {
       "id": "s9-032",
@@ -1954,7 +2048,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s9-035",
@@ -1976,7 +2071,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s9-040",
@@ -1996,7 +2092,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Controle social e participação popular"
     },
     {
       "id": "s9-042",
@@ -2019,7 +2116,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s9-055",
@@ -2041,7 +2139,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s9-059",
@@ -2063,7 +2162,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Medidas de frequência (incidência, prevalência)"
     },
     {
       "id": "s9-066",
@@ -2086,7 +2186,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s9-067",
@@ -2106,7 +2207,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s9-070",
@@ -2126,7 +2228,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Regionalização e Rede de Atenção à Saúde (RAS)"
     },
     {
       "id": "s9-079",
@@ -2148,7 +2251,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Epidemiologia",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s9-085",
@@ -2171,7 +2275,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Medicina de Família e Comunidade",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Estratégia Saúde da Família (ESF) e NASF"
     },
     {
       "id": "s9-088",
@@ -2193,7 +2298,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": ""
     },
     {
       "id": "s9-092",
@@ -2213,7 +2319,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Sistema Único de Saúde (SUS)",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Princípios e diretrizes do SUS"
     },
     {
       "id": "s9-094",
@@ -2233,7 +2340,8 @@
       "_simulado": "9-simulado",
       "_edicao": "9",
       "subarea": "Medicina de Família e Comunidade",
-      "_area_slug": "medicina-preventiva"
+      "_area_slug": "medicina-preventiva",
+      "sub_subarea": "Estratégia Saúde da Família (ESF) e NASF"
     }
   ]
 }
