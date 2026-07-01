@@ -1,147 +1,188 @@
 {
-  "exportado": "2026-07-01T18:02:00.718Z",
+  "exportado": "2026-07-01T18:29:47.677Z",
   "versao": 2,
   "progresso": {
-    "pediatria": {
-      "ped-001": true,
-      "s3-043": true
+    "clinica-medica": {
+      "s3-023": {
+        "acertou": false,
+        "selecao": "C",
+        "favorita": false,
+        "nota": "",
+        "respondida": true,
+        "data": "2026-07-01T18:18:51.912Z"
+      },
+      "s3-036": {
+        "acertou": false,
+        "selecao": "B",
+        "favorita": false,
+        "nota": "",
+        "respondida": true,
+        "data": "2026-07-01T18:19:05.750Z"
+      }
     },
     "cirurgia": {
-      "cir-002": false,
+      "s3-028": {
+        "acertou": false,
+        "selecao": "B",
+        "favorita": false,
+        "nota": "",
+        "respondida": true,
+        "data": "2026-07-01T18:19:31.894Z"
+      },
       "s1-001": {
         "acertou": false,
-        "selecao": "A",
+        "selecao": "C",
         "favorita": false,
         "nota": "",
-        "respondida": true
+        "respondida": true,
+        "data": "2026-07-01T18:19:55.298Z"
       },
-      "s11-085": {
+      "s1-008": {
         "acertou": false,
-        "selecao": "A",
+        "selecao": "C",
         "favorita": false,
         "nota": "",
-        "respondida": true
+        "respondida": true,
+        "data": "2026-07-01T18:20:01.085Z"
       },
-      "s5-044": {
+      "s1-013": {
+        "acertou": false,
+        "selecao": "C",
+        "favorita": false,
+        "nota": "",
+        "respondida": true,
+        "data": "2026-07-01T18:20:06.163Z"
+      },
+      "s1-019": {
+        "acertou": false,
+        "selecao": "B",
+        "favorita": false,
+        "nota": "",
+        "respondida": true,
+        "data": "2026-07-01T18:20:12.000Z"
+      }
+    },
+    "obstetricia": {
+      "s1-062": {
         "acertou": true,
         "selecao": "B",
         "favorita": false,
         "nota": "",
-        "respondida": true
+        "respondida": true,
+        "data": "2026-07-01T18:20:51.796Z"
       }
-    },
-    "clinica-medica": {
-      "s1-026": false,
-      "s1-039": false,
-      "s14-027": false,
-      "s1-007": false,
-      "s14-053": true,
-      "s1-009": {
-        "acertou": true,
-        "selecao": "C",
-        "favorita": false,
-        "nota": "",
-        "respondida": true
-      }
-    },
-    "medicina-preventiva": {
-      "s1-004": false
-    },
-    "ortopedia": {
-      "s14-005": false
     },
     "ginecologia": {
-      "s1-005": true,
-      "s1-015": true,
-      "s9-018": false,
-      "s1-094": false
+      "s3-006": {
+        "acertou": false,
+        "selecao": "A",
+        "favorita": false,
+        "nota": "",
+        "respondida": true,
+        "data": "2026-07-01T18:29:21.452Z"
+      }
     }
   },
-  "log": [],
+  "log": [
+    {
+      "id": "s3-023",
+      "acertou": false,
+      "selecao": "C",
+      "area": "Clínica Médica",
+      "subarea": "Hematologia",
+      "fonte": "ESTRATÉGIA MED 2026 ENAMED 3ª",
+      "timestamp": "2026-07-01T18:18:51.913Z",
+      "modo": "📖 Livre"
+    },
+    {
+      "id": "s3-036",
+      "acertou": false,
+      "selecao": "B",
+      "area": "Clínica Médica",
+      "subarea": "Reumatologia",
+      "fonte": "ESTRATÉGIA MED 2026 ENAMED 3ª",
+      "timestamp": "2026-07-01T18:19:05.750Z",
+      "modo": "📖 Livre"
+    },
+    {
+      "id": "s3-028",
+      "acertou": false,
+      "selecao": "B",
+      "area": "Cirurgia",
+      "subarea": "Trauma",
+      "fonte": "ESTRATÉGIA MED 2026 ENAMED 3ª",
+      "timestamp": "2026-07-01T18:19:31.894Z",
+      "modo": "📖 Livre"
+    },
+    {
+      "id": "s1-001",
+      "acertou": false,
+      "selecao": "C",
+      "area": "Cirurgia",
+      "subarea": "Urgências Abdominais",
+      "fonte": "ESTRATÉGIA MED 2026 ENAMED 1ª",
+      "timestamp": "2026-07-01T18:19:55.299Z",
+      "modo": "📖 Livre"
+    },
+    {
+      "id": "s1-008",
+      "acertou": false,
+      "selecao": "C",
+      "area": "Cirurgia",
+      "subarea": "Proctologia",
+      "fonte": "ESTRATÉGIA MED 2026 ENAMED 1ª",
+      "timestamp": "2026-07-01T18:20:01.086Z",
+      "modo": "📖 Livre"
+    },
+    {
+      "id": "s1-013",
+      "acertou": false,
+      "selecao": "C",
+      "area": "Cirurgia",
+      "subarea": "Urgências Abdominais",
+      "fonte": "ESTRATÉGIA MED 2026 ENAMED 1ª",
+      "timestamp": "2026-07-01T18:20:06.164Z",
+      "modo": "📖 Livre"
+    },
+    {
+      "id": "s1-019",
+      "acertou": false,
+      "selecao": "B",
+      "area": "Cirurgia",
+      "subarea": "Urgências Abdominais",
+      "fonte": "ESTRATÉGIA MED 2026 ENAMED 1ª",
+      "timestamp": "2026-07-01T18:20:12.000Z",
+      "modo": "📖 Livre"
+    },
+    {
+      "id": "s1-062",
+      "acertou": true,
+      "selecao": "B",
+      "area": "Obstetrícia",
+      "subarea": "Doenças associadas à gestação",
+      "fonte": "ESTRATÉGIA MED 2026 ENAMED 1ª",
+      "timestamp": "2026-07-01T18:20:51.797Z",
+      "modo": "📖 Livre"
+    },
+    {
+      "id": "s3-006",
+      "acertou": false,
+      "selecao": "A",
+      "area": "Ginecologia",
+      "subarea": "Oncologia ginecológica",
+      "fonte": "ESTRATÉGIA MED 2026 ENAMED 3ª",
+      "timestamp": "2026-07-01T18:29:21.452Z",
+      "modo": "📖 Livre"
+    }
+  ],
   "favoritos": {},
   "notas": {},
   "streak": {
     "count": 1,
     "ultimo": "2026-07-01",
     "dias": {
-      "2026-07-01": 14
+      "2026-07-01": 5
     }
   },
-  "simulados": {
-    "14-simulado": {
-      "respostas": {
-        "s14-074": "certo",
-        "s14-043": "certo",
-        "s14-088": "pulou",
-        "s14-089": "pulou",
-        "s14-076": "certo",
-        "s14-067": "certo",
-        "s14-069": "errado",
-        "s14-063": "errado",
-        "s14-055": "certo",
-        "s14-001": "errado",
-        "s14-002": "certo",
-        "s14-024": "certo",
-        "s14-003": "certo",
-        "s14-038": "certo"
-      },
-      "selecao": {
-        "s14-074": "C",
-        "s14-043": "A",
-        "s14-076": "C",
-        "s14-067": "D",
-        "s14-069": "A",
-        "s14-063": "A",
-        "s14-055": "D",
-        "s14-001": "C",
-        "s14-002": "D",
-        "s14-024": "C",
-        "s14-003": "B",
-        "s14-038": "B"
-      },
-      "timerRestante": 0
-    },
-    "11-simulado": {
-      "respostas": {
-        "s11-025": "errado",
-        "s11-094": "certo",
-        "s11-001": "errado"
-      },
-      "selecao": {
-        "s11-025": "C",
-        "s11-001": "D",
-        "s11-094": "B"
-      },
-      "timerRestante": 0
-    },
-    "9-simulado": {
-      "respostas": {
-        "s9-082": "certo",
-        "s9-087": "certo"
-      },
-      "selecao": {
-        "s9-082": "C",
-        "s9-087": "A"
-      },
-      "timerRestante": 0
-    },
-    "1-simulado": {
-      "respostas": {
-        "s1-093": "errado"
-      },
-      "selecao": {
-        "s1-093": "C"
-      },
-      "timerRestante": 0
-    },
-    "5-simulado": {
-      "respostas": {
-        "s5-078": "errado"
-      },
-      "selecao": {
-        "s5-078": "A"
-      },
-      "timerRestante": 0
-    }
-  }
+  "simulados": {}
 }
