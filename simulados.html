@@ -6,25 +6,14 @@
 <title>HermesMed — Simulados</title>
 <style>
   :root {
-    --bg: #0f0f1a;
-    --card: #1a1a2e;
-    --card2: #22223a;
-    --accent: #7c5cfc;
-    --accent2: #5ac8fa;
-    --correct: #34c759;
-    --wrong: #ff3b30;
-    --text: #e8e8f0;
-    --muted: #8888a0;
-    --radius: 16px;
-    --shadow: 0 8px 32px rgba(0,0,0,0.3);
+    --bg: #0f0f1a; --card: #1a1a2e; --card2: #22223a; --accent: #7c5cfc;
+    --accent2: #5ac8fa; --correct: #34c759; --wrong: #ff3b30; --text: #e8e8f0;
+    --muted: #8888a0; --radius: 16px; --shadow: 0 8px 32px rgba(0,0,0,0.3);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    padding: 16px;
+    background: var(--bg); color: var(--text); min-height: 100vh; padding: 16px;
   }
   .container { max-width: 800px; margin: 0 auto; }
 
@@ -38,74 +27,88 @@
   .topbar .info .sub { color: var(--muted); font-size: 0.8rem; }
 
   /* Lista de simulados */
-  .simulado-card {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 16px;
-    cursor: pointer;
-    transition: all 0.25s;
-    border: 1px solid transparent;
+  .sim-card {
+    background: var(--card); border-radius: var(--radius); padding: 20px; margin-bottom: 16px;
+    cursor: pointer; transition: all 0.25s; border: 1px solid transparent;
   }
-  .simulado-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
-  .simulado-card .sim-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px; }
-  .simulado-card .sim-title { font-weight: 700; font-size: 1.05rem; }
-  .simulado-card .sim-badge {
-    background: var(--accent); color: white; font-size: 0.7rem; font-weight: 700;
-    padding: 3px 10px; border-radius: 8px;
-  }
-  .simulado-card .sim-meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 12px; }
-  .simulado-card .sim-meta span { margin-right: 16px; }
-  .simulado-card .sim-stats {
-    display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem;
-  }
-  .simulado-card .sim-stats .s { display: flex; align-items: center; gap: 4px; color: var(--muted); }
-  .simulado-card .sim-stats .s strong { color: var(--text); }
+  .sim-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .sim-card .sim-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px; }
+  .sim-card .sim-title { font-weight: 700; font-size: 1.05rem; }
+  .sim-card .sim-badge { background: var(--accent); color: white; font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 8px; }
+  .sim-card .sim-meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 12px; }
+  .sim-card .sim-meta span { margin-right: 16px; }
+  .sim-stats { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; }
+  .sim-card .sim-stats .s { display: flex; align-items: center; gap: 4px; color: var(--muted); }
+  .sim-card .sim-stats .s strong { color: var(--text); }
   .sim-stats-bar { height: 4px; background: var(--card2); border-radius: 2px; margin-top: 12px; overflow: hidden; }
   .sim-stats-bar .fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; transition: width 0.5s; }
 
-  /* Filtros */
-  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-  .filter-btn {
-    padding: 6px 14px; border: 1px solid var(--card2); border-radius: 20px;
-    background: transparent; color: var(--muted); font-size: 0.8rem;
-    cursor: pointer; transition: 0.2s;
+  /* Modo selector */
+  .modo-selector { display: flex; gap: 10px; margin-bottom: 16px; }
+  .modo-btn {
+    flex: 1; padding: 16px; border: 2px solid var(--card2); border-radius: var(--radius);
+    background: var(--card); color: var(--muted); cursor: pointer; transition: 0.25s;
+    text-align: center;
   }
-  .filter-btn:hover { border-color: var(--accent); color: var(--text); }
-  .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .modo-btn:hover { border-color: var(--accent); color: var(--text); }
+  .modo-btn.active { border-color: var(--accent); background: rgba(124,92,252,0.08); color: var(--text); }
+  .modo-btn .icon { font-size: 1.8rem; margin-bottom: 4px; }
+  .modo-btn .nome { font-weight: 600; font-size: 0.95rem; }
+  .modo-btn .desc { font-size: 0.75rem; margin-top: 4px; }
 
   /* Stats bar */
   .stats-bar {
-    display: flex; gap: 16px; padding: 12px 16px;
-    background: var(--card); border-radius: 12px; margin-bottom: 16px; font-size: 0.85rem; flex-wrap: wrap;
-    justify-content: center;
+    display: flex; gap: 8px; align-items: center; padding: 10px 14px;
+    background: var(--card); border-radius: 12px; margin-bottom: 14px; font-size: 0.82rem; flex-wrap: wrap;
   }
   .stats-bar .stat { display: flex; align-items: center; gap: 4px; color: var(--muted); }
   .stats-bar .stat strong { color: var(--text); }
+  .stats-bar .spacer { flex: 1; }
+  .stats-bar .timer { font-weight: 700; font-size: 0.95rem; font-variant-numeric: tabular-nums; }
+  .timer.warning { color: #ff9f0a; }
+  .timer.danger { color: var(--wrong); animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+  /* Question nav */
+  .q-nav { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .q-nav-dot {
+    width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--card2);
+    background: var(--card); color: var(--muted); font-size: 0.7rem; font-weight: 600;
+    cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center;
+  }
+  .q-nav-dot:hover { border-color: var(--accent); }
+  .q-nav-dot.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .q-nav-dot.answered { background: rgba(124,92,252,0.15); color: var(--accent); border-color: var(--accent); }
+  .q-nav-dot.correct { background: rgba(52,199,89,0.15); color: var(--correct); border-color: var(--correct); }
+  .q-nav-dot.wrong { background: rgba(255,59,48,0.15); color: var(--wrong); border-color: var(--wrong); }
 
   /* Question card */
   .question-card {
-    background: var(--card); border-radius: var(--radius); padding: 20px; margin-bottom: 16px;
-    animation: fadeIn 0.3s;
+    background: var(--card); border-radius: var(--radius); padding: 20px; margin-bottom: 14px;
+    animation: fadeIn 0.25s;
   }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
   .question-card .q-meta { font-size: 0.75rem; color: var(--muted); margin-bottom: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
   .question-card .q-meta .tag { background: var(--card2); padding: 2px 8px; border-radius: 6px; }
   .question-card .q-meta .tag.area-tag { background: rgba(124,92,252,0.15); color: var(--accent); }
-  .question-card .q-num { font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; color: var(--accent2); }
-  .question-card .enunciado { font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px; }
-  .question-card .enunciado .highlight { display: block; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 10px; border-left: 3px solid var(--accent2); margin: 10px 0; font-style: italic; }
+  .question-card .q-num { font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; color: var(--accent2); }
+  .question-card .enunciado { font-size: 0.95rem; line-height: 1.7; margin-bottom: 16px; }
 
   /* Alternativas */
   .alts { display: flex; flex-direction: column; gap: 6px; }
   .alt {
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: flex-start; gap: 10px;
     background: var(--card2); border: 2px solid transparent; border-radius: 10px;
     padding: 12px 14px; cursor: pointer; transition: 0.2s; color: var(--text);
-    font-size: 0.9rem; text-align: left; width: 100%;
+    font-size: 0.9rem; text-align: left; width: 100%; line-height: 1.5;
   }
   .alt:hover:not(.disabled) { border-color: var(--accent); }
-  .alt .let { width: 26px; height: 26px; border-radius: 7px; background: var(--bg); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem; flex-shrink: 0; transition: 0.2s; }
+  .alt .let {
+    width: 26px; height: 26px; border-radius: 7px; background: var(--bg);
+    display: flex; align-items: center; justify-content: center; font-weight: 700;
+    font-size: 0.75rem; flex-shrink: 0; margin-top: 2px; transition: 0.2s;
+  }
+  .alt .alt-text { flex: 1; }
   .alt.selected { border-color: var(--accent); }
   .alt.selected .let { background: var(--accent); color: white; }
   .alt.correct { border-color: var(--correct); background: rgba(52,199,89,0.08); }
@@ -119,39 +122,62 @@
   .explicacao {
     margin-top: 12px; padding: 14px; border-radius: 10px;
     background: rgba(124,92,252,0.06); border-left: 3px solid var(--accent);
-    display: none; font-size: 0.88rem; line-height: 1.6;
+    display: none; font-size: 0.88rem; line-height: 1.7;
   }
   .explicacao.visible { display: block; }
-  .explicacao strong { color: var(--accent2); display: block; margin-bottom: 4px; }
+  .explicacao .exp-title { color: var(--accent2); font-weight: 700; display: block; margin-bottom: 6px; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; }
 
-  .actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .q-foot { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
   .btn {
-    padding: 10px 20px; border: none; border-radius: 10px; font-weight: 600;
-    font-size: 0.85rem; cursor: pointer; transition: 0.2s; color: white; flex: 1; min-width: 80px;
+    padding: 10px 18px; border: none; border-radius: 10px; font-weight: 600;
+    font-size: 0.85rem; cursor: pointer; transition: 0.15s; color: white;
   }
   .btn:active { transform: scale(0.97); }
+  .btn:disabled { opacity: 0.35; cursor: not-allowed; }
   .btn-primary { background: var(--accent); }
-  .btn-primary:hover { background: #6a4ae0; }
-  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-primary:hover:not(:disabled) { background: #6a4ae0; }
   .btn-secondary { background: var(--card2); color: var(--text); }
-  .btn-secondary:hover { background: #2a2a44; }
-  .btn-correct { background: var(--correct); }
-  .btn-wrong { background: var(--wrong); }
+  .btn-secondary:hover:not(:disabled) { background: #2a2a44; }
+  .btn-success { background: var(--correct); }
+  .btn-danger { background: var(--wrong); }
+  .btn-outline {
+    background: transparent; border: 1px solid var(--card2); color: var(--muted);
+  }
+  .btn-outline:hover:not(:disabled) { border-color: var(--accent); color: var(--text); }
+
+  .q-nav-btns { display: flex; gap: 8px; margin-top: 12px; }
+  .q-nav-btns .btn { flex: 1; }
 
   /* Resultado */
-  .result { display: none; text-align: center; padding: 30px 20px; }
-  .result.visible { display: block; }
+  .result { display: none; text-align: center; padding: 30px 16px; }
+  .result.visible { display: block; animation: fadeIn 0.4s; }
   .result .big-icon { font-size: 3.5rem; margin-bottom: 12px; }
   .result h2 { font-size: 1.4rem; margin-bottom: 8px; }
   .result .score { font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .result .details { display: flex; justify-content: center; gap: 20px; margin: 16px 0; flex-wrap: wrap; }
-  .result .details .item { background: var(--card); padding: 14px 18px; border-radius: 12px; min-width: 80px; }
-  .result .details .item .num { font-size: 1.3rem; font-weight: 700; }
-  .result .details .item .label { font-size: 0.75rem; color: var(--muted); }
+  .result .score-sub { color: var(--muted); font-size: 0.9rem; margin: 4px 0 16px; }
+  .result-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 10px; margin: 16px 0; }
+  .result-grid .rg-item { background: var(--card); padding: 14px; border-radius: 12px; }
+  .result-grid .rg-item .rg-num { font-size: 1.3rem; font-weight: 700; }
+  .result-grid .rg-item .rg-label { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+  .result-actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+  .result-actions .btn { flex: 0; padding: 12px 24px; min-width: 120px; }
+
+  .result-detalhado { margin-top: 20px; text-align: left; }
+  .result-detalhado table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .result-detalhado th { text-align: left; padding: 8px 10px; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--card2); }
+  .result-detalhado td { padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .result-detalhado .r-certo { color: var(--correct); }
+  .result-detalhado .r-errado { color: var(--wrong); }
+  .result-detalhado .r-pular { color: var(--muted); }
+  .result-detalhado tr:hover td { background: rgba(255,255,255,0.02); }
 
   @media (max-width: 500px) {
+    body { padding: 10px; }
     .question-card { padding: 14px; }
     .alt { padding: 10px 12px; font-size: 0.85rem; }
+    .modo-selector { flex-direction: column; }
+    .q-nav-dot { width: 28px; height: 28px; font-size: 0.65rem; }
   }
 </style>
 </head>
@@ -161,35 +187,46 @@
     <a href="index.html">←</a>
     <div class="info">
       <div class="title">📝 Simulados</div>
-      <div class="sub" id="pageSub">Carregando simulados...</div>
+      <div class="sub" id="pageSub">Carregando...</div>
     </div>
   </div>
 
-  <div id="simuladoList"></div>
-  <div id="simuladoView" style="display:none;"></div>
+  <div id="simList"></div>
+  <div id="simView" style="display:none;"></div>
 </div>
 
 <script>
 const STORAGE_KEY = 'hermesmed_simulados';
 
-// ─── Listar simulados ───
-async function listarSimulados() {
-  const el = document.getElementById('simuladoList');
-  const view = document.getElementById('simuladoView');
-  view.style.display = 'none';
-  el.style.display = 'block';
+// ─── Utils ───
+function salvarProgresso(idSim, dados) {
+  const p = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  p[idSim] = dados;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
+}
+function carregarProgresso(idSim) {
+  const p = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  return p[idSim] || null;
+}
+function pad(n) { return String(n).padStart(2, '0'); }
+
+// ─── Listar ───
+async function listar() {
+  const el = document.getElementById('simList');
+  const v = document.getElementById('simView');
+  v.style.display = 'none'; el.style.display = 'block';
 
   try {
-    const resp = await fetch('data/simulados/14-simulado.json');
-    const data = await resp.json();
-    const progresso = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-    const p14 = progresso['14-simulado'] || {};
-    const respondidas = Object.keys(p14).filter(k => p14[k] !== undefined).length;
-    const acertos = Object.keys(p14).filter(k => p14[k] === true).length;
+    const r = await fetch('data/simulados/14-simulado.json');
+    const data = await r.json();
+    const prog = carregarProgresso('14-simulado');
+    const resp = prog ? (prog.respostas || {}) : {};
+    const respondidas = Object.keys(resp).filter(k => resp[k] !== undefined).length;
+    const acertos = Object.keys(resp).filter(k => resp[k] === 'certo').length;
     const pct = data.total_questoes > 0 ? Math.round((respondidas / data.total_questoes) * 100) : 0;
 
     el.innerHTML = `
-      <div class="simulado-card" onclick="abrirSimulado('14-simulado')">
+      <div class="sim-card" onclick="iniciar('14-simulado')">
         <div class="sim-header">
           <div class="sim-title">${data.simulado}</div>
           <span class="sim-badge">${data.total_questoes} questões</span>
@@ -200,111 +237,212 @@ async function listarSimulados() {
         </div>
         <div class="sim-stats">
           <span class="s">✅ <strong>${acertos}</strong> acertos</span>
-          <span class="s">📊 <strong>${respondidas}</strong>/${data.total_questoes} respondidas</span>
-          <span class="s">🎯 <strong>${pct}%</strong> completo</span>
+          <span class="s">📊 <strong>${respondidas}</strong>/${data.total_questoes}</span>
+          <span class="s">🎯 <strong>${pct}%</strong></span>
         </div>
         <div class="sim-stats-bar"><div class="fill" style="width:${pct}%"></div></div>
       </div>
-      <div style="text-align:center;margin-top:12px;">
-        <button class="btn btn-primary" onclick="abrirSimulado('14-simulado')" style="flex:0;padding:12px 24px;display:inline-flex;">
-          🎯 Iniciar Simulado
-        </button>
+      <div style="max-width:500px;margin:0 auto;">
+        <div class="modo-selector" id="modoSelector">
+          <div class="modo-btn active" data-modo="questoes" onclick="selecionarModo('questoes')">
+            <div class="icon">📖</div>
+            <div class="nome">Modo Questões</div>
+            <div class="desc">Correção na hora • Ver explicação</div>
+          </div>
+          <div class="modo-btn" data-modo="prova" onclick="selecionarModo('prova')">
+            <div class="icon">⏱️</div>
+            <div class="nome">Modo Prova</div>
+            <div class="desc">4h • Gabarito só no final</div>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="iniciar('14-simulado')" style="width:100%;padding:14px;font-size:1rem;">🎯 Iniciar Simulado</button>
       </div>
     `;
     document.getElementById('pageSub').textContent = '1 simulado disponível';
   } catch(e) {
-    el.innerHTML = `
-      <div style="text-align:center;padding:60px 20px;color:var(--muted);">
-        <div style="font-size:3rem;margin-bottom:12px;">📭</div>
-        <strong>Nenhum simulado disponível</strong>
-        <p style="margin-top:8px;font-size:0.9rem;">Adicione arquivos .json na pasta data/simulados/</p>
-      </div>`;
+    el.innerHTML = `<div style="text-align:center;padding:60px 20px;color:var(--muted);">
+      <div style="font-size:3rem;margin-bottom:12px;">📭</div>
+      <strong>Nenhum simulado disponível</strong>
+      <p style="margin-top:8px;font-size:0.9rem;">Adicione .json em data/simulados/</p>
+    </div>`;
   }
 }
 
-// ─── Abrir simulado ───
-let questoes = [];
-let currentIndex = 0;
-let acertos = 0;
-let erros = 0;
-let answered = false;
-let selectedLetra = null;
-let areaFiltro = null;
+let modoAtual = 'questoes';
 
-async function abrirSimulado(id, filtroArea) {
-  areaFiltro = filtroArea || null;
-  document.getElementById('simuladoList').style.display = 'none';
-  const view = document.getElementById('simuladoView');
-  view.style.display = 'block';
+function selecionarModo(m) {
+  modoAtual = m;
+  document.querySelectorAll('.modo-btn').forEach(b => b.classList.toggle('active', b.dataset.modo === m));
+}
+
+// ─── Estado do simulado ───
+let questoes = [];
+let respostas = {};        // { id: 'certo' | 'errado' | 'pulou' }
+let respSelecao = {};      // { id: 'A' } — o que o usuário selecionou
+let indexAtual = 0;
+let timerInterval = null;
+let timerSegundos = 0;
+let modoProvaAtivo = false;
+let simuladoId = null;
+
+// ─── Iniciar ───
+async function iniciar(id) {
+  simuladoId = id;
+  document.getElementById('simList').style.display = 'none';
+  const v = document.getElementById('simView');
+  v.style.display = 'block';
 
   try {
-    const resp = await fetch(`data/simulados/${id}.json`);
-    const data = await resp.json();
+    const r = await fetch(`data/simulados/${id}.json`);
+    const data = await r.json();
     questoes = data.questoes;
 
-    if (areaFiltro) {
-      questoes = questoes.filter(q => q.area === areaFiltro);
+    // Carregar progresso existente
+    const prog = carregarProgresso(id);
+    respostas = prog ? (prog.respostas || {}) : {};
+    respSelecao = prog ? (prog.selecao || {}) : {};
+
+    modoProvaAtivo = (modoAtual === 'prova');
+
+    // Timer apenas no modo prova
+    if (modoProvaAtivo) {
+      timerSegundos = 14400; // 4h
+      if (prog && prog.timerRestante) {
+        timerSegundos = prog.timerRestante;
+      }
+    } else {
+      timerSegundos = 0;
     }
 
-    acertos = 0; erros = 0; currentIndex = 0;
+    // Renderizar
+    renderizarView();
 
-    view.innerHTML = `
-      <div class="stats-bar" id="qStats">
-        <span class="stat">📝 <strong id="qIdx">1</strong>/<span id="qTot">${questoes.length}</span></span>
-        <span class="stat">✅ <strong id="qAcertos">0</strong></span>
-        <span class="stat">❌ <strong id="qErros">0</strong></span>
-        <span class="stat">🎯 <strong id="qPct">0%</strong></span>
-      </div>
-      <div id="qArea" style="margin-bottom:8px;">
-        ${areaFiltro ? `<span class="filter-btn active" style="cursor:default;">📂 ${areaFiltro}</span>` : ''}
-        <button class="filter-btn" onclick="voltarLista()" style="float:right;">← Todos simulados</button>
-      </div>
-      <div id="qCard"></div>
-      <div class="result" id="qResult"></div>
-    `;
+    if (modoProvaAtivo && timerSegundos > 0) {
+      iniciarTimer();
+    }
 
-    showQuestion(0);
   } catch(e) {
-    view.innerHTML = `<p style="color:var(--wrong);">Erro ao carregar simulado.</p>`;
+    v.innerHTML = `<p style="color:var(--wrong);">Erro ao carregar simulado.</p>`;
   }
 }
 
-function showQuestion(index) {
-  if (index >= questoes.length) { showResult(); return; }
-  currentIndex = index; answered = false; selectedLetra = null;
-  const q = questoes[index];
+function renderizarView() {
+  const total = questoes.length;
+  const idsRespondidas = Object.keys(respostas);
+  const respondidas = idsRespondidas.length;
+  const acertos = idsRespondidas.filter(k => respostas[k] === 'certo').length;
 
-  document.getElementById('qIdx').textContent = index + 1;
-  document.getElementById('qTot').textContent = questoes.length;
-  document.getElementById('qAcertos').textContent = acertos;
-  document.getElementById('qErros').textContent = erros;
-  document.getElementById('qPct').textContent = questoes.length > 0 ? Math.round((index / questoes.length) * 100) + '%' : '0%';
+  let dotsHtml = '';
+  questoes.forEach((q, i) => {
+    const r = respostas[q.id];
+    let cls = 'q-nav-dot';
+    if (i === indexAtual) cls += ' active';
+    else if (r === 'certo') cls += ' correct';
+    else if (r === 'errado') cls += ' wrong';
+    else if (r !== undefined) cls += ' answered';
+    dotsHtml += `<div class="${cls}" onclick="irQuestao(${i})">${q.numero}</div>`;
+  });
 
-  const letras = ['A','B','C','D','E'];
+  const tempoStr = modoProvaAtivo ? formatTimer(timerSegundos) : '';
+
+  document.getElementById('simView').innerHTML = `
+    <div class="stats-bar">
+      <span class="stat">📝 <strong>${respondidas}</strong>/${total}</span>
+      ${modoProvaAtivo ? '' : `<span class="stat">✅ <strong>${acertos}</strong></span>`}
+      ${modoProvaAtivo ? `<span class="stat">⏱️ <span class="timer" id="timerDisplay">${tempoStr}</span></span>` : `<span class="stat">❌ <strong>${respondidas - acertos}</strong></span>`}
+      <span class="spacer"></span>
+      <span class="stat">${modoProvaAtivo ? '🔒 Modo Prova' : '📖 Modo Questões'}</span>
+      <button class="btn btn-outline" onclick="voltarLista()" style="padding:4px 10px;font-size:0.75rem;">← Sair</button>
+    </div>
+    <div class="q-nav" id="qNav">${dotsHtml}</div>
+
+    <!-- Área de filtro -->
+    <div id="qAreaFilter">
+      <button class="btn btn-outline" onclick="filtrarArea()" style="padding:4px 12px;font-size:0.78rem;float:left;">📂 Filtrar por área</button>
+      <button class="btn btn-outline" onclick="mostrarTodas()" style="padding:4px 12px;font-size:0.78rem;float:right;">📋 Lista de questões</button>
+      <div style="clear:both;margin-bottom:8px;"></div>
+    </div>
+
+    <div id="qCard"></div>
+    <div class="q-nav-btns" id="qNavBtns">
+      <button class="btn btn-secondary" id="btnPrev" onclick="questaoAnterior()" ${indexAtual === 0 ? 'disabled' : ''}>← Anterior</button>
+      <button class="btn btn-outline" id="btnPular" onclick="pularQuestao()">⏭️ Pular</button>
+      <button class="btn btn-secondary" id="btnNext" onclick="proximaQuestao()">Próxima →</button>
+    </div>
+    <div class="result" id="qResult"></div>
+  `;
+
+  mostrarQuestao(indexAtual);
+}
+
+function mostrarQuestao(idx) {
+  if (idx >= questoes.length || idx < 0) { mostrarResultado(); return; }
+  indexAtual = idx;
+  const q = questoes[idx];
+  const respondida = respostas[q.id] !== undefined;
+  const selecionada = respSelecao[q.id] || null;
+
+  // Atualizar nav dots
+  document.querySelectorAll('.q-nav-dot').forEach((dot, i) => {
+    const r = respostas[questoes[i].id];
+    dot.className = 'q-nav-dot';
+    if (i === idx) dot.classList.add('active');
+    else if (r === 'certo') dot.classList.add('correct');
+    else if (r === 'errado') dot.classList.add('wrong');
+    else if (r !== undefined) dot.classList.add('answered');
+  });
+
+  document.getElementById('btnPrev').disabled = (idx === 0);
+  document.getElementById('btnNext').textContent = idx < questoes.length - 1 ? 'Próxima →' : 'Finalizar ✅';
+
   let altsHtml = '';
-  (Object.entries(q.alternativas || {})).forEach(([k, v]) => {
-    altsHtml += `<div class="alt" data-let="${k}" onclick="selectAlt('${k}')">
-      <span class="let">${k}</span><span>${v}</span>
+  Object.entries(q.alternativas).forEach(([k, v]) => {
+    let cls = 'alt disabled';
+    if (!respondida && !modoProvaAtivo) cls = 'alt';
+    else if (respondida) {
+      cls += ' disabled';
+      if (k === q.correta) cls += ' correct';
+      if (k === selecionada && k !== q.correta) cls += ' wrong';
+      if (k === q.correta && k !== selecionada && selecionada) cls += ' show-correct';
+    }
+
+    const selAttr = (!respondida && !modoProvaAtivo) ? `onclick="selecionarAlt('${k}')"` : '';
+    const selectedCls = (k === selecionada && !respondida && !modoProvaAtivo) ? ' selected' : '';
+
+    altsHtml += `<div class="${cls}${selectedCls}" data-let="${k}" ${selAttr}>
+      <span class="let">${k}</span>
+      <span class="alt-text">${v}</span>
     </div>`;
   });
+
+  const showExp = (respondida && !modoProvaAtivo) || (!modoProvaAtivo && respostas[q.id] !== undefined);
 
   const card = document.getElementById('qCard');
   card.innerHTML = `
     <div class="question-card">
       <div class="q-meta">
-        <span class="tag area-tag">${q.area || ''}</span>
+        <span class="tag area-tag">${q.area}</span>
         <span class="tag">Q${q.numero}</span>
       </div>
-      <div class="q-num">Questão ${q.numero}</div>
+      <div class="q-num">Questão ${q.numero} de ${questoes.length}</div>
       <div class="enunciado">${q.enunciado}</div>
       <div class="alts">${altsHtml}</div>
-      <div class="explicacao" id="qExp">
-        <strong>📖 Resolução</strong>
-        <p id="qExpText">${q.explicacao || 'Resolução não disponível para esta questão.'}</p>
+      <div class="explicacao ${showExp ? 'visible' : ''}" id="qExp">
+        <span class="exp-title">📖 Resolução</span>
+        <div id="qExpText">${q.explicacao || 'Resolução não disponível.'}</div>
       </div>
-      <div class="actions" id="qActions">
-        <button class="btn btn-primary" id="btnConfirm" onclick="confirmar()" disabled>Confirmar</button>
-        <button class="btn btn-secondary" id="btnNext" onclick="nextQ()" style="display:none;">Próxima →</button>
+      <div class="q-foot" id="qFoot">
+        ${!modoProvaAtivo && !respondida
+          ? `<button class="btn btn-primary" id="btnConfirmar" onclick="confirmar()" disabled>Confirmar</button>`
+          : (modoProvaAtivo && !respondida
+            ? `<button class="btn btn-primary" onclick="confirmarProva()">Confirmar (modo prova)</button>`
+            : (!modoProvaAtivo && respondida
+              ? `<button class="btn ${respostas[q.id] === 'certo' ? 'btn-success' : 'btn-danger'}" disabled>
+                   ${respostas[q.id] === 'certo' ? '✅ Correto!' : `❌ Errado! (Gabarito: ${q.correta})`}
+                 </button><button class="btn btn-secondary" onclick="limparResposta(${idx})">🔄 Refazer</button>`
+              : '')
+          )
+        }
       </div>
     </div>
   `;
@@ -312,109 +450,289 @@ function showQuestion(index) {
   card.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function selectAlt(letra) {
-  if (answered) return;
-  selectedLetra = letra;
+function selecionarAlt(letra) {
+  const q = questoes[indexAtual];
+  if (respostas[q.id] !== undefined) return;
+  respSelecao[q.id] = letra;
   document.querySelectorAll('.alt').forEach(a => {
     a.classList.toggle('selected', a.dataset.let === letra);
   });
-  document.getElementById('btnConfirm').disabled = false;
+  document.getElementById('btnConfirmar').disabled = false;
 }
 
 function confirmar() {
-  if (!selectedLetra || answered) return;
-  answered = true;
-  const q = questoes[currentIndex];
-  const isCorrect = selectedLetra === q.correta;
+  const q = questoes[indexAtual];
+  const letra = respSelecao[q.id];
+  if (!letra) return;
 
-  if (isCorrect) acertos++; else erros++;
+  const isCorrect = letra === q.correta;
+  respostas[q.id] = isCorrect ? 'certo' : 'errado';
 
+  salvarProgresso(simuladoId, { respostas, selecao: respSelecao, timerRestante: timerSegundos });
+
+  // Atualizar UI
   document.querySelectorAll('.alt').forEach(a => {
-    a.classList.add('disabled');
-    a.onclick = null;
-    if (a.dataset.let === q.correta) a.classList.add('correct');
-    if (a.dataset.let === selectedLetra && a.dataset.let !== q.correta) a.classList.add('wrong');
-    if (a.dataset.let === q.correta && a.dataset.let !== selectedLetra) a.classList.add('show-correct');
+    a.classList.add('disabled'); a.onclick = null;
+    const l = a.dataset.let;
+    if (l === q.correta) a.classList.add('correct');
+    if (l === letra && l !== q.correta) a.classList.add('wrong');
+    if (l === q.correta && l !== letra) a.classList.add('show-correct');
   });
 
+  document.getElementById('qFoot').innerHTML = `
+    <button class="btn ${isCorrect ? 'btn-success' : 'btn-danger'}" disabled>
+      ${isCorrect ? '✅ Correto!' : `❌ Errado! (Gabarito: ${q.correta})`}
+    </button>
+    <button class="btn btn-secondary" onclick="limparResposta(${indexAtual})">🔄 Refazer</button>
+  `;
+
   document.getElementById('qExp').classList.add('visible');
-  document.getElementById('btnConfirm').style.display = 'none';
 
-  const actions = document.getElementById('qActions');
-  const badge = document.createElement('button');
-  badge.className = `btn ${isCorrect ? 'btn-correct' : 'btn-wrong'}`;
-  badge.disabled = true;
-  badge.textContent = isCorrect ? '✅ Correto!' : `❌ Errado! (Gabarito: ${q.correta})`;
-  actions.insertBefore(badge, document.getElementById('btnNext'));
-  document.getElementById('btnNext').style.display = '';
-
-  // Salvar
-  salvar(q, isCorrect);
-
-  document.getElementById('qAcertos').textContent = acertos;
-  document.getElementById('qErros').textContent = erros;
-}
-
-function nextQ() {
-  showQuestion(currentIndex + 1);
-}
-
-function salvar(q, isCorrect) {
-  const progresso = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-  if (!progresso['14-simulado']) progresso['14-simulado'] = {};
-  progresso['14-simulado'][String(q.id)] = isCorrect;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(progresso));
-}
-
-function showResult() {
+  // Atualizar stats
   const total = questoes.length;
-  const pct = total > 0 ? Math.round((acertos / total) * 100) : 0;
-  let icon, title;
-  if (pct >= 80) { icon = '🏆'; title = 'Excelente!'; }
-  else if (pct >= 60) { icon = '👏'; title = 'Bom trabalho!'; }
-  else if (pct >= 40) { icon = '💪'; title = 'Continue praticando!'; }
-  else { icon = '📚'; title = 'Hora de revisar!'; }
+  const acertos = Object.keys(respostas).filter(k => respostas[k] === 'certo').length;
+  document.querySelector('.stats-bar').innerHTML = `
+    <span class="stat">📝 <strong>${Object.keys(respostas).length}</strong>/${total}</span>
+    <span class="stat">✅ <strong>${acertos}</strong></span>
+    <span class="stat">❌ <strong>${Object.keys(respostas).length - acertos}</strong></span>
+    <span class="spacer"></span>
+    <span class="stat">📖 Modo Questões</span>
+    <button class="btn btn-outline" onclick="voltarLista()" style="padding:4px 10px;font-size:0.75rem;">← Sair</button>
+  `;
+}
+
+function confirmarProva() {
+  const q = questoes[indexAtual];
+  const letra = respSelecao[q.id];
+  if (!letra) return;
+
+  const isCorrect = letra === q.correta;
+  respostas[q.id] = isCorrect ? 'certo' : 'errado';
+  salvarProgresso(simuladoId, { respostas, selecao: respSelecao, timerRestante: timerSegundos });
+
+  // No modo prova, não mostra certo/errado — só marca
+  document.querySelector('.alt.selected')?.classList.add('disabled');
+  document.getElementById('qFoot').innerHTML = `<button class="btn btn-success" disabled>✅ Respondida (${letra})</button>`;
+
+  // Atualizar stats
+  const total = questoes.length;
+  document.querySelector('.stats-bar').innerHTML = `
+    <span class="stat">📝 <strong>${Object.keys(respostas).length}</strong>/${total}</span>
+    <span class="stat">⏱️ <span class="timer" id="timerDisplay">${formatTimer(timerSegundos)}</span></span>
+    <span class="spacer"></span>
+    <span class="stat">🔒 Modo Prova</span>
+    <button class="btn btn-outline" onclick="voltarLista()" style="padding:4px 10px;font-size:0.75rem;">← Sair</button>
+  `;
+}
+
+function limparResposta(idx) {
+  const q = questoes[idx];
+  delete respostas[q.id];
+  delete respSelecao[q.id];
+  salvarProgresso(simuladoId, { respostas, selecao: respSelecao, timerRestante: timerSegundos });
+  mostrarQuestao(idx);
+}
+
+function pularQuestao() {
+  const q = questoes[indexAtual];
+  if (respostas[q.id] === undefined) {
+    respostas[q.id] = 'pulou';
+  }
+  salvarProgresso(simuladoId, { respostas, selecao: respSelecao, timerRestante: timerSegundos });
+  proximaQuestao();
+}
+
+function questaoAnterior() {
+  if (indexAtual > 0) {
+    mostrarQuestao(indexAtual - 1);
+  }
+}
+
+function proximaQuestao() {
+  if (indexAtual < questoes.length - 1) {
+    mostrarQuestao(indexAtual + 1);
+  } else {
+    // Finalizar
+    mostrarResultado();
+  }
+}
+
+function irQuestao(idx) {
+  if (idx >= 0 && idx < questoes.length) {
+    mostrarQuestao(idx);
+  }
+}
+
+// ─── Timer ───
+function formatTimer(s) {
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const seg = s % 60;
+  return `${pad(h)}:${pad(m)}:${pad(seg)}`;
+}
+
+function iniciarTimer() {
+  if (timerInterval) clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timerSegundos--;
+    const disp = document.getElementById('timerDisplay');
+    if (disp) {
+      disp.textContent = formatTimer(timerSegundos);
+      disp.className = 'timer';
+      if (timerSegundos < 600) disp.classList.add('warning');
+      if (timerSegundos < 300) disp.classList.add('danger');
+    }
+    // Salvar periodicamente
+    if (timerSegundos % 30 === 0) {
+      salvarProgresso(simuladoId, { respostas, selecao: respSelecao, timerRestante: timerSegundos });
+    }
+    if (timerSegundos <= 0) {
+      clearInterval(timerInterval);
+      mostrarResultado();
+    }
+  }, 1000);
+}
+
+// ─── Resultado ───
+function mostrarResultado() {
+  clearInterval(timerInterval);
+
+  const total = questoes.length;
+  const idsResp = Object.keys(respostas).filter(k => respostas[k] !== 'pulou');
+  const respondidas = idsResp.length;
+  const acertos = idsResp.filter(k => respostas[k] === 'certo').length;
+  const erros = respondidas - acertos;
+  const puladas = Object.keys(respostas).filter(k => respostas[k] === 'pulou').length;
+  const naoResp = total - respondidas - puladas;
+  const pct = respondidas > 0 ? Math.round((acertos / respondidas) * 100) : 0;
+
+  let icon, titulo;
+  if (pct >= 80) { icon = '🏆'; titulo = 'Excelente!'; }
+  else if (pct >= 60) { icon = '👏'; titulo = 'Bom trabalho!'; }
+  else if (pct >= 40) { icon = '💪'; titulo = 'Continue praticando!'; }
+  else { icon = '📚'; titulo = 'Hora de revisar!'; }
+
+  // Time no modo prova
+  let tempoInfo = '';
+  if (modoProvaAtivo) {
+    const usado = 14400 - timerSegundos;
+    const h = Math.floor(usado / 3600);
+    const m = Math.floor((usado % 3600) / 60);
+    tempoInfo = `<p style="color:var(--muted);font-size:0.85rem;margin-bottom:8px;">⏱️ Tempo: ${h}h${m > 0 ? m + 'min' : ''}</p>`;
+  }
+
+  // Tabela detalhada
+  let tabelaHtml = '';
+  questoes.forEach((q, i) => {
+    const r = respostas[q.id];
+    let status, cls;
+    if (r === 'certo') { status = '✅'; cls = 'r-certo'; }
+    else if (r === 'errado') { status = '❌'; cls = 'r-errado'; }
+    else { status = '⏭️'; cls = 'r-pular'; }
+    tabelaHtml += `<tr><td>${q.numero}</td><td>${q.area}</td><td class="${cls}">${status}</td><td>${r === 'certo' || r === 'errado' ? respSelecao[q.id] || '-' : '-'}</td><td>${q.correta}</td></tr>`;
+  });
 
   document.getElementById('qCard').innerHTML = '';
-  document.getElementById('qStats').style.display = 'none';
+  document.getElementById('qNav').style.display = 'none';
+  document.getElementById('qNavBtns').style.display = 'none';
+  document.getElementById('qAreaFilter').style.display = 'none';
+
   const result = document.getElementById('qResult');
   result.classList.add('visible');
   result.innerHTML = `
     <div class="big-icon">${icon}</div>
-    <h2>${title}</h2>
+    <h2>${titulo}</h2>
     <div class="score">${pct}%</div>
-    <p>${acertos} de ${total} questões</p>
-    <div class="details">
-      <div class="item"><div class="num" style="color:var(--correct)">${acertos}</div><div class="label">Acertos</div></div>
-      <div class="item"><div class="num" style="color:var(--wrong)">${erros}</div><div class="label">Erros</div></div>
-      <div class="item"><div class="num" style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">${pct}%</div><div class="label">Aproveitamento</div></div>
+    <div class="score-sub">${acertos} de ${respondidas} respondidas</div>
+    ${tempoInfo}
+    <div class="result-grid">
+      <div class="rg-item"><div class="rg-num" style="color:var(--correct)">${acertos}</div><div class="rg-label">Acertos</div></div>
+      <div class="rg-item"><div class="rg-num" style="color:var(--wrong)">${erros}</div><div class="rg-label">Erros</div></div>
+      <div class="rg-item"><div class="rg-num" style="color:var(--muted)">${puladas}</div><div class="rg-label">Puladas</div></div>
+      <div class="rg-item"><div class="rg-num" style="color:var(--muted)">${naoResp}</div><div class="rg-label">Não respondidas</div></div>
+      <div class="rg-item"><div class="rg-num" style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">${pct}%</div><div class="rg-label">Aproveitamento</div></div>
     </div>
-    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px;">
-      <button class="btn btn-secondary" onclick="voltarLista()" style="flex:0;padding:12px 24px;">← Voltar</button>
-      <button class="btn btn-primary" onclick="location.reload()" style="flex:0;padding:12px 24px;">🔄 Refazer</button>
+    <div class="result-actions">
+      <button class="btn btn-secondary" onclick="voltarLista()">← Voltar</button>
+      <button class="btn btn-danger" onclick="zerarSimulado()">🔄 Refazer</button>
+      <button class="btn btn-primary" onclick="revisarErros()">📖 Revisar erros</button>
+    </div>
+    <div class="result-detalhado">
+      <h3 style="font-size:0.95rem;margin:20px 0 10px;text-align:left;">📋 Detalhamento por questão</h3>
+      <table>
+        <thead><tr><th>#</th><th>Área</th><th>Status</th><th>Sua resposta</th><th>Gabarito</th></tr></thead>
+        <tbody>${tabelaHtml}</tbody>
+      </table>
     </div>
   `;
+
+  // Salvar resultado final
+  salvarProgresso(simuladoId, { respostas, selecao: respSelecao, timerRestante: 0, concluido: true });
+}
+
+function zerarSimulado() {
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
+}
+
+function revisarErros() {
+  // Filtrar só erros e pular pra eles no modo revisão
+  const erros = questoes.filter(q => respostas[q.id] === 'errado');
+  if (erros.length === 0) {
+    alert('🎉 Nenhum erro para revisar!');
+    return;
+  }
+
+  // Modo "revisão de erros": mostra só as erradas
+  modoProvaAtivo = false;
+  const idxErro = questoes.findIndex(q => q.id === erros[0].id);
+  if (idxErro >= 0) mostrarQuestao(idxErro);
+}
+
+function filtrarArea() {
+  const areas = [...new Set(questoes.map(q => q.area))];
+  const areaOpts = areas.map(a => `<option value="${a}">${a}</option>`).join('');
+  const sel = prompt(`Filtrar por área:\nDigite o nome da área (ou Enter para todas):\n\nDisponíveis: ${areas.join(', ')}`);
+  if (sel && areas.includes(sel.trim())) {
+    const idx = questoes.findIndex(q => q.area === sel.trim());
+    if (idx >= 0) mostrarQuestao(idx);
+  }
+}
+
+function mostrarTodas() {
+  // Abre um diálogo para pular pra questão específica
+  const num = prompt(`Ir para questão (1-${questoes.length}):`);
+  const n = parseInt(num);
+  if (n >= 1 && n <= questoes.length) {
+    irQuestao(n - 1);
+  }
 }
 
 function voltarLista() {
-  document.getElementById('simuladoView').style.display = 'none';
-  document.getElementById('simuladoList').style.display = 'block';
-  listarSimulados();
+  clearInterval(timerInterval);
+  document.getElementById('simView').style.display = 'none';
+  document.getElementById('simList').style.display = 'block';
+  listar();
 }
 
 // ─── Keyboard ───
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    if (!answered && !document.getElementById('btnConfirm')?.disabled) confirmar();
-    else if (answered && document.getElementById('btnNext')?.style.display !== 'none') nextQ();
-  } else if (['1','2','3','4','5'].includes(e.key)) {
-    const alts = document.querySelectorAll('.alt');
-    if (alts[parseInt(e.key)-1]) alts[parseInt(e.key)-1].click();
+  if (document.getElementById('simList').style.display !== 'none') return;
+
+  if (['1','2','3','4','5'].includes(e.key)) {
+    const alts = document.querySelectorAll('.alt:not(.disabled)');
+    if (alts[e.key.charCodeAt(0) - 49]) alts[e.key.charCodeAt(0) - 49].click();
   }
+  if (e.key === 'Enter') {
+    const confirmBtn = document.getElementById('btnConfirmar');
+    if (confirmBtn && !confirmBtn.disabled) confirmBtn.click();
+  }
+  if (e.key === 'ArrowRight') proximaQuestao();
+  if (e.key === 'ArrowLeft') questaoAnterior();
 });
 
 // ─── Init ───
-listarSimulados();
+listar();
 </script>
 </body>
 </html>
