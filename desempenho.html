@@ -577,7 +577,8 @@ function salvarToken() {
   const t = document.getElementById('ghToken').value.trim();
   if (!t) { setSyncStatus('⚠️ Digite um token', '#ff9f0a'); return; }
   localStorage.setItem(SYNC_KEY, JSON.stringify({ token: t }));
-  setSyncStatus('✅ Token salvo!', '#34c759');
+  setSyncStatus('✅ Token salvo! (já fica salvo no navegador, não precisa digitar de novo)', '#34c759');
+  document.getElementById('ghToken').placeholder = '🔒 Token salvo';
 }
 
 function setSyncStatus(msg, color) {

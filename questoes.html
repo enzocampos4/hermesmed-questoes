@@ -1849,7 +1849,9 @@ function salvarToken() {
     return;
   }
   localStorage.setItem(SYNC_KEY, JSON.stringify({ token: token }));
-  setSyncStatus('✅ Token salvo com sucesso!', '#34c759');
+  setSyncStatus('✅ Token salvo! (já fica salvo no navegador, não precisa digitar de novo)', '#34c759');
+  document.getElementById('ghToken').value = token;
+  document.getElementById('ghToken').placeholder = '🔒 Token salvo no navegador';
 }
 
 function setSyncStatus(msg, color) {
