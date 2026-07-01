@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>HermesMed — Desempenho</title>
+<style>
+  :root {
+    --bg: #0d0d0d; --card: #1a1a2e; --text: #e8e8f0; --muted: #8888aa;
+    --accent: #7c5cfc; --accent2: #5ac8fa; --correct: #34c759; --wrong: #ff3b30;
+    --yellow: #ff9f0a; --orange: #ff6b35; --pink: #ff6b9d;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5;
+    min-height: 100vh; -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 600px; margin: 0 auto; padding: 0 14px 60px; }
+  .topbar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 0; position: sticky; top: 0; z-index: 10;
+    background: var(--bg); backdrop-filter: blur(8px);
+  }
+  .topbar a { text-decoration: none; font-size: 1.3rem; color: var(--accent); }
+  .topbar .title { font-weight: 700; font-size: 1rem; }
+  .topbar .sub { font-size: 0.78rem; color: var(--muted); }
+  
+  /* ─── Cards ─── */
+  .card {
+    background: var(--card); border-radius: 14px; padding: 18px;
+    margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.04);
+  }
+  .card h2 { font-size: 0.85rem; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .card h3 { font-size: 0.9rem; margin-bottom: 10px; }
+  
+  /* ─── Stats Grid ─── */
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+  }
+  .stat-item { text-align: center; padding: 10px 4px; }
+  .stat-num { font-size: 1.6rem; font-weight: 800; line-height: 1.2; }
+  .stat-label { font-size: 0.7rem; color: var(--muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.3px; }
+  .stat-score { font-size: 2.2rem; font-weight: 900; line-height: 1.1; }
+  
+  /* ─── Big Card ─── */
+  .big-score {
+    text-align: center; padding: 24px 10px;
+  }
+  .big-score .score { font-size: 3.2rem; font-weight: 900; line-height: 1; }
+  .big-score .label { font-size: 0.82rem; color: var(--muted); margin: 6px 0 12px; }
+  .big-score .sub { font-size: 0.78rem; color: var(--muted); }
+  
+  /* ─── Bar chart ─── */
+  .bar-area { margin-bottom: 12px; }
+  .bar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; font-size: 0.82rem; }
+  .bar-header .area-name { font-weight: 600; }
+  .bar-header .area-pct { color: var(--muted); font-size: 0.75rem; }
+  .bar-track {
+    height: 22px; border-radius: 12px; background: rgba(255,255,255,0.05);
+    overflow: hidden; display: flex;
+  }
+  .bar-correct {
+    height: 100%; background: linear-gradient(135deg, var(--correct), #2bac4a);
+    transition: width 0.6s ease;
+  }
+  .bar-wrong {
+    height: 100%; background: linear-gradient(135deg, var(--wrong), #cc2f26);
+    transition: width 0.6s ease;
+  }
+  .bar-none { height: 100%; background: rgba(255,255,255,0.04); }
+  .bar-area .bar-info {
+    display: flex; justify-content: space-between; font-size: 0.7rem;
+    color: var(--muted); margin-top: 2px;
+  }
+  
+  /* ─── Table ─── */
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  th { text-align: left; padding: 6px 4px; color: var(--muted); font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  td { padding: 6px 4px; border-bottom: 1px solid rgba(255,255,255,0.03); }
+  .td-certo { color: var(--correct); font-weight: 700; }
+  .td-errado { color: var(--wrong); font-weight: 700; }
+  
+  /* ─── Sim card ─── */
+  .sim-item {
+    padding: 12px; border-radius: 10px;
+    background: rgba(124,92,252,0.06); margin-bottom: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .sim-item .s-left { flex: 1; }
+  .sim-item .s-title { font-weight: 600; font-size: 0.85rem; }
+  .sim-item .s-meta { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+  .sim-item .s-score { font-size: 1.1rem; font-weight: 800; }
+  
+  /* ─── Empty ─── */
+  .empty-state {
+    text-align: center; padding: 40px 20px; color: var(--muted);
+  }
+  .empty-state .icon { font-size: 3rem; margin-bottom: 12px; }
+  .empty-state h3 { color: var(--text); margin-bottom: 6px; }
+  
+  /* ─── Legend ─── */
+  .legend { display: flex; gap: 14px; justify-content: center; margin: 10px 0; font-size: 0.78rem; }
+  .legend-item { display: flex; align-items: center; gap: 4px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  
+  /* ─── Colors ─── */
+  .cor-clinica-medica { color: #7c5cfc; }
+  .cor-cirurgia { color: #ff6b6b; }
+  .cor-pediatria { color: #5ac8fa; }
+  .cor-ginecologia { color: #ff8a80; }
+  .cor-medicina-preventiva { color: #34c759; }
+  .cor-medicina-intensiva { color: #ff9500; }
+  .cor-emergencia { color: #ff3b30; }
+  .cor-ortopedia { color: #af52de; }
+  .cor-oftalmologia { color: #30d158; }
+  .cor-otorrino { color: #64d2ff; }
+  .cor-dermatologia { color: #ff9f0a; }
+  .cor-psiquiatria { color: #bf5af2; }
+  .cor-geriatria { color: #5e5ce6; }
+  .cor-infectologia { color: #30b0c7; }
+  .cor-nefrologia { color: #64b5f6; }
+  .cor-reumatologia { color: #ce93d8; }
+  .cor-geral { color: #888; }
+  
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f2f2f7; --card: #ffffff; --text: #1c1c1e; --muted: #8e8e93;
+    }
+    .topbar { background: var(--bg); }
+    .card { border-color: rgba(0,0,0,0.06); }
+    .bar-track { background: rgba(0,0,0,0.06); }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="topbar">
+    <a href="index.html">←</a>
+    <div>
+      <div class="title">📊 Desempenho</div>
+      <div class="sub" id="pageSub">Carregando...</div>
+    </div>
+  </div>
+
+  <div id="content"></div>
+</div>
+
+<script>
+// ─── Áreas (mesmo array do index) ───
+const AREAS = [
+  { id: 'clinica-medica',    icon: '🫁', name: 'Clínica Médica', cor: '#7c5cfc' },
+  { id: 'cirurgia',          icon: '🔪', name: 'Cirurgia', cor: '#ff6b6b' },
+  { id: 'pediatria',         icon: '👶', name: 'Pediatria', cor: '#5ac8fa' },
+  { id: 'ginecologia',       icon: '🩺', name: 'Ginecologia e Obstetrícia', cor: '#ff8a80' },
+  { id: 'medicina-preventiva', icon: '🛡️', name: 'Medicina Preventiva', cor: '#34c759' },
+  { id: 'medicina-intensiva', icon: '💉', name: 'Medicina Intensiva', cor: '#ff9500' },
+  { id: 'emergencia',        icon: '🚑', name: 'Emergência e Trauma', cor: '#ff3b30' },
+  { id: 'ortopedia',         icon: '🦴', name: 'Ortopedia', cor: '#af52de' },
+  { id: 'oftalmologia',      icon: '👁️', name: 'Oftalmologia', cor: '#30d158' },
+  { id: 'otorrino',          icon: '👂', name: 'Otorrinolaringologia', cor: '#64d2ff' },
+  { id: 'dermatologia',      icon: '🧴', name: 'Dermatologia', cor: '#ff9f0a' },
+  { id: 'psiquiatria',       icon: '🧠', name: 'Psiquiatria', cor: '#bf5af2' },
+  { id: 'geriatria',         icon: '👴', name: 'Geriatria', cor: '#5e5ce6' },
+  { id: 'infectologia',      icon: '🦠', name: 'Infectologia', cor: '#30b0c7' },
+  { id: 'nefrologia',        icon: '🔬', name: 'Nefrologia', cor: '#64b5f6' },
+  { id: 'reumatologia',      icon: '🦵', name: 'Reumatologia', cor: '#ce93d8' },
+];
+
+const SIMULADOS_INFO = {
+  '14-simulado': { nome: '14° Simulado Residência Médica - ENAMED', data: '2026-06-28' }
+};
+
+const mapAreaId = {
+  'clinica-medica': 'Clínica Médica',
+  'cirurgia': 'Cirurgia',
+  'pediatria': 'Pediatria',
+  'ginecologia': 'Ginecologia e Obstetrícia',
+  'medicina-preventiva': 'Medicina Preventiva',
+  'medicina-intensiva': 'Medicina Intensiva',
+  'emergencia': 'Emergência e Trauma',
+  'ortopedia': 'Ortopedia',
+  'oftalmologia': 'Oftalmologia',
+  'otorrino': 'Otorrinolaringologia',
+  'dermatologia': 'Dermatologia',
+  'psiquiatria': 'Psiquiatria',
+  'geriatria': 'Geriatria',
+  'infectologia': 'Infectologia',
+  'nefrologia': 'Nefrologia',
+  'reumatologia': 'Reumatologia',
+  'geral': 'Geral'
+};
+
+function getAreaIcon(id) {
+  const a = AREAS.find(x => x.id === id);
+  return a ? a.icon : '📚';
+}
+function getAreaName(id) {
+  return mapAreaId[id] || id;
+}
+
+// ─── Carregar dados ───
+async function carregar() {
+  const sub = document.getElementById('pageSub');
+  const content = document.getElementById('content');
+
+  // 1. Progresso de questões avulsas
+  const progQuestoes = JSON.parse(localStorage.getItem('hermesmed_progresso') || '{}');
+
+  // 2. Progresso de simulados
+  const progSimulados = JSON.parse(localStorage.getItem('hermesmed_simulados') || '{}');
+
+  // 3. Flashcards
+  const progFlashcards = JSON.parse(localStorage.getItem('hermesmed_flashcards') || '{}');
+
+  // Carregar JSON de cada área pra saber total de questões
+  const areasData = {};
+  for (const area of AREAS) {
+    try {
+      const resp = await fetch(`data/${area.id}.json`);
+      if (resp.ok) {
+        const data = await resp.json();
+        areasData[area.id] = data.questoes || [];
+      }
+    } catch {}
+  }
+
+  // Carregar simulados
+  let simuladoQuestoes = [];
+  try {
+    const resp = await fetch('data/simulados/14-simulado.json');
+    if (resp.ok) {
+      const data = await resp.json();
+      simuladoQuestoes = data.questoes || [];
+    }
+  } catch {}
+
+  // ─── Consolidar ───
+  // Questões avulsas
+  const areasStats = {};
+  for (const area of AREAS) {
+    const questoes = areasData[area.id] || [];
+    const progresso = progQuestoes[area.id] || {};
+    let acertos = 0, erros = 0, respondidas = 0;
+    for (const q of questoes) {
+      const r = progresso[String(q.id)];
+      if (r === true || r === 'true') { acertos++; respondidas++; }
+      else if (r === false || r === 'false') { erros++; respondidas++; }
+    }
+    areasStats[area.id] = {
+      total: questoes.length,
+      respondidas,
+      acertos,
+      erros,
+      pct: respondidas > 0 ? Math.round(acertos / respondidas * 100) : 0
+    };
+  }
+
+  // Simulados
+  const simStats = [];
+  for (const [simId, dados] of Object.entries(progSimulados)) {
+    if (!dados.concluido && !dados.respostas) continue;
+    const respostas = dados.respostas || {};
+    const concluido = dados.concluido || false;
+    const questSim = simuladoQuestoes;
+    
+    // Contar por área no simulado
+    let totalResp = 0, totalAcertos = 0;
+    const areaSim = {};
+    for (const q of questSim) {
+      const r = respostas[q.id];
+      if (r === 'certo') { totalAcertos++; totalResp++; }
+      else if (r === 'errado') { totalResp++; }
+      else continue;
+      
+      const aNome = q.area || 'Geral';
+      if (!areaSim[aNome]) areaSim[aNome] = { acertos: 0, total: 0 };
+      areaSim[aNome].total++;
+      if (r === 'certo') areaSim[aNome].acertos++;
+    }
+
+    simStats.push({
+      id: simId,
+      info: SIMULADOS_INFO[simId] || { nome: simId },
+      total: questSim.length,
+      respondidas: totalResp,
+      acertos: totalAcertos,
+      pct: totalResp > 0 ? Math.round(totalAcertos / totalResp * 100) : 0,
+      concluido,
+      areas: areaSim
+    });
+  }
+
+  // ─── Renderizar ───
+  const totalGeral = Object.values(areasStats).reduce((s, a) => s + a.respondidas, 0);
+  const acertosGeral = Object.values(areasStats).reduce((s, a) => s + a.acertos, 0);
+  const pctGeral = totalGeral > 0 ? Math.round(acertosGeral / totalGeral * 100) : 0;
+  const totalSimRespondidas = simStats.reduce((s, sim) => s + sim.respondidas, 0);
+  const totalSimAcertos = simStats.reduce((s, sim) => s + sim.acertos, 0);
+  const totalFlashcards = Object.keys(progFlashcards).length;
+
+  const totalRespondidas = totalGeral + totalSimRespondidas;
+  const totalAcertos = acertosGeral + totalSimAcertos;
+  const totalPct = totalRespondidas > 0 ? Math.round(totalAcertos / totalRespondidas * 100) : 0;
+
+  sub.textContent = `${totalRespondidas} questões respondidas`;
+
+  if (totalRespondidas === 0) {
+    content.innerHTML = `
+      <div class="empty-state">
+        <div class="icon">📊</div>
+        <h3>Nenhum dado ainda</h3>
+        <p>Resolva questões e faça simulados para ver seu desempenho aqui!</p>
+        <div style="margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
+          <a href="questoes.html" class="card" style="padding:14px 20px;text-decoration:none;color:var(--accent);font-weight:600;">
+            🎯 Resolver questões
+          </a>
+          <a href="simulados.html" class="card" style="padding:14px 20px;text-decoration:none;color:var(--accent);font-weight:600;">
+            📝 Fazer simulado
+          </a>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  // Resumo geral
+  let html = `
+    <div class="card big-score">
+      <div class="score" style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+        ${totalPct}%
+      </div>
+      <div class="label">Aproveitamento geral</div>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-num" style="color:var(--correct)">${totalAcertos}</div>
+          <div class="stat-label">Acertos</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" style="color:var(--wrong)">${totalRespondidas - totalAcertos}</div>
+          <div class="stat-label">Erros</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" style="color:var(--muted)">${totalRespondidas}</div>
+          <div class="stat-label">Respondidas</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" style="color:var(--yellow)">${totalFlashcards}</div>
+          <div class="stat-label">Flashcards</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Gráfico por área (questões avulsas)
+  const areasComDados = AREAS.filter(a => areasStats[a.id].respondidas > 0);
+  if (areasComDados.length > 0) {
+    html += `<div class="card"><h2>📊 Desempenho por área</h2>`;
+    
+    for (const area of areasComDados) {
+      const st = areasStats[area.id];
+      const pct = st.pct;
+      const totalBar = st.respondidas > 0 ? 100 : 0;
+      const pctCerto = st.respondidas > 0 ? Math.round(st.acertos / st.respondidas * 100) : 0;
+      const pctErrado = st.respondidas > 0 ? Math.round(st.erros / st.respondidas * 100) : 0;
+      
+      html += `
+        <div class="bar-area">
+          <div class="bar-header">
+            <span class="area-name">${area.icon} ${area.name}</span>
+            <span class="area-pct">${st.acertos}/${st.respondidas} · ${pct}%</span>
+          </div>
+          <div class="bar-track">
+            ${st.acertos > 0 ? `<div class="bar-correct" style="width:${pctCerto}%"></div>` : ''}
+            ${st.erros > 0 ? `<div class="bar-wrong" style="width:${pctErrado}%"></div>` : ''}
+            ${st.respondidas < st.total ? `<div class="bar-none" style="width:${100 - pctCerto - pctErrado}%"></div>` : ''}
+          </div>
+          <div class="bar-info">
+            <span>✅ ${st.acertos}</span>
+            <span>❌ ${st.erros}</span>
+            <span>📚 ${st.total - st.respondidas} pendentes</span>
+          </div>
+        </div>
+      `;
+    }
+    html += `</div>`;
+
+    // Tabela detalhada
+    html += `<div class="card"><h2>📋 Tabela por área</h2>
+      <table>
+        <thead><tr><th>Área</th><th>Questões</th><th>Respondidas</th><th>Acertos</th><th>%</th></tr></thead>
+        <tbody>
+    `;
+    for (const area of areasComDados) {
+      const st = areasStats[area.id];
+      html += `<tr>
+        <td>${area.icon} ${area.name}</td>
+        <td>${st.total}</td>
+        <td>${st.respondidas}</td>
+        <td class="td-certo">${st.acertos}</td>
+        <td style="font-weight:700;color:${st.pct >= 70 ? 'var(--correct)' : st.pct >= 40 ? 'var(--yellow)' : 'var(--wrong)'}">${st.pct}%</td>
+      </tr>`;
+    }
+    html += `</tbody></table></div>`;
+  }
+
+  // Simulados
+  if (simStats.length > 0) {
+    html += `<div class="card"><h2>📝 Simulados</h2>`;
+    for (const sim of simStats.sort((a, b) => b.concluido - a.concluido)) {
+      const icon = sim.concluido ? '🏁' : '🔄';
+      const cor = sim.pct >= 70 ? 'var(--correct)' : sim.pct >= 40 ? 'var(--yellow)' : 'var(--wrong)';
+      html += `
+        <div class="sim-item" onclick="location.href='simulados.html'" style="cursor:pointer;">
+          <div class="s-left">
+            <div class="s-title">${icon} ${sim.info.nome}</div>
+            <div class="s-meta">${sim.respondidas}/${sim.total} · ${sim.acertos} acertos</div>
+          </div>
+          <div class="s-score" style="color:${cor}">${sim.pct}%</div>
+        </div>
+      `;
+
+      // Detalhamento por área dentro do simulado
+      if (Object.keys(sim.areas).length > 0) {
+        html += `<div style="margin:-4px 0 8px 12px;font-size:0.75rem;">`;
+        for (const [aNome, aDados] of Object.entries(sim.areas)) {
+          const aPct = aDados.total > 0 ? Math.round(aDados.acertos / aDados.total * 100) : 0;
+          const corA = aPct >= 70 ? 'var(--correct)' : aPct >= 40 ? 'var(--yellow)' : 'var(--wrong)';
+          html += `<span style="color:var(--muted);margin-right:10px;">${aNome}: <span style="color:${corA};font-weight:600;">${aDados.acertos}/${aDados.total}</span></span>`;
+        }
+        html += `</div>`;
+      }
+    }
+    html += `</div>`;
+  }
+
+  // Flashcards
+  if (totalFlashcards > 0) {
+    html += `<div class="card"><h2>🃏 Flashcards</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-num" style="color:var(--accent)">${totalFlashcards}</div>
+          <div class="stat-label">Total de flashcards</div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // Dica final
+  html += `
+    <div style="text-align:center;color:var(--muted);font-size:0.78rem;padding:8px 0;">
+      📊 Os dados ficam salvos no seu navegador.
+      <br>Eles aparecem aqui conforme você estuda!
+    </div>
+  `;
+
+  content.innerHTML = html;
+}
+
+carregar();
+</script>
+</body>
+</html>
