@@ -542,6 +542,12 @@ async function carregar() {
         <button class="btn btn-primary" onclick="syncComGitHub()" style="flex:1;padding:8px;">🔄 Sync</button>
         <button class="btn btn-outline" onclick="syncDoGitHub()" style="flex:1;padding:8px;">⬇️ Baixar</button>
       </div>
+      <div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">
+        <button onclick="confirmarZerarProgresso()" style="padding:10px 16px;font-size:0.82rem;background:#ff3b30;color:white;border:none;border-radius:10px;cursor:pointer;font-weight:600;">
+          🗑️ Zerar todo o progresso
+        </button>
+        <div style="font-size:0.7rem;color:var(--muted);margin-top:3px;">Protegido pela senha do site</div>
+      </div>
       <div id="syncStatus" style="font-size:0.82rem;color:var(--muted);padding:8px 10px;border-radius:8px;background:rgba(0,0,0,0.2);margin-top:10px;min-height:20px;">
         Pronto.
       </div>
@@ -685,6 +691,30 @@ async function syncDoGitHub() {
     setSyncStatus('✅ Restaurado! Recarregando...', '#34c759');
     setTimeout(() => location.reload(), 1000);
   } catch(e) { setSyncStatus('⚠️ ' + e.message, '#ff9f0a'); }
+}
+
+// ─── Zerar progresso (protegido por senha) ───
+const HASH_SENHA = '7bbe53946a9673db28527380a7aafba86eaba6f7f6db8ccd6989c7b0b45cff7c';
+
+async function hashSenha(senha) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(senha);
+  const hash = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hash))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+async function confirmarZerarProgresso() {
+  const senha = prompt('🔐 Digite sua senha para zerar todo o progresso:');
+  if (!senha) return;
+  if ((await hashSenha(senha)) !== HASH_SENHA) { alert('❌ Senha incorreta!'); return; }
+  if (!confirm('🗑️ Tem CERTEZA? Vai apagar TODO o progresso do navegador.\n\nO backup no GitHub NÃO será afetado.')) return;
+  const c2 = prompt('⚠️ Digite "ZERAR" para confirmar:');
+  if (c2 !== 'ZERAR') { alert('Cancelado.'); return; }
+  ['hermesmed_progresso','hermesmed_log','hermesmed_favoritos','hermesmed_notas','hermesmed_streak','hermesmed_simulados','hermesmed_auth'].forEach(k => localStorage.removeItem(k));
+  alert('✅ Zerado! Recarregando...');
+  location.reload();
 }
 
 carregar();

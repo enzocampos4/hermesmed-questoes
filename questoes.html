@@ -1810,6 +1810,13 @@ init();
     <button class="btn btn-outline" onclick="syncDoGitHub()" style="flex:1;padding:10px;">⬇️ Baixar da nuvem</button>
   </div>
 
+  <div style="margin-top:14px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);text-align:center;">
+    <button class="btn btn-danger" onclick="confirmarZerarProgresso()" style="padding:12px 20px;font-size:0.85rem;background:#ff3b30;color:white;border:none;border-radius:10px;cursor:pointer;font-weight:600;">
+      🗑️ Zerar todo o progresso
+    </button>
+    <div style="font-size:0.7rem;color:var(--muted);margin-top:4px;">Protegido pela senha do site</div>
+  </div>
+
   <div id="syncStatus" style="font-size:0.82rem;color:var(--muted);padding:8px 12px;border-radius:8px;background:rgba(0,0,0,0.2);min-height:20px;">
     Pronto para sincronizar.
   </div>
@@ -2027,6 +2034,58 @@ async function syncDoGitHub() {
   } catch(e) {
     setSyncStatus('⚠️ ' + e.message, '#ff9f0a');
   }
+}
+
+// ─── Hash SHA-256 (mesmo do login) ───
+const HASH_SENHA = '7bbe53946a9673db28527380a7aafba86eaba6f7f6db8ccd6989c7b0b45cff7c';
+
+async function hashSenha(senha) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(senha);
+  const hash = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(hash))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+async function confirmarZerarProgresso() {
+  // 1. Pedir senha
+  const senha = prompt('🔐 Digite sua senha para zerar todo o progresso:');
+  if (!senha) return;
+
+  const hash = await hashSenha(senha);
+  if (hash !== HASH_SENHA) {
+    alert('❌ Senha incorreta!');
+    return;
+  }
+
+  // 2. Confirmar
+  if (!confirm('🗑️ Tem CERTEZA? Isso vai apagar TODO o seu progresso:\n\n' +
+    '• Respostas em questões avulsas\n' +
+    '• Respostas em simulados\n' +
+    '• Log de atividades\n' +
+    '• Favoritos e anotações\n' +
+    '• Flashcards e streak\n\n' +
+    'O progresso no GitHub NÃO será afetado (só o do navegador).')) {
+    return;
+  }
+
+  // 3. Segunda confirmação (pra evitar acidentes)
+  const confirm2 = prompt('⚠️ Digite "ZERAR" para confirmar:');
+  if (confirm2 !== 'ZERAR') {
+    alert('❌ Cancelado.');
+    return;
+  }
+
+  // 4. ZERAR TUDO
+  const chaves = [
+    STORAGE_KEY, LOG_KEY, FAVORITOS_KEY, NOTAS_KEY, STREAK_KEY,
+    'hermesmed_simulados', 'hermesmed_revisao', 'hermesmed_auth'
+  ];
+  chaves.forEach(k => localStorage.removeItem(k));
+
+  alert('✅ Progresso zerado com sucesso! A página vai recarregar.');
+  location.reload();
 }
 </script>
 
