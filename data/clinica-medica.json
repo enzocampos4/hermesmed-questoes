@@ -1,0 +1,173 @@
+{
+  "area": "Clínica Médica",
+  "icone": "🫁",
+  "cor": "#7c5cfc",
+  "questoes": [
+    {
+      "id": "pneumo-001",
+      "area": "Clínica Médica",
+      "especialidade": "Pneumologia",
+      "assunto": "Pneumonias Adquiridas na Comunidade",
+      "dificuldade": "Média",
+      "enunciado": "Homem, 65 anos, hipertenso e diabético, comparece ao pronto-socorro com tosse produtiva há 5 dias, dispneia e febre (38,5°C). Ao exame: FC 98 bpm, FR 24 rpm, PA 130/80 mmHg, SatO₂ 90% em ar ambiente. Ausculta pulmonar com creptações em base direita. Radiografia de tórax mostra opacidade consolidativa em lobo inferior direito. Qual o escore de CURB-65 desse paciente e qual a conduta mais adequada?",
+      "alternativas": {
+        "A": "CURB-65 = 2 (confusão mental + ureia > 50), indicado internação em enfermaria",
+        "B": "CURB-65 = 1 (idade ≥ 65 anos), indicado tratamento ambulatorial",
+        "C": "CURB-65 = 2 (idade ≥ 65 anos + FR ≥ 30), indicado internação em enfermaria",
+        "D": "CURB-65 = 3 (idade ≥ 65 anos + FR ≥ 30 + PA alterada), indicado internação em UTI",
+        "E": "CURB-65 = 0, indicado tratamento ambulatorial com macrolídeo"
+      },
+      "correta": "B",
+      "explicacao": "O CURB-65 é um escore de gravidade para pneumonia adquirida na comunidade. Cada item vale 1 ponto: C (Confusão mental), U (Ureia > 50 mg/dL), R (Respiratory rate ≥ 30 irpm), B (Blood pressure - PAS < 90 ou PAD ≤ 60), 65 (idade ≥ 65 anos). Neste paciente, o único ponto é a idade (65 anos). FR = 24 (não ≥ 30), PA normal, sem confusão, sem ureia elevada. CURB-65 = 1: taxa de mortalidade de 2,7% — tratamento ambulatorial é adequado. CURB-65 ≥ 2 indica internação, ≥ 3 considera UTI."
+    },
+    {
+      "id": "pneumo-002",
+      "area": "Clínica Médica",
+      "especialidade": "Pneumologia",
+      "assunto": "Derrame Pleural",
+      "dificuldade": "Difícil",
+      "enunciado": "Paciente feminina, 45 anos, com queixa de dispneia progressiva há 2 semanas e dor pleurítica em hemitórax direito. Ao exame: macicez à percussão, redução do murmúrio vesicular e expansibilidade diminuída em base direita. Realizada toracocentese diagnóstica que evidencia líquido de aspecto turvo com as seguintes características: pH 7,1, glicose 38 mg/dL, LDH 1.200 U/L, proteína 4,5 g/dL, DHL sérico 200 U/L, proteína sérica 7,0 g/dL. Qual o diagnóstico e a conduta?",
+      "alternativas": {
+        "A": "Transudato — indicado tratamento clínico com antibióticos e acompanhamento ambulatorial",
+        "B": "Exsudato — critérios de Light não preenchidos — drenagem ambulatorial com dreno de tórax",
+        "C": "Exsudato com critérios de empiema — indicada drenagem torácica com dreno tubular",
+        "D": "Quilotórax — indicada pleurodese com talco",
+        "E": "Exsudato parapneumônico simples — indicado apenas antibiótico, sem drenagem"
+      },
+      "correta": "C",
+      "explicacao": "Critérios de Light para exsudato: (1) Proteína pleural/sérica > 0,5; (2) DHL pleural/sérico > 0,6; (3) DHL pleural > ⅔ do limite superior sérico (DHL sérico 200, logo LSN ~200, ⅔ = 133 — LDH pleural 1.200 > 133). É exsudato. Além disso, apresenta critérios de gravidade (empiema/complicado): pH < 7,2, glicose < 60 mg/dL, LDH > 1.000. Portanto, é um derrame pleural parapneumônico complicado/empiema, que requer drenagem torácica com dreno tubular."
+    },
+    {
+      "id": "pneumo-003",
+      "area": "Clínica Médica",
+      "especialidade": "Pneumologia",
+      "assunto": "DPOC Exacerbação",
+      "dificuldade": "Média",
+      "enunciado": "Homem, 68 anos, tabagista (40 anos-maço), com diagnóstico de DPOC GOLD 3. Dá entrada no pronto-socorro com aumento da dispneia, aumento do volume de escarro e escarro purulento há 3 dias. Trouxe exames: gasometria arterial (ar ambiente) — pH 7,32, PaCO₂ 58 mmHg, PaO₂ 55 mmHg, HCO₃ 26 mEq/L. Qual a classificação da exacerbação e a conduta inicial mais adequada?",
+      "alternativas": {
+        "A": "Exacerbação Grupo A (sem insuficiência respiratória) — broncodilatador e corticoide inalatório, alta para casa",
+        "B": "Exacerbação Grupo B (insuficiência respiratória aguda sem risco de vida) — oxigenioterapia, broncodilatador, corticoide sistêmico e antibiótico",
+        "C": "Exacerbação Grupo C (insuficiência respiratória aguda com risco de vida) — VNI imediata e internação em UTI",
+        "D": "Exacerbação Grupo B — apenas broncodilatador e oxigênio, sem corticoide",
+        "E": "Exacerbação Grupo C — indicada intubação orotraqueal imediata"
+      },
+      "correta": "B",
+      "explicacao": "A exacerbação de DPOC é classificada em: Grupo A — sem insuficiência respiratória (PaO₂ ≥ 60 ou PaCO₂ < 45); Grupo B — IRpA sem risco de vida (pH ≥ 7,30 sem hipercapnia grave); Grupo C — IRpA com risco de vida (pH < 7,30 ou hipercapnia grave). Paciente tem pH 7,32, PaCO₂ 58, PaO₂ 55 — insuficiência respiratória parcial (PaO₂ < 60 e PaCO₂ > 50), sem acidemia grave (pH > 7,30). Grupo B. Conduta: O₂ para Sat ≥ 90%, broncodilatador inalatório, corticoide sistêmico e antibiótico (escarro purulento = indicação de ATB)."
+    },
+    {
+      "id": "pneumo-004",
+      "area": "Clínica Médica",
+      "especialidade": "Pneumologia",
+      "assunto": "Tromboembolismo Pulmonar",
+      "dificuldade": "Fácil",
+      "enunciado": "Mulher, 32 anos, usuária de anticoncepcional oral, apresenta dispneia súbita e dor torácica ventilatório-dependente há 2 horas. Nega febre ou tosse. Antecedente: cirurgia de joelho há 15 dias. Exame: SatO₂ 88%, FR 30 irpm, FC 110 bpm. Qual exame tem maior acurácia para confirmar o diagnóstico?",
+      "alternativas": {
+        "A": "Radiografia de tórax",
+        "B": "ECG",
+        "C": "Angiotomografia computadorizada de tórax (angioTC)",
+        "D": "Dosagem de dímero D",
+        "E": "Ecocardiograma transtorácico"
+      },
+      "correta": "C",
+      "explicacao": "O TEP é uma emergência. O Wells Score é usado para probabilidade clínica. O exame padrão-ouro para diagnóstico de TEP é a angioTC de tórax (angiotomografia computadorizada com contraste), que tem alta sensibilidade e especificidade (>95%). O dímero D é um exame de exclusão (alto valor preditivo negativo), mas não confirma. Neste caso, a paciente tem alta suspeita clínica (Wells elevado: cirurgia recente, uso de ACO, taquipneia, taquicardia, dispneia súbita), então o dímero D é desnecessário e deve-se ir direto para angioTC."
+    },
+    {
+      "id": "pneumo-005",
+      "area": "Clínica Médica",
+      "especialidade": "Pneumologia",
+      "assunto": "Asma Brônquica",
+      "dificuldade": "Média",
+      "enunciado": "Criança, 8 anos, é trazida ao pronto-socorro com crise de sibilância. Mãe relata que a criança já teve 3 internações por asma no último ano e usa corticoide inalatório diariamente (budesonida 400 mcg/dia), mas com baixa adesão. Ao exame: FR 40 rpm, FC 130 bpm, SatO₂ 91%, uso de musculatura acessória, sibilos expiratórios difusos, PFE = 45% do previsto. Classifique a crise e a conduta imediata.",
+      "alternativas": {
+        "A": "Crise leve — broncodilatador inalatório e alta",
+        "B": "Crise moderada — broncodilatador + corticoide oral e observação",
+        "C": "Crise grave — broncodilatador + corticoide sistêmico + oxigênio, considerar internação",
+        "D": "Crise quase fatal — intubação orotraqueal imediata",
+        "E": "Crise moderada — apenas corticoide inalatório em dose triplicada"
+      },
+      "correta": "C",
+      "explicacao": "Classificação da crise de asma: Leve — PFE > 70%, sem taquipneia/taquicardia, SatO₂ > 95%; Moderada — PFE 50-70%, dispneia moderada, taquipneia, SatO₂ 92-95%; Grave — PFE 33-50%, agitação, impossibilidade de falar, uso de acessórios, SatO₂ < 92%, FC > 130, FR > 30; Quase fatal — PFE < 33%, silêncio auscultatório, cianose, arritmia. A paciente tem PFE 45% (grave), SatO₂ 91%, uso de acessórios, FC 130. Conduta: O₂ suplementar, broncodilatador (β₂-agonista + anticolinérgico), corticoide sistêmico e considerar internação."
+    },
+    {
+      "id": "pneumo-006",
+      "area": "Clínica Médica",
+      "especialidade": "Pneumologia",
+      "assunto": "Neoplasia Pulmonar",
+      "dificuldade": "Difícil",
+      "enunciado": "Homem, 62 anos, tabagista, perda ponderal de 8 kg em 3 meses, tosse crônica e hemoptise. Radiografia de tórax mostra nódulo pulmonar solitário de 3,2 cm em lobo superior esquerdo. Realizada biópsia por agulha fina guiada por TC, cujo laudo anatomopatológico evidencia adenocarcinoma. Qual o próximo passo na propedêutica antes de definir o tratamento?",
+      "alternativas": {
+        "A": "Iniciar quimioterapia neoadjuvante imediatamente",
+        "B": "Realizar PET-CT para estadiamento e determinar se há metástases",
+        "C": "Solicitar ressonância magnética de tórax para melhor definição do nódulo",
+        "D": "Indicar lobectomia esquerda urgente",
+        "E": "Dosar marcadores tumorais séricos (CEA, CYFRA 21-1)"
+      },
+      "correta": "B",
+      "explicacao": "O adenocarcinoma pulmonar é confirmado por biópsia. O próximo passo é o estadiamento com PET-CT (avalia linfonodos mediastinais e metástases à distância) e, se necessário, mediastinoscopia para confirmar comprometimento linfonodal. O estadiamento (I a IV) define a conduta: estádio I/II → cirurgia; III → quimio + radioterapia; IV → tratamento paliativo. Não se opera sem estadiamento completo. Marcadores tumorais não substituem o estadiamento por imagem."
+    },
+    {
+      "id": "pneumo-007",
+      "area": "Clínica Médica",
+      "especialidade": "Pneumologia",
+      "assunto": "Síndrome do Desconforto Respiratório Agudo (SDRA)",
+      "dificuldade": "Difícil",
+      "enunciado": "Paciente internado na UTI há 48 horas por sepse abdominal evolui com piora da oxigenação. PaO₂/FiO₂ = 150 com PEEP de 10 cmH₂O. Radiografia de tórax com opacidades bilaterais. Ausência de sinais clínicos de sobrecarga hídrica. Ecocardiograma normal. Qual o diagnóstico e a estratégia ventilatória recomendada?",
+      "alternativas": {
+        "A": "Edema agudo de pulmão cardiogênico — VNI com BiPAP e diurético",
+        "B": "SDRA moderada — ventilação protetora com volume corrente 6 mL/kg, PEEP ≥ 10, limitar pressão de platô < 30 cmH₂O",
+        "C": "SDRA leve — ventilação com volume corrente 8 mL/kg e PEEP 5",
+        "D": "SDRA grave — indicação de ECMO imediata",
+        "E": "Atelectasia — indicada fisioterapia respiratória e broncoscopia"
+      },
+      "correta": "B",
+      "explicacao": "A SDRA é definida pela classificação de Berlim: início agudo < 7 dias, opacidades bilaterais no RX/TC, não explicada por insuficiência cardíaca/sobrecarga hídrica, e PaO₂/FiO₂ ≤ 300 com PEEP ≥ 5. Classificação: leve (200-300), moderada (100-200), grave (< 100). Paciente: PaO₂/FiO₂ = 150 → SDRA moderada. Conduta: ventilação protetora — volume corrente 6 mL/kg (4-8), PEEP ≥ 10 cmH₂O, pressão de platô ≤ 30 cmH₂O, posição prona se PaO₂/FiO₂ < 150 persistente."
+    },
+    {
+      "id": "pneumo-008",
+      "area": "Clínica Médica",
+      "especialidade": "Pneumologia",
+      "assunto": "Tuberculose",
+      "dificuldade": "Fácil",
+      "enunciado": "Paciente, 28 anos, tosse há 4 semanas, febre vespertina, sudorese noturna e perda ponderal. Realizou baciloscopia de escarro que foi positiva (++). Qual o esquema terapêutico inicial padronizado pelo Ministério da Saúde do Brasil?",
+      "alternativas": {
+        "A": "Rifampicina + Isoniazida + Pirazinamida + Etambutol (RHZE) por 2 meses, seguido de Rifampicina + Isoniazida por 4 meses",
+        "B": "Rifampicina + Isoniazida por 6 meses",
+        "C": "Rifampicina + Isoniazida + Pirazinamida + Estreptomicina por 2 meses, depois Rifampicina + Isoniazida por 7 meses",
+        "D": "Isoniazida + Pirazinamida + Etambutol por 6 meses",
+        "E": "Rifampicina + Isoniazida + Pirazinamida por 9 meses"
+      },
+      "correta": "A",
+      "explicacao": "O esquema básico para tratamento da tuberculose no Brasil (MS) é o RHZE (Rifampicina, Isoniazida, Pirazinamida, Etambutol) na fase intensiva (2 meses), seguido de RH (Rifampicina + Isoniazida) na fase de manutenção (4 meses) — total de 6 meses. Fase intensiva: 2 meses com 4 drogas (RHZE). Fase de manutenção: 4 meses com 2 drogas (RH). A baciloscopia positiva confirma o diagnóstico. Ajustes de dose conforme peso do paciente."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fp-001",
+      "area": "Clínica Médica",
+      "assunto": "Pneumonia — CURB-65",
+      "pergunta": "Quais os componentes do escore CURB-65 e quando indicar internação?",
+      "resposta": "C = Confusão mental\nU = Ureia > 50 mg/dL\nR = FR ≥ 30 irpm\nB = BP (PAS < 90 ou PAD ≤ 60)\n65 = idade ≥ 65 anos\n\n0-1: ambulatorial\n≥ 2: internação enfermaria\n≥ 3: considerar UTI\n≥ 4-5: UTI"
+    },
+    {
+      "id": "fp-002",
+      "area": "Clínica Médica",
+      "assunto": "Derrame Pleural — Critérios de Light",
+      "pergunta": "Quais os 3 critérios de Light para diferenciar exsudato de transudato?",
+      "resposta": "1) Proteína pleural / proteína sérica > 0,5\n2) DHL pleural / DHL sérico > 0,6\n3) DHL pleural > 2/3 do LSN sérico de DHL\n\nBASTA 1 CRITÉRIO para classificar como EXSUDATO."
+    },
+    {
+      "id": "fp-003",
+      "area": "Clínica Médica",
+      "assunto": "DPOC — Classificação Gold",
+      "pergunta": "Classificação GOLD de DPOC por VEF1 e sintomas (grupos A, B, E)",
+      "resposta": "GOLD 1: VEF1 ≥ 80% (leve)\nGOLD 2: 50% ≤ VEF1 < 80% (moderado)\nGOLD 3: 30% ≤ VEF1 < 50% (grave)\nGOLD 4: VEF1 < 30% (muito grave)\n\nGrupos (sintomas + exacerbações):\nA: mMRC 0-1, CAT < 10, ≤ 1 exacerbação (não hospitalização)\nE: mMRC ≥ 2, CAT ≥ 10, ou ≥ 2 exacerbações/≥1 hospitalização"
+    },
+    {
+      "id": "fp-004",
+      "area": "Clínica Médica",
+      "assunto": "TEP — Wells Score",
+      "pergunta": "Quais itens do Escore de Wells para TEP?",
+      "resposta": "Sinais clínicos de TVP: 3 pts\nTEP é o diagnóstico mais provável: 3 pts\nFC > 100: 1,5 pts\nImobilização/cirurgia ≤ 4 sem: 1,5 pts\nTEP/TVP prévia: 1,5 pts\nHemoptise: 1 pt\nCâncer ativo: 1 pt\n\nProbabilidade:\n≤ 4: baixa\n4,5 - 6: moderada\n> 6: alta"
+    }
+  ]
+}

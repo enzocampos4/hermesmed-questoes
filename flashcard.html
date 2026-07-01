@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HermesMed — Flashcards</title>
+<style>
+  :root {
+    --bg: #0f0f1a;
+    --card: #1a1a2e;
+    --card2: #22223a;
+    --accent: #7c5cfc;
+    --accent2: #5ac8fa;
+    --correct: #34c759;
+    --wrong: #ff3b30;
+    --text: #e8e8f0;
+    --muted: #8888a0;
+    --radius: 20px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .container { max-width: 600px; width: 100%; }
+
+  .topbar {
+    display: flex; align-items: center; gap: 12px; padding: 8px 0 16px;
+    width: 100%; max-width: 600px;
+  }
+  .topbar .back {
+    font-size: 1.3rem; text-decoration: none; color: var(--text);
+    width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+    border-radius: 10px; background: var(--card);
+  }
+  .topbar .info { flex: 1; }
+  .topbar .info .title { font-weight: 600; }
+  .topbar .info .sub { color: var(--muted); font-size: 0.8rem; }
+  .topbar .count { color: var(--muted); font-size: 0.9rem; }
+
+  /* Flashcard */
+  .flashcard-container {
+    perspective: 1000px;
+    width: 100%;
+    margin: 20px 0;
+    cursor: pointer;
+  }
+  .flashcard {
+    width: 100%;
+    min-height: 320px;
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(124,92,252,0.1);
+    box-shadow: var(--shadow, 0 8px 32px rgba(0,0,0,0.3));
+    position: relative;
+  }
+  .flashcard:hover { border-color: rgba(124,92,252,0.3); }
+  .flashcard .front, .flashcard .back {
+    width: 100%;
+    transition: opacity 0.3s;
+  }
+  .flashcard .back { display: none; }
+  .flashcard.flipped .front { display: none; }
+  .flashcard.flipped .back { display: block; }
+  .flashcard .label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+  }
+  .flashcard .content {
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  .flashcard .content.big { font-size: 1.4rem; font-weight: 600; }
+  .flashcard .tap-hint {
+    position: absolute;
+    bottom: 12px;
+    font-size: 0.7rem;
+    color: var(--muted);
+    opacity: 0.5;
+  }
+
+  /* Área/assunto tag */
+  .flashcard .meta-tag {
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    font-size: 0.7rem;
+    background: var(--card2);
+    padding: 3px 8px;
+    border-radius: 6px;
+    color: var(--muted);
+  }
+
+  /* Stats */
+  .stats {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .stat-btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .stat-btn:active { transform: scale(0.95); }
+  .stat-btn.easy { background: rgba(52,199,89,0.15); color: var(--correct); }
+  .stat-btn.easy:hover { background: rgba(52,199,89,0.25); }
+  .stat-btn.medium { background: rgba(255,149,0,0.15); color: #ff9500; }
+  .stat-btn.medium:hover { background: rgba(255,149,0,0.25); }
+  .stat-btn.hard { background: rgba(255,59,48,0.15); color: var(--wrong); }
+  .stat-btn.hard:hover { background: rgba(255,59,48,0.25); }
+
+  .counters {
+    display: flex;
+    gap: 16px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin: 8px 0;
+  }
+  .counters span { display: flex; align-items: center; gap: 4px; }
+  .counters strong { color: var(--text); }
+
+  /* Progress bar */
+  .progress-track {
+    width: 100%;
+    height: 4px;
+    background: var(--card2);
+    border-radius: 2px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* Empty state */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+  }
+  .empty-state .icon { font-size: 4rem; margin-bottom: 16px; }
+  .empty-state h3 { color: var(--text); margin-bottom: 8px; }
+  .empty-state p { font-size: 0.9rem; }
+
+  @media (max-width: 500px) {
+    .flashcard { min-height: 260px; padding: 24px 16px; }
+    .flashcard .content { font-size: 1.05rem; }
+    .flashcard .content.big { font-size: 1.2rem; }
+    .stat-btn { padding: 6px 14px; font-size: 0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="topbar">
+    <a href="index.html" class="back">←</a>
+    <div class="info">
+      <div class="title">🃏 Flashcards</div>
+      <div class="sub" id="flashcardSub">Estudo rápido</div>
+    </div>
+    <div class="count" id="flashcardCount">0</div>
+  </div>
+
+  <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+  <div id="flashcardArea">
+    <div class="counters">
+      <span>📚 <strong id="totalCards">0</strong> cards</span>
+      <span>✅ <strong id="doneCards">0</strong> vistos</span>
+      <span>📊 <strong id="pctCards">0%</strong></span>
+    </div>
+
+    <div class="flashcard-container" onclick="flipCard()">
+      <div class="flashcard" id="flashcard">
+        <span class="meta-tag" id="cardTag">Carregando...</span>
+        <div class="front">
+          <div class="label">📝 PERGUNTA</div>
+          <div class="content big" id="cardFront">Clique para carregar</div>
+        </div>
+        <div class="back">
+          <div class="label">💡 RESPOSTA</div>
+          <div class="content" id="cardBack"></div>
+        </div>
+        <span class="tap-hint">Toque para virar</span>
+      </div>
+    </div>
+
+    <div class="stats" id="actionButtons" style="display:none;">
+      <button class="stat-btn hard" onclick="rateCard('hard')">🔴 Difícil</button>
+      <button class="stat-btn medium" onclick="rateCard('medium')">🟡 Médio</button>
+      <button class="stat-btn easy" onclick="rateCard('easy')">🟢 Fácil</button>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:20px;">
+    <button class="stat-btn medium" onclick="window.location.href='index.html'" style="display:inline-flex;">← Voltar ao início</button>
+  </div>
+</div>
+
+<script>
+// ─── State ───
+const STORAGE_KEY = 'hermesmed_flashcards';
+const AREAS = [
+  'clinica-medica','cirurgia','pediatria','ginecologia',
+  'medicina-preventiva','medicina-intensiva','emergencia','ortopedia',
+  'oftalmologia','otorrino','dermatologia','psiquiatria',
+  'geriatria','infectologia','nefrologia','reumatologia'
+];
+
+let cards = [];
+let currentIndex = 0;
+let seenCount = 0;
+
+async function loadFlashcards() {
+  for (const area of AREAS) {
+    try {
+      const resp = await fetch(`data/${area}.json`);
+      if (!resp.ok) continue;
+      const data = await resp.json();
+      if (data.flashcards) {
+        cards = cards.concat(data.flashcards.map(f => ({...f, _area: area})));
+      }
+    } catch {}
+  }
+
+  // Também usar questões como flashcards
+  for (const area of AREAS) {
+    try {
+      const resp = await fetch(`data/${area}.json`);
+      if (!resp.ok) continue;
+      const data = await resp.json();
+      if (data.questoes) {
+        data.questoes.forEach(q => {
+          const alternativas = Object.entries(q.alternativas || {})
+            .map(([k, v]) => `${k}) ${v}`).join('\n');
+          cards.push({
+            id: q.id,
+            pergunta: q.enunciado.replace(/<[^>]*>/g, '') + '\n\n' + alternativas,
+            resposta: `✅ Resposta: ${q.correta}\n\n📖 ${q.explicacao || ''}`,
+            area: q.area || area,
+            assunto: q.assunto || '',
+            _area: area
+          });
+        });
+      }
+    } catch {}
+  }
+
+  if (cards.length === 0) {
+    document.getElementById('flashcardArea').innerHTML = `
+      <div class="empty-state">
+        <div class="icon">📭</div>
+        <h3>Nenhum flashcard disponível</h3>
+        <p>Adicione arquivos .json com flashcards na pasta /data/</p>
+      </div>`;
+    return;
+  }
+
+  // Embaralhar
+  cards = cards.sort(() => Math.random() - 0.5);
+  document.getElementById('totalCards').textContent = cards.length;
+  document.getElementById('flashcardCount').textContent = cards.length;
+  showCard(0);
+}
+
+function showCard(index) {
+  if (index >= cards.length) {
+    showComplete();
+    return;
+  }
+  currentIndex = index;
+  const card = cards[index];
+
+  document.getElementById('flashcard').classList.remove('flipped');
+  document.getElementById('cardFront').textContent = card.pergunta || 'Pergunta não disponível';
+  document.getElementById('cardBack').textContent = card.resposta || 'Resposta não disponível';
+  document.getElementById('cardTag').textContent = card.area + (card.assunto ? ` • ${card.assunto}` : '');
+  document.getElementById('actionButtons').style.display = 'none';
+
+  const pct = Math.round((index / cards.length) * 100);
+  document.getElementById('progressFill').style.width = `${pct}%`;
+  document.getElementById('pctCards').textContent = `${pct}%`;
+}
+
+function flipCard() {
+  const el = document.getElementById('flashcard');
+  if (el.classList.contains('flipped')) return;
+  el.classList.add('flipped');
+  document.getElementById('actionButtons').style.display = 'flex';
+  seenCount++;
+  document.getElementById('doneCards').textContent = seenCount;
+}
+
+function rateCard(rating) {
+  const card = cards[currentIndex];
+
+  // Salvar no localStorage
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  saved[String(card.id || currentIndex)] = {
+    rating,
+    area: card._area,
+    date: new Date().toISOString().split('T')[0]
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+
+  // Avançar
+  if (currentIndex + 1 < cards.length) {
+    showCard(currentIndex + 1);
+  } else {
+    showComplete();
+  }
+}
+
+function showComplete() {
+  document.getElementById('flashcardArea').innerHTML = `
+    <div class="empty-state">
+      <div class="icon">🎉</div>
+      <h3>Flashcards concluídos!</h3>
+      <p>Você revisou ${seenCount} cards neste ciclo</p>
+      <br>
+      <button class="stat-btn medium" onclick="location.reload()" style="display:inline-flex;">🔄 Embaralhar e recomeçar</button>
+    </div>`;
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('pctCards').textContent = '100%';
+}
+
+// ─── Keyboard ───
+document.addEventListener('keydown', (e) => {
+  if (e.key === ' ' || e.key === 'Enter') {
+    e.preventDefault();
+    const card = document.getElementById('flashcard');
+    if (!card.classList.contains('flipped')) {
+      flipCard();
+    } else if (e.key === '1') { rateCard('hard'); }
+    else if (e.key === '2') { rateCard('medium'); }
+    else if (e.key === '3') { rateCard('easy'); }
+  }
+});
+
+loadFlashcards();
+</script>
+</body>
+</html>

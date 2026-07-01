@@ -1,0 +1,50 @@
+{
+  "area": "Cirurgia",
+  "icone": "🔪",
+  "cor": "#ff6b6b",
+  "questoes": [
+    {
+      "id": "cir-001",
+      "area": "Cirurgia",
+      "especialidade": "Cirurgia Geral",
+      "assunto": "Abdome Agudo",
+      "dificuldade": "Média",
+      "enunciado": "Homem, 35 anos, dá entrada no pronto-socorro com dor abdominal difusa iniciada há 12 horas, que começou em região periumbilical e migrou para fossa ilíaca direita. Náuseas e vômitos. Ao exame: temperatura 38,2°C, descompressão brusca positiva em FID, sinal de Rovsing presente. Qual a principal hipótese diagnóstica?",
+      "alternativas": {
+        "A": "Colecistite aguda",
+        "B": "Pancreatite aguda",
+        "C": "Apendicite aguda",
+        "D": "Diverticulite aguda",
+        "E": "Úlcera péptica perfurada"
+      },
+      "correta": "C",
+      "explicacao": "O quadro clássico de apendicite aguda é: dor periumbilical que migra para FID (sinal de Korin), associada a náuseas/vômitos, febre, descompressão brusca positiva (sinal de Blumberg) e sinal de Rovsing positivo (dor em FID à palpação de FIE). A migração da dor ocorre por irritação peritoneal inicialmente visceral (periumbilical) e depois parietal (FID)."
+    },
+    {
+      "id": "cir-002",
+      "area": "Cirurgia",
+      "especialidade": "Cirurgia Geral",
+      "assunto": "Hérnias da Parede Abdominal",
+      "dificuldade": "Fácil",
+      "enunciado": "Paciente, 55 anos, obeso, apresenta-se com aumento de volume em região inguinal direita, redutível, que aumenta com esforço físico. Ao exame, o conteúdo herniário protui acima do ligamento inguinal e lateralmente aos vasos epigástricos inferiores. Qual o tipo de hérnia?",
+      "alternativas": {
+        "A": "Hérnia inguinal direta",
+        "B": "Hérnia inguinal indireta",
+        "C": "Hérnia crural (femoral)",
+        "D": "Hérnia umbilical",
+        "E": "Hérnia incisional"
+      },
+      "correta": "A",
+      "explicacao": "A hérnia inguinal direta protui através do assoalho inguinal (triângulo de Hesselbach), medialmente aos vasos epigástricos inferiores e acima do ligamento inguinal. Já a hérnia inguinal indireta segue o trajeto do conduto peritônio-vaginal, lateral aos vasos epigástricos, podendo descer até o escroto. A hérnia femoral (crural) protui abaixo do ligamento inguinal, medial à veia femoral."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fc-001",
+      "area": "Cirurgia",
+      "assunto": "Abdome Agudo — Classificação",
+      "pergunta": "Quais os 5 tipos de abdome agudo? Dê exemplos de cada.",
+      "resposta": "1) Inflamatório: apendicite, colecistite\n2) Perfurativo: úlcera perfurada, divertículo perfurado\n3) Obstrutivo: brida, hérnia encarcerada, volvo\n4) Hemorrágico: gestação ectópica rota, aneurisma roto\n5) Vascular: isquemia mesentérica"
+    }
+  ]
+}

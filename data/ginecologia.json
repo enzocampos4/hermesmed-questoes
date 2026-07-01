@@ -1,0 +1,50 @@
+{
+  "area": "Ginecologia e Obstetrícia",
+  "icone": "🩺",
+  "cor": "#ff8a80",
+  "questoes": [
+    {
+      "id": "go-001",
+      "area": "Ginecologia e Obstetrícia",
+      "especialidade": "Obstetrícia",
+      "assunto": "Pré-natal — Vacinação",
+      "dificuldade": "Média",
+      "enunciado": "Gestante, 28 anos, primigesta, IG 32 semanas pela DUM, comparece à consulta de pré-natal assintomática. Exame físico: PA 110x70 mmHg, altura uterina 30 cm, BCF 140 bpm. Qual a conduta em relação à vacinação?",
+      "alternativas": {
+        "A": "Administrar vacina dTpa (tríplice bacteriana acelular do adulto)",
+        "B": "Administrar vacina contra febre amarela",
+        "C": "Administrar vacina tríplice viral (SCR)",
+        "D": "Vacina HPV, 3 doses",
+        "E": "Nenhuma vacina é indicada neste momento"
+      },
+      "correta": "A",
+      "explicacao": "A vacina dTpa é recomendada para todas as gestantes a partir da 20ª semana, preferencialmente entre 20-36 semanas. Protege contra difteria, tétano e coqueluche (protegendo o RN contra coqueluche). Vacinas contraindicadas na gestação: febre amarela (salvo surto), SCR (vírus vivo atenuado), HPV."
+    },
+    {
+      "id": "go-002",
+      "area": "Ginecologia e Obstetrícia",
+      "especialidade": "Ginecologia",
+      "assunto": "Climatério",
+      "dificuldade": "Média",
+      "enunciado": "Mulher, 52 anos, há 14 meses sem menstruar, apresenta fogachos, insônia e irritabilidade. Nega sangramento vaginal. Qual a conduta mais adequada para o manejo dos sintomas?",
+      "alternativas": {
+        "A": "Histerectomia total",
+        "B": "Terapia de Reposição Hormonal combinada (estrogênio + progesterona) se não houver contraindicações",
+        "C": "Apenas antidepressivos, sem reposição hormonal",
+        "D": "Estrogênio isolado por via oral",
+        "E": "Radioablação endometrial"
+      },
+      "correta": "B",
+      "explicacao": "Pós-menopausa confirmada (>12 meses de amenorreia) com sintomas vasomotores moderados a graves. A TRH é a primeira opção. Se houver útero (como neste caso), deve-se usar estrogênio combinado com progesterona para prevenir hiperplasia endometrial. Estrogênio isolado só em histerectomizadas. Contraindicações: CA de mama, doença cardiovascular ativa, trombofilia, sangramento vaginal inexplicado."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fgo-001",
+      "area": "Ginecologia e Obstetrícia",
+      "assunto": "Ciclo Menstrual",
+      "pergunta": "Quais as fases do ciclo menstrual e quais hormônios predominam em cada uma?",
+      "resposta": "1) Fase Folicular/Proliferativa (dia 1-14): FSH estimula folículos → estrogênio cresce\n2) Ovulação (dia 14): Pico de LH → liberação do óvulo\n3) Fase Lútea/Secretora (dia 15-28): LH → progesterona prepara endométrio\nSe não houver fecundação → queda de hormônios → menstruação"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "area": "Pediatria",
+  "icone": "👶",
+  "cor": "#5ac8fa",
+  "questoes": [
+    {
+      "id": "ped-001",
+      "area": "Pediatria",
+      "especialidade": "Pediatria Geral",
+      "assunto": "Puericultura — Crescimento",
+      "dificuldade": "Média",
+      "enunciado": "Lactente, 4 meses, nascido a termo, peso ao nascer 3.200g, comparece à consulta de puericultura. Mãe relata que ele sustenta a cabeça, segue objetos com o olhar e sorri socialmente. Qual o peso esperado para esta idade?",
+      "alternativas": {
+        "A": "4.500g",
+        "B": "5.800g",
+        "C": "6.400g",
+        "D": "7.200g",
+        "E": "8.000g"
+      },
+      "correta": "C",
+      "explicacao": "O ganho de peso no 1º trimestre é de aproximadamente 700g/mês, no 2º trimestre 600g/mês. Aos 4 meses: peso ao nascer = 3.200g. Ganho = ~700g/mês nos primeiros 3 meses (2.100g) + 600g no 4º mês = 2.700g. Peso estimado = 3.200 + 2.700 = 5.900g. Na prática, com 4-5 meses a criança dobra o peso do nascimento (~6.400g). Regra prática: 1º trimestre = 700g/mês, 2º trimestre = 600g/mês, 3º trimestre = 500g/mês, 4º trimestre = 400g/mês."
+    },
+    {
+      "id": "ped-002",
+      "area": "Pediatria",
+      "especialidade": "Pediatria Geral",
+      "assunto": "Imunizações",
+      "dificuldade": "Fácil",
+      "enunciado": "Criança, 2 meses, primeira consulta de puericultura. Mãe trouxe a caderneta de vacinação em branco. Quais vacinas devem ser administradas nesta idade segundo o calendário do Ministério da Saúde?",
+      "alternativas": {
+        "A": "BCG + Hepatite B",
+        "B": "Pentavalente + VIP + Pneumocócica 10V + Rotavírus",
+        "C": "Pentavalente + VOP + Pneumocócica 10V + Meningocócica C",
+        "D": "Tríplice viral + Hepatite A + Febre amarela",
+        "E": "dTpa + HPV + Meningocócica ACWY"
+      },
+      "correta": "B",
+      "explicacao": "Aos 2 meses, o calendário do MS prevê: Pentavalente (DTP/Hib/Hep B) — 1ª dose; VIP (poliomielite inativada) — 1ª dose; Pneumocócica 10-valente — 1ª dose; Rotavírus — 1ª dose. BCG e Hepatite B são ao nascer. VOP (poliomielite oral) é aos 3 meses (1º reforço). Tríplice viral é aos 12 meses."
+    }
+  ],
+  "flashcards": [
+    {
+      "id": "fped-001",
+      "area": "Pediatria",
+      "assunto": "Marcos do Desenvolvimento",
+      "pergunta": "Quais os principais marcos do desenvolvimento nos primeiros 12 meses?",
+      "resposta": "2m: sorriso social, segue objetos\n4m: sustenta cabeça, rola\n6m: senta sem apoio, transfere objetos\n9m: engatinha, pinça polegar-indicador, fala 'mama/papa'\n12m: fica em pé, primeiros passos, diz 1-2 palavras"
+    }
+  ]
+}
