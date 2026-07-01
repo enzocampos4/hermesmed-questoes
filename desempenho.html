@@ -447,15 +447,243 @@ async function carregar() {
     </div>`;
   }
 
-  // Dica final
+  // ─── Atividade recente (do log) ───
+  const log = JSON.parse(localStorage.getItem('hermesmed_log') || '[]');
+  const hoje = new Date().toISOString().split('T')[0];
+  const hojeLog = log.filter(e => e.timestamp?.startsWith(hoje));
+  const logAcertos = hojeLog.filter(e => e.acertou === true).length;
+  const logErros = hojeLog.filter(e => e.acertou === false).length;
+
+  if (hojeLog.length > 0) {
+    html += `<div class="card">
+      <h2>📅 Hoje</h2>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-num" style="color:var(--correct)">${logAcertos}</div>
+          <div class="stat-label">Acertos</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" style="color:var(--wrong)">${logErros}</div>
+          <div class="stat-label">Erros</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" style="color:var(--muted)">${hojeLog.length}</div>
+          <div class="stat-label">Questões</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" style="color:var(--accent)">${hojeLog.length > 0 ? Math.round(logAcertos / hojeLog.length * 100) : 0}%</div>
+          <div class="stat-label">Aproveitamento</div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // ─── Últimos 7 dias ───
+  const ultimos7 = [...Array(7)].map((_, i) => {
+    const d = new Date(Date.now() - i * 86400000);
+    return d.toISOString().split('T')[0];
+  }).reverse();
+  
+  const diasAtividade = ultimos7.map(dia => {
+    const qs = log.filter(e => e.timestamp?.startsWith(dia));
+    const ac = qs.filter(e => e.acertou === true).length;
+    const er = qs.filter(e => e.acertou === false).length;
+    return { dia, total: qs.length, acertos: ac, erros: er };
+  });
+
+  if (log.length > 0) {
+    html += `<div class="card"><h2>📈 Últimos 7 dias</h2>
+      <div style="display:flex;gap:4px;align-items:flex-end;height:60px;padding:8px 0;">
+        ${diasAtividade.map(d => {
+          const h = d.total > 0 ? Math.min(50, d.total * 5) : 2;
+          const cor = d.total > 0 ? (d.acertos >= d.erros ? 'var(--correct)' : 'var(--wrong)') : 'var(--muted)';
+          const diaLabel = new Date(d.dia + 'T12:00:00').toLocaleDateString('pt-BR', { weekday: 'short' });
+          return `<div style="flex:1;text-align:center;">
+            <div style="height:${h}px;background:${cor};border-radius:4px 4px 0 0;margin:0 auto;max-width:28px;opacity:${d.total > 0 ? 0.9 : 0.3};transition:height 0.3s;"></div>
+            <div style="font-size:0.6rem;color:var(--muted);margin-top:4px;">${diaLabel}</div>
+            <div style="font-size:0.65rem;color:var(--text);font-weight:600;">${d.total}</div>
+          </div>`;
+        }).join('')}
+      </div>
+      <div style="text-align:center;font-size:0.75rem;color:var(--muted);margin-top:4px;">
+        Total no log: <strong style="color:var(--text)">${log.length}</strong> eventos
+        · <strong style="color:var(--correct)">${log.filter(e => e.acertou === true).length}</strong> acertos
+        · <strong style="color:var(--wrong)">${log.filter(e => e.acertou === false).length}</strong> erros
+      </div>
+    </div>`;
+  }
+
+  // ⚙️ Botão Configurações/Sync
+  html += `<div style="text-align:center;padding:8px 0;">
+    <button onclick="toggleSyncPanel()" style="background:none;border:none;color:var(--muted);font-size:0.78rem;cursor:pointer;padding:8px 16px;border-radius:8px;">
+      ⚙️ Configurações e sincronia
+    </button>
+  </div>`;
+
+  // Painel de sync (inicialmente oculto)
   html += `
-    <div style="text-align:center;color:var(--muted);font-size:0.78rem;padding:8px 0;">
-      📊 Os dados ficam salvos no seu navegador.
-      <br>Eles aparecem aqui conforme você estuda!
+  <div id="syncPanel" style="display:none;">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <h2>☁️ Sincronização GitHub</h2>
+        <button onclick="document.getElementById('syncPanel').style.display='none'" style="background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;">✕</button>
+      </div>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:0.8rem;color:var(--muted);display:block;margin-bottom:4px;">🔑 Token do GitHub</label>
+        <div style="display:flex;gap:6px;">
+          <input type="password" id="ghToken" style="flex:1;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.3);color:var(--text);font-size:0.85rem;" placeholder="github_pat_...">
+          <button class="btn btn-primary" onclick="salvarToken()" style="padding:10px 14px;">💾</button>
+        </div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        <button class="btn btn-secondary" onclick="exportarProgresso()" style="flex:1;padding:8px;">📥 Exportar</button>
+        <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()" style="flex:1;padding:8px;">📤 Importar</button>
+        <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importarProgresso(event)">
+        <button class="btn btn-primary" onclick="syncComGitHub()" style="flex:1;padding:8px;">🔄 Sync</button>
+        <button class="btn btn-outline" onclick="syncDoGitHub()" style="flex:1;padding:8px;">⬇️ Baixar</button>
+      </div>
+      <div id="syncStatus" style="font-size:0.82rem;color:var(--muted);padding:8px 10px;border-radius:8px;background:rgba(0,0,0,0.2);margin-top:10px;min-height:20px;">
+        Pronto.
+      </div>
     </div>
-  `;
+  </div>`;
 
   content.innerHTML = html;
+}
+
+// ═══ Sync / Settings ═══
+const SYNC_KEY = 'hermesmed_sync';
+const LOG_KEY = 'hermesmed_log';
+const GH_OWNER = 'enzocampos4';
+const GH_REPO = 'mooncake-stash';
+const GH_BRANCH = 'main';
+const GH_PATH_ESTADO = 'data/progresso/estado.json';
+
+function toggleSyncPanel() {
+  const p = document.getElementById('syncPanel');
+  p.style.display = p.style.display === 'none' ? 'block' : 'none';
+  if (p.style.display === 'block') {
+    const saved = localStorage.getItem(SYNC_KEY);
+    if (saved) {
+      try {
+        const cfg = JSON.parse(saved);
+        if (cfg.token) document.getElementById('ghToken').value = cfg.token;
+      } catch {}
+    }
+  }
+}
+
+function salvarToken() {
+  const t = document.getElementById('ghToken').value.trim();
+  if (!t) { setSyncStatus('⚠️ Digite um token', '#ff9f0a'); return; }
+  localStorage.setItem(SYNC_KEY, JSON.stringify({ token: t }));
+  setSyncStatus('✅ Token salvo!', '#34c759');
+}
+
+function setSyncStatus(msg, color) {
+  const el = document.getElementById('syncStatus');
+  el.textContent = msg;
+  el.style.color = color || 'var(--muted)';
+}
+
+function getConfig() {
+  try { return JSON.parse(localStorage.getItem(SYNC_KEY) || '{}'); }
+  catch { return {}; }
+}
+
+function exportarProgresso() {
+  try {
+    const dados = {
+      exportado: new Date().toISOString(),
+      versao: 2,
+      progresso: JSON.parse(localStorage.getItem('hermesmed_progresso') || '{}'),
+      log: JSON.parse(localStorage.getItem(LOG_KEY) || '[]'),
+      favoritos: JSON.parse(localStorage.getItem('hermesmed_favoritos') || '{}'),
+      notas: JSON.parse(localStorage.getItem('hermesmed_notas') || '{}'),
+      streak: JSON.parse(localStorage.getItem('hermesmed_streak') || '{}'),
+      simulados: JSON.parse(localStorage.getItem('hermesmed_simulados') || '{}')
+    };
+    const blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'hermesmed-progresso-' + new Date().toISOString().split('T')[0] + '.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    setSyncStatus('✅ Exportado!', '#34c759');
+  } catch(e) { setSyncStatus('❌ Erro: ' + e.message, '#ff3b30'); }
+}
+
+function importarProgresso(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const d = JSON.parse(e.target.result);
+      if (d.progresso) localStorage.setItem('hermesmed_progresso', JSON.stringify(d.progresso));
+      if (d.log) localStorage.setItem(LOG_KEY, JSON.stringify(d.log));
+      if (d.favoritos) localStorage.setItem('hermesmed_favoritos', JSON.stringify(d.favoritos));
+      if (d.notas) localStorage.setItem('hermesmed_notas', JSON.stringify(d.notas));
+      if (d.streak) localStorage.setItem('hermesmed_streak', JSON.stringify(d.streak));
+      if (d.simulados) localStorage.setItem('hermesmed_simulados', JSON.stringify(d.simulados));
+      setSyncStatus('✅ Importado! Recarregando...', '#34c759');
+      setTimeout(() => location.reload(), 1000);
+    } catch(err) { setSyncStatus('❌ Erro: ' + err.message, '#ff3b30'); }
+  };
+  reader.readAsText(file);
+}
+
+async function syncComGitHub() {
+  const cfg = getConfig();
+  if (!cfg.token) { setSyncStatus('⚠️ Configure o token!', '#ff9f0a'); return; }
+  setSyncStatus('🔄 Enviando...', '#5ac8fa');
+  try {
+    const dados = {
+      exportado: new Date().toISOString(),
+      versao: 2,
+      progresso: JSON.parse(localStorage.getItem('hermesmed_progresso') || '{}'),
+      log: JSON.parse(localStorage.getItem(LOG_KEY) || '[]'),
+      favoritos: JSON.parse(localStorage.getItem('hermesmed_favoritos') || '{}'),
+      notas: JSON.parse(localStorage.getItem('hermesmed_notas') || '{}'),
+      streak: JSON.parse(localStorage.getItem('hermesmed_streak') || '{}'),
+      simulados: JSON.parse(localStorage.getItem('hermesmed_simulados') || '{}')
+    };
+    const conteudo = btoa(unescape(encodeURIComponent(JSON.stringify(dados, null, 2))));
+    let sha = null;
+    try {
+      const r = await fetch('https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + GH_PATH_ESTADO + '?ref=' + GH_BRANCH, {
+        headers: { 'Authorization': 'Bearer ' + cfg.token }
+      });
+      if (r.ok) { const d = await r.json(); sha = d.sha; }
+    } catch {}
+    const body = { message: '📊 Sync desempenho - ' + new Date().toISOString().split('T')[0], content: conteudo, branch: GH_BRANCH };
+    if (sha) body.sha = sha;
+    const resp = await fetch('https://api.github.com/repos/' + GH_OWNER + '/' + GH_REPO + '/contents/' + GH_PATH_ESTADO, {
+      method: 'PUT',
+      headers: { 'Authorization': 'Bearer ' + cfg.token, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!resp.ok) { const err = await resp.json(); throw new Error(err.message); }
+    setSyncStatus('✅ Sincronizado!', '#34c759');
+  } catch(e) { setSyncStatus('❌ ' + e.message, '#ff3b30'); }
+}
+
+async function syncDoGitHub() {
+  setSyncStatus('⬇️ Baixando...', '#5ac8fa');
+  try {
+    const resp = await fetch('https://raw.githubusercontent.com/' + GH_OWNER + '/' + GH_REPO + '/' + GH_BRANCH + '/' + GH_PATH_ESTADO);
+    if (!resp.ok) throw new Error('Nada na nuvem');
+    const d = await resp.json();
+    if (d.progresso) localStorage.setItem('hermesmed_progresso', JSON.stringify(d.progresso));
+    if (d.log) localStorage.setItem(LOG_KEY, JSON.stringify(d.log));
+    if (d.favoritos) localStorage.setItem('hermesmed_favoritos', JSON.stringify(d.favoritos));
+    if (d.notas) localStorage.setItem('hermesmed_notas', JSON.stringify(d.notas));
+    if (d.streak) localStorage.setItem('hermesmed_streak', JSON.stringify(d.streak));
+    if (d.simulados) localStorage.setItem('hermesmed_simulados', JSON.stringify(d.simulados));
+    setSyncStatus('✅ Restaurado! Recarregando...', '#34c759');
+    setTimeout(() => location.reload(), 1000);
+  } catch(e) { setSyncStatus('⚠️ ' + e.message, '#ff9f0a'); }
 }
 
 carregar();

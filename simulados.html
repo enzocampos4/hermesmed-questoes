@@ -213,6 +213,7 @@
 
 <script>
 const STORAGE_KEY = 'hermesmed_simulados';
+const LOG_KEY = 'hermesmed_log';
 
 // ─── Utils ───
 function salvarProgresso(idSim, dados) {
@@ -225,6 +226,25 @@ function carregarProgresso(idSim) {
   return p[idSim] || null;
 }
 function pad(n) { return String(n).padStart(2, '0'); }
+
+// ─── Activity Log ───
+function addLogEntry(q, acertou, selecao, modo) {
+  try {
+    const log = JSON.parse(localStorage.getItem(LOG_KEY) || '[]');
+    if (!q) return;
+    log.push({
+      id: q.id,
+      acertou: acertou,
+      selecao: selecao || null,
+      area: q.area || '',
+      subarea: q.subarea || '',
+      fonte: q.fonte || '',
+      timestamp: new Date().toISOString(),
+      modo: modo || (modoProvaAtivo ? 'prova' : 'questoes')
+    });
+    localStorage.setItem(LOG_KEY, JSON.stringify(log));
+  } catch(e) { /* silently fail */ }
+}
 
 // ─── Listar ───
 async function listar() {
@@ -507,6 +527,9 @@ function confirmar() {
 
   salvarProgresso(simuladoId, { respostas, selecao: respSelecao, timerRestante: timerSegundos });
 
+  // Log
+  addLogEntry(q, isCorrect, letra, 'questoes');
+
   // Atualizar UI
   document.querySelectorAll('.alt').forEach(a => {
     a.classList.add('disabled'); a.onclick = null;
@@ -546,6 +569,9 @@ function confirmarProva() {
   const isCorrect = letra === q.correta;
   respostas[q.id] = isCorrect ? 'certo' : 'errado';
   salvarProgresso(simuladoId, { respostas, selecao: respSelecao, timerRestante: timerSegundos });
+
+  // Log
+  addLogEntry(q, isCorrect, letra, 'prova');
 
   // No modo prova, não mostra certo/errado — só marca
   document.querySelector('.alt.selected')?.classList.add('disabled');

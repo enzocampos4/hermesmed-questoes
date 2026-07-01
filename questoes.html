@@ -656,6 +656,8 @@
 <script>
 // ─── State ───
 const STORAGE_KEY = 'hermesmed_progresso';
+const LOG_KEY = 'hermesmed_log';
+const SYNC_KEY = 'hermesmed_sync';
 const REVISAO_KEY = 'hermesmed_revisao';
 const FAVORITOS_KEY = 'hermesmed_favoritos';
 const NOTAS_KEY = 'hermesmed_notas';
@@ -694,6 +696,26 @@ function getAreaKey(q) {
   return areaAtual || q?.area?.toLowerCase().replace(/[^a-z0-9]/g, '-') || 'geral';
 }
 
+// ─── Activity Log ───
+function addLogEntry(q, acertou, selecao) {
+  try {
+    const log = JSON.parse(localStorage.getItem(LOG_KEY) || '[]');
+    const qAtual = q || (questoesFiltradas ? questoesFiltradas[currentIndex] : null);
+    if (!qAtual) return;
+    log.push({
+      id: qAtual.id,
+      acertou: acertou,
+      selecao: selecao || null,
+      area: qAtual.area || '',
+      subarea: qAtual.subarea || qAtual.especialidade || '',
+      fonte: qAtual.fonte || (qAtual._edicao ? `ESTRATÉGIA MED ${qAtual._edicao}` : ''),
+      timestamp: new Date().toISOString(),
+      modo: document.getElementById('modeBadge')?.textContent?.trim() || 'livre'
+    });
+    localStorage.setItem(LOG_KEY, JSON.stringify(log));
+  } catch(e) { /* silently fail */ }
+}
+
 function getProgQuestao(qId, areaKey) {
   const p = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
   const area = p[areaKey] || {};
@@ -714,6 +736,10 @@ function setProgQuestao(qId, areaKey, data) {
   const novo = p[areaKey][String(qId)] || { acertou: null, selecao: null, favorita: false, nota: '', respondida: false };
   Object.assign(novo, data);
   novo.respondida = novo.acertou !== null;
+  // Add timestamp when answering
+  if (data.acertou !== undefined && data.acertou !== null) {
+    novo.data = new Date().toISOString();
+  }
   p[areaKey][String(qId)] = novo;
   localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
   return novo;
@@ -1211,6 +1237,9 @@ function confirmAnswer() {
   // Salvar progresso com a alternativa selecionada
   const areaKey = getAreaKey(q);
   setProgQuestao(q.id, areaKey, { acertou: isCorrect, selecao: selectedLetra });
+
+  // Registrar no log de atividades
+  addLogEntry(q, isCorrect, selectedLetra);
 
   // Gerenciar revisão espaçada
   gerenciarRevisao(q, isCorrect);
@@ -1754,5 +1783,250 @@ document.addEventListener('touchend', (e) => {
 // ─── Start ───
 init();
 </script>
+
+<!-- ⚙️ Sync / Settings Panel -->
+<div id="syncPanel" style="max-width:600px;margin:30px auto;padding:20px;background:var(--card);border-radius:14px;border:1px solid rgba(255,255,255,0.06);display:none;">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+    <h3 style="font-size:1rem;color:var(--text);">☁️ Sincronização com GitHub</h3>
+    <button onclick="document.getElementById('syncPanel').style.display='none'" style="background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;">✕</button>
+  </div>
+
+  <div style="margin-bottom:12px;">
+    <label style="font-size:0.8rem;color:var(--muted);display:block;margin-bottom:4px;">
+      🔑 Token do GitHub
+      <span style="font-size:0.7rem;color:var(--yellow);"> (fine-grained, repo: contents write)</span>
+    </label>
+    <div style="display:flex;gap:8px;">
+      <input type="password" id="ghToken" style="flex:1;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(0,0,0,0.3);color:var(--text);font-size:0.85rem;" placeholder="github_pat_...">
+      <button class="btn btn-primary" onclick="salvarToken()" style="padding:10px 16px;">💾</button>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+    <button class="btn btn-secondary" onclick="exportarProgresso()" style="flex:1;padding:10px;">📥 Exportar</button>
+    <button class="btn btn-secondary" onclick="document.getElementById('importFile').click()" style="flex:1;padding:10px;">📤 Importar</button>
+    <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importarProgresso(event)">
+    <button class="btn btn-primary" onclick="syncComGitHub()" style="flex:1;padding:10px;">🔄 Sincronizar</button>
+    <button class="btn btn-outline" onclick="syncDoGitHub()" style="flex:1;padding:10px;">⬇️ Baixar da nuvem</button>
+  </div>
+
+  <div id="syncStatus" style="font-size:0.82rem;color:var(--muted);padding:8px 12px;border-radius:8px;background:rgba(0,0,0,0.2);min-height:20px;">
+    Pronto para sincronizar.
+  </div>
+  <div style="margin-top:8px;font-size:0.75rem;color:var(--muted);text-align:center;">
+    Log: <span id="logCount">0</span> eventos • Progresso: <span id="progCount">0</span> questões respondidas
+  </div>
+</div>
+
+<div style="text-align:center;padding:12px 0;margin-top:10px;">
+  <button onclick="toggleSyncPanel()" style="background:none;border:none;color:var(--muted);font-size:0.78rem;cursor:pointer;padding:8px 16px;border-radius:8px;">
+    ⚙️ Configurações e sincronia
+  </button>
+</div>
+
+<script>
+// ─── Sync / Settings ───
+function toggleSyncPanel() {
+  const panel = document.getElementById('syncPanel');
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  if (panel.style.display === 'block') {
+    // Carregar token salvo
+    const saved = localStorage.getItem(SYNC_KEY);
+    if (saved) {
+      try {
+        const cfg = JSON.parse(saved);
+        if (cfg.token) document.getElementById('ghToken').value = cfg.token;
+      } catch {}
+    }
+    atualizarContadores();
+  }
+}
+
+function salvarToken() {
+  const token = document.getElementById('ghToken').value.trim();
+  if (!token) {
+    setSyncStatus('⚠️ Digite um token válido', '#ff9f0a');
+    return;
+  }
+  localStorage.setItem(SYNC_KEY, JSON.stringify({ token: token }));
+  setSyncStatus('✅ Token salvo com sucesso!', '#34c759');
+}
+
+function setSyncStatus(msg, color) {
+  const el = document.getElementById('syncStatus');
+  el.textContent = msg;
+  el.style.color = color || 'var(--muted)';
+}
+
+function atualizarContadores() {
+  try {
+    const log = JSON.parse(localStorage.getItem(LOG_KEY) || '[]');
+    document.getElementById('logCount').textContent = log.length;
+    const prog = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    let total = 0;
+    Object.values(prog).forEach(area => {
+      Object.values(area).forEach(v => {
+        const ac = typeof v === 'boolean' ? v : v?.acertou;
+        if (ac !== undefined && ac !== null) total++;
+      });
+    });
+    document.getElementById('progCount').textContent = total;
+  } catch {}
+}
+
+function getConfig() {
+  try {
+    return JSON.parse(localStorage.getItem(SYNC_KEY) || '{}');
+  } catch { return {}; }
+}
+
+function exportarProgresso() {
+  try {
+    const dados = {
+      exportado: new Date().toISOString(),
+      versao: 2,
+      progresso: JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'),
+      log: JSON.parse(localStorage.getItem(LOG_KEY) || '[]'),
+      favoritos: JSON.parse(localStorage.getItem(FAVORITOS_KEY) || '{}'),
+      notas: JSON.parse(localStorage.getItem(NOTAS_KEY) || '{}'),
+      streak: JSON.parse(localStorage.getItem(STREAK_KEY) || '{}'),
+      simulados: JSON.parse(localStorage.getItem('hermesmed_simulados') || '{}')
+    };
+    const blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `hermesmed-progresso-${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    setSyncStatus('✅ Progresso exportado!', '#34c759');
+  } catch(e) {
+    setSyncStatus('❌ Erro ao exportar: ' + e.message, '#ff3b30');
+  }
+}
+
+function importarProgresso(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const dados = JSON.parse(e.target.result);
+      if (dados.progresso) localStorage.setItem(STORAGE_KEY, JSON.stringify(dados.progresso));
+      if (dados.log) localStorage.setItem(LOG_KEY, JSON.stringify(dados.log));
+      if (dados.favoritos) localStorage.setItem(FAVORITOS_KEY, JSON.stringify(dados.favoritos));
+      if (dados.notas) localStorage.setItem(NOTAS_KEY, JSON.stringify(dados.notas));
+      if (dados.streak) localStorage.setItem(STREAK_KEY, JSON.stringify(dados.streak));
+      if (dados.simulados) localStorage.setItem('hermesmed_simulados', JSON.stringify(dados.simulados));
+      atualizarContadores();
+      setSyncStatus('✅ Progresso importado com sucesso! (' + (dados.log?.length || 0) + ' eventos)', '#34c759');
+      location.reload();
+    } catch(err) {
+      setSyncStatus('❌ Erro ao importar: ' + err.message, '#ff3b30');
+    }
+  };
+  reader.readAsText(file);
+}
+
+// ─── GitHub Sync ───
+const GH_OWNER = 'enzocampos4';
+const GH_REPO = 'mooncake-stash';
+const GH_BRANCH = 'main';
+const GH_PATH_ESTADO = 'data/progresso/estado.json';
+const GH_PATH_LOG = 'data/progresso/log.json';
+
+async function syncComGitHub() {
+  const cfg = getConfig();
+  if (!cfg.token) {
+    setSyncStatus('⚠️ Configure o token do GitHub primeiro!', '#ff9f0a');
+    return;
+  }
+  setSyncStatus('🔄 Enviando progresso para o GitHub...', '#5ac8fa');
+
+  try {
+    // 1. Exportar dados
+    const dados = {
+      exportado: new Date().toISOString(),
+      versao: 2,
+      progresso: JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'),
+      log: JSON.parse(localStorage.getItem(LOG_KEY) || '[]'),
+      favoritos: JSON.parse(localStorage.getItem(FAVORITOS_KEY) || '{}'),
+      notas: JSON.parse(localStorage.getItem(NOTAS_KEY) || '{}'),
+      streak: JSON.parse(localStorage.getItem(STREAK_KEY) || '{}'),
+      simulados: JSON.parse(localStorage.getItem('hermesmed_simulados') || '{}')
+    };
+
+    // 2. Enviar estado.json
+    const conteudoEstado = btoa(unescape(encodeURIComponent(JSON.stringify(dados, null, 2))));
+    
+    // Tentar pegar SHA do arquivo existente
+    let shaEstado = null;
+    try {
+      const resp = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PATH_ESTADO}?ref=${GH_BRANCH}`, {
+        headers: { 'Authorization': 'Bearer ' + cfg.token }
+      });
+      if (resp.ok) {
+        const data = await resp.json();
+        shaEstado = data.sha;
+      }
+    } catch {}
+
+    const bodyEstado = {
+      message: `📊 Sync progresso - ${new Date().toISOString().split('T')[0]}`,
+      content: conteudoEstado,
+      branch: GH_BRANCH
+    };
+    if (shaEstado) bodyEstado.sha = shaEstado;
+
+    const respEstado = await fetch(`https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${GH_PATH_ESTADO}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'Bearer ' + cfg.token,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(bodyEstado)
+    });
+
+    if (!respEstado.ok) {
+      const err = await respEstado.json();
+      throw new Error(err.message || 'Erro ao enviar para GitHub');
+    }
+
+    setSyncStatus(`✅ Sincronizado! ${dados.log.length} eventos salvos na nuvem.`, '#34c759');
+    atualizarContadores();
+  } catch(e) {
+    setSyncStatus('❌ Erro na sincronização: ' + e.message, '#ff3b30');
+    console.error('Sync error:', e);
+  }
+}
+
+async function syncDoGitHub() {
+  setSyncStatus('⬇️ Baixando progresso da nuvem...', '#5ac8fa');
+
+  try {
+    const resp = await fetch(`https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${GH_PATH_ESTADO}`);
+    if (!resp.ok) {
+      throw new Error('Nenhum progresso salvo na nuvem ainda');
+    }
+    const dados = await resp.json();
+    
+    if (dados.progresso) localStorage.setItem(STORAGE_KEY, JSON.stringify(dados.progresso));
+    if (dados.log) localStorage.setItem(LOG_KEY, JSON.stringify(dados.log));
+    if (dados.favoritos) localStorage.setItem(FAVORITOS_KEY, JSON.stringify(dados.favoritos));
+    if (dados.notas) localStorage.setItem(NOTAS_KEY, JSON.stringify(dados.notas));
+    if (dados.streak) localStorage.setItem(STREAK_KEY, JSON.stringify(dados.streak));
+    if (dados.simulados) localStorage.setItem('hermesmed_simulados', JSON.stringify(dados.simulados));
+
+    atualizarContadores();
+    setSyncStatus(`✅ Dados restaurados da nuvem! (${dados.log?.length || 0} eventos)`, '#34c759');
+    
+    // Recarregar a página pra aplicar
+    setTimeout(() => location.reload(), 1500);
+  } catch(e) {
+    setSyncStatus('⚠️ ' + e.message, '#ff9f0a');
+  }
+}
+</script>
+
 </body>
 </html>
