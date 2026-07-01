@@ -124,6 +124,16 @@
     background: rgba(124,92,252,0.06); border-left: 3px solid var(--accent);
     display: none; font-size: 0.88rem; line-height: 1.7;
   }
+  .explicacao .exp-img-box { margin: 12px 0; text-align: center; }
+  .explicacao .exp-img {
+    max-width: 100%; height: auto; border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.08); cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .explicacao .exp-img:hover { transform: scale(1.02); }
+  @media (min-width: 600px) {
+    .explicacao .exp-img { max-width: 80%; }
+  }
   .explicacao.visible { display: block; }
   .explicacao .exp-title { color: var(--accent2); font-weight: 700; display: block; margin-bottom: 6px; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; }
 
@@ -430,6 +440,9 @@ function mostrarQuestao(idx) {
       <div class="explicacao ${showExp ? 'visible' : ''}" id="qExp">
         <span class="exp-title">📖 Resolução</span>
         <div id="qExpText">${q.explicacao || 'Resolução não disponível.'}</div>
+        ${q.imagens && q.imagens.length > 0 ? q.imagens.map(img => 
+          `<div class="exp-img-box"><img src="${img}" alt="Imagem da resolução" class="exp-img" loading="lazy" onclick="window.open(this.src)"></div>`
+        ).join('') : ''}
       </div>
       <div class="q-foot" id="qFoot">
         ${!modoProvaAtivo && !respondida
