@@ -879,27 +879,6 @@ async function carregar() {
   </div>`;
 
   content.innerHTML = html;
-
-  // Auto-expand: abre áreas com aproveitamento < 60%
-  document.querySelectorAll('.tree-area').forEach(el => {
-    const header = el.querySelector('.tree-area-header');
-    const pctText = header?.querySelector('.pct')?.textContent?.replace('%', '');
-    const pct = parseFloat(pctText);
-    if (!isNaN(pct) && pct < 60) {
-      toggleArea(header);
-    }
-    // Dentro das áreas expandidas, abre subcats com < 40%
-    const children = el.querySelector('.tree-children');
-    if (children?.classList.contains('open')) {
-      children.querySelectorAll('.tree-row').forEach(row => {
-        const rowPct = row.querySelector('.pct')?.textContent?.replace('%', '');
-        const rp = parseFloat(rowPct);
-        if (!isNaN(rp) && rp < 40) {
-          toggleSub(row);
-        }
-      });
-    }
-  });
 }
 
 // ═══ Sync / Settings ═══
