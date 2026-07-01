@@ -401,8 +401,10 @@
         <div id="qExpImagens" class="exp-images"></div>
       </div>
       <div class="actions" id="qActions">
+        <button class="btn btn-secondary" id="btnPrev" onclick="previousQuestion()" style="display:none;">← Anterior</button>
         <button class="btn btn-primary" id="btnConfirm" onclick="confirmAnswer()">Confirmar</button>
-        <button class="btn btn-secondary" id="btnNext" onclick="nextQuestion()" style="display:none;">Próxima →</button>
+        <button class="btn btn-secondary" id="btnSkip" onclick="pularQuestao()" style="display:none;">⏭️ Pular</button>
+        <button class="btn btn-secondary" id="btnNext" onclick="nextQuestion()">Próxima →</button>
       </div>
     </div> <!-- /question-card -->
   </div> <!-- /questionArea -->
@@ -650,8 +652,14 @@ function temImagemNoEnunciado(enunciado) {
 function showQuestion(index) {
   if (index < 0 || index >= questoesFiltradas.length) return;
   currentIndex = index;
-  answered = false;
   const q = questoesFiltradas[index];
+
+  // Verificar se já foi respondida (via localStorage)
+  const areaKey = areaAtual || q.area?.toLowerCase().replace(/[^a-z0-9]/g, '-') || 'geral';
+  const progresso = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  const progArea = progresso[areaKey] || {};
+  const respAnterior = progArea[String(q.id)];
+  answered = respAnterior !== undefined;
 
   document.getElementById('qIndex').textContent = index + 1;
   document.getElementById('qAcertos').textContent = acertos;
@@ -700,8 +708,85 @@ function showQuestion(index) {
   document.getElementById('qExplicacao').classList.remove('visible');
   document.getElementById('btnConfirm').style.display = '';
   document.getElementById('btnConfirm').disabled = true;
-  document.getElementById('btnNext').style.display = 'none';
   document.getElementById('qActions').querySelectorAll('.btn-correct, .btn-wrong, .btn-outline').forEach(e => e.remove());
+
+  // Navegação: Anterior
+  document.getElementById('btnPrev').style.display = currentIndex > 0 ? '' : 'none';
+
+  // Navegação: Pular (só quando não respondeu e não é a última)
+  document.getElementById('btnSkip').style.display =
+    !answered && currentIndex < questoesFiltradas.length - 1 ? '' : 'none';
+
+  // Navegação: Próxima / Finalizar
+  const btnNext = document.getElementById('btnNext');
+  if (currentIndex < questoesFiltradas.length - 1) {
+    btnNext.textContent = !answered ? '⏭️ Pular →' : 'Próxima →';
+  } else {
+    btnNext.textContent = answered ? '✅ Finalizar' : '⏭️ Pular';
+  }
+
+  // Se já respondida, restaurar estado visual
+  if (answered) {
+    const correta = q.correta;
+    document.querySelectorAll('.alt-btn').forEach(btn => {
+      btn.classList.add('disabled');
+      btn.onclick = null;
+      const letra = btn.dataset.letra;
+      if (letra === correta) {
+        btn.classList.add('correct');
+      }
+    });
+
+    // Mostrar explicação
+    if (q.explicacao) {
+      document.getElementById('qExplicacao').classList.add('visible');
+      document.getElementById('qExplicacaoTexto').innerHTML = q.explicacao;
+      const expImgBox = document.getElementById('qExpImagens');
+      expImgBox.innerHTML = '';
+      if (q.imagens && q.imagens.length > 0) {
+        q.imagens.forEach(src => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.loading = 'lazy';
+          img.onclick = () => window.open(src, '_blank');
+          expImgBox.appendChild(img);
+        });
+      }
+    }
+
+    // Substituir Confirm por badge + Refazer
+    document.getElementById('btnConfirm').style.display = 'none';
+    document.getElementById('btnSkip').style.display = 'none';
+    const actions = document.getElementById('qActions');
+    // Remover badges antigos
+    actions.querySelectorAll('.btn-correct, .btn-wrong, .btn-outline').forEach(e => e.remove());
+    if (respAnterior === true) {
+      const badge = document.createElement('button');
+      badge.className = 'btn btn-correct';
+      badge.disabled = true;
+      badge.textContent = '✅ Correto!';
+      actions.insertBefore(badge, btnNext);
+    } else {
+      const badge = document.createElement('button');
+      badge.className = 'btn btn-wrong';
+      badge.disabled = true;
+      badge.textContent = `❌ Errado! (Resposta: ${correta})`;
+      actions.insertBefore(badge, btnNext);
+    }
+    // Botão Refazer
+    const refBtn = document.createElement('button');
+    refBtn.className = 'btn btn-outline';
+    refBtn.textContent = '🔄 Refazer';
+    refBtn.onclick = () => {
+      const progresso = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      if (progresso[areaKey]) {
+        delete progresso[areaKey][String(q.id)];
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(progresso));
+      }
+      showQuestion(currentIndex);
+    };
+    actions.insertBefore(refBtn, btnNext);
+  }
 
   renderDots();
   document.getElementById('questionCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -775,6 +860,13 @@ function confirmAnswer() {
 
   // Botões
   document.getElementById('btnConfirm').style.display = 'none';
+  document.getElementById('btnSkip').style.display = 'none';
+  // Atualizar texto do Próxima
+  if (currentIndex < questoesFiltradas.length - 1) {
+    document.getElementById('btnNext').textContent = 'Próxima →';
+  } else {
+    document.getElementById('btnNext').textContent = '✅ Finalizar';
+  }
 
   const actions = document.getElementById('qActions');
   if (isCorrect) {
@@ -808,7 +900,22 @@ function confirmAnswer() {
     }
   }
 
-  document.getElementById('btnNext').style.display = '';
+}
+
+function previousQuestion() {
+  if (currentIndex > 0) {
+    // Se a questão atual já foi respondida, mostra ela com o estado salvo
+    showQuestion(currentIndex - 1);
+  }
+}
+
+function pularQuestao() {
+  // Vai pra próxima sem registrar resposta
+  if (currentIndex + 1 < questoesFiltradas.length) {
+    showQuestion(currentIndex + 1);
+  } else {
+    mostrarResultado();
+  }
 }
 
 function nextQuestion() {
