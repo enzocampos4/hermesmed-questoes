@@ -178,6 +178,12 @@
   .explicacao.visible { display: block; }
   .explicacao strong { color: var(--accent2); display: block; margin-bottom: 6px; font-size: 0.85rem; }
   .explicacao p { line-height: 1.6; font-size: 0.9rem; color: #ccc; }
+  .enunciado-imgs { margin-bottom: 16px; }
+  .enunciado-imgs img {
+    max-width: 100%; border-radius: 12px; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.06); display: block;
+  }
+  .enunciado-imgs img:hover { opacity: 0.9; }
   .explicacao .exp-images { margin-top: 12px; display: flex; flex-direction: column; gap: 10px; }
   .explicacao .exp-images img {
     max-width: 100%; border-radius: 12px; cursor: pointer;
@@ -387,6 +393,7 @@
         <span class="tag" id="qDificuldade"></span>
       </div>
       <div class="enunciado" id="qEnunciado"></div>
+      <div class="enunciado-imgs" id="qImagens"></div>
       <div class="alternativas" id="qAlternativas"></div>
       <div class="explicacao" id="qExplicacao">
         <strong>📖 Explicação</strong>
@@ -631,6 +638,14 @@ function filtrarSubarea(subSlug) {
   showQuestion(0);
 }
 
+// ─── Detecta se o enunciado referencia uma imagem que deve ser exibida ───
+function temImagemNoEnunciado(enunciado) {
+  // Exam/Image name + "a seguir"/"abaixo"/"acima"/"conforme"
+  var pat = /(ECG|eletrocardiograma|raio[\s-]?[Xx]|radiografia|tomografia|ultrassonografia|ultrassom|ressonância|angiografia|esfregaço|eletroencefalograma|imagem|figura|gráfic[oa]|fotografia)[^.]{0,60}?(a seguir|abaixo|acima|conforme|como observado)/i;
+  var pat2 = /(imagem|figura)\s.*(abaixo|a seguir|acima|demonstra|mostra|apresenta)/i;
+  return pat.test(enunciado) || pat2.test(enunciado);
+}
+
 // ─── Display ───
 function showQuestion(index) {
   if (index < 0 || index >= questoesFiltradas.length) return;
@@ -652,6 +667,15 @@ function showQuestion(index) {
 
   // Enunciado
   document.getElementById('qEnunciado').innerHTML = q.enunciado;
+
+  // Imagem do enunciado (só se o texto referenciar)
+  var imgBox = document.getElementById('qImagens');
+  if (temImagemNoEnunciado(q.enunciado) && q.imagens && q.imagens.length > 0) {
+    var src = q.imagens[0];
+    imgBox.innerHTML = '<img src="' + src.replace(/'/g, "\\'") + '" alt="Imagem da questão" onclick="window.open(this.src)" loading="lazy">';
+  } else {
+    imgBox.innerHTML = '';
+  }
 
   // Alternativas
   const altsEl = document.getElementById('qAlternativas');
