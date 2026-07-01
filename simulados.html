@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>HermesMed — Simulados</title>
+<style>
+  :root {
+    --bg: #0f0f1a;
+    --card: #1a1a2e;
+    --card2: #22223a;
+    --accent: #7c5cfc;
+    --accent2: #5ac8fa;
+    --correct: #34c759;
+    --wrong: #ff3b30;
+    --text: #e8e8f0;
+    --muted: #8888a0;
+    --radius: 16px;
+    --shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 16px;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+
+  .topbar {
+    display: flex; align-items: center; gap: 12px; padding: 8px 0 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 16px;
+  }
+  .topbar a { font-size: 1.3rem; text-decoration: none; color: var(--text); background: var(--card); width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+  .topbar .info { flex: 1; }
+  .topbar .info .title { font-weight: 600; font-size: 1rem; }
+  .topbar .info .sub { color: var(--muted); font-size: 0.8rem; }
+
+  /* Lista de simulados */
+  .simulado-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 20px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.25s;
+    border: 1px solid transparent;
+  }
+  .simulado-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: var(--shadow); }
+  .simulado-card .sim-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px; }
+  .simulado-card .sim-title { font-weight: 700; font-size: 1.05rem; }
+  .simulado-card .sim-badge {
+    background: var(--accent); color: white; font-size: 0.7rem; font-weight: 700;
+    padding: 3px 10px; border-radius: 8px;
+  }
+  .simulado-card .sim-meta { color: var(--muted); font-size: 0.85rem; margin-bottom: 12px; }
+  .simulado-card .sim-meta span { margin-right: 16px; }
+  .simulado-card .sim-stats {
+    display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem;
+  }
+  .simulado-card .sim-stats .s { display: flex; align-items: center; gap: 4px; color: var(--muted); }
+  .simulado-card .sim-stats .s strong { color: var(--text); }
+  .sim-stats-bar { height: 4px; background: var(--card2); border-radius: 2px; margin-top: 12px; overflow: hidden; }
+  .sim-stats-bar .fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 2px; transition: width 0.5s; }
+
+  /* Filtros */
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .filter-btn {
+    padding: 6px 14px; border: 1px solid var(--card2); border-radius: 20px;
+    background: transparent; color: var(--muted); font-size: 0.8rem;
+    cursor: pointer; transition: 0.2s;
+  }
+  .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+  .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+  /* Stats bar */
+  .stats-bar {
+    display: flex; gap: 16px; padding: 12px 16px;
+    background: var(--card); border-radius: 12px; margin-bottom: 16px; font-size: 0.85rem; flex-wrap: wrap;
+    justify-content: center;
+  }
+  .stats-bar .stat { display: flex; align-items: center; gap: 4px; color: var(--muted); }
+  .stats-bar .stat strong { color: var(--text); }
+
+  /* Question card */
+  .question-card {
+    background: var(--card); border-radius: var(--radius); padding: 20px; margin-bottom: 16px;
+    animation: fadeIn 0.3s;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .question-card .q-meta { font-size: 0.75rem; color: var(--muted); margin-bottom: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .question-card .q-meta .tag { background: var(--card2); padding: 2px 8px; border-radius: 6px; }
+  .question-card .q-meta .tag.area-tag { background: rgba(124,92,252,0.15); color: var(--accent); }
+  .question-card .q-num { font-weight: 700; font-size: 1.1rem; margin-bottom: 8px; color: var(--accent2); }
+  .question-card .enunciado { font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px; }
+  .question-card .enunciado .highlight { display: block; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 10px; border-left: 3px solid var(--accent2); margin: 10px 0; font-style: italic; }
+
+  /* Alternativas */
+  .alts { display: flex; flex-direction: column; gap: 6px; }
+  .alt {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--card2); border: 2px solid transparent; border-radius: 10px;
+    padding: 12px 14px; cursor: pointer; transition: 0.2s; color: var(--text);
+    font-size: 0.9rem; text-align: left; width: 100%;
+  }
+  .alt:hover:not(.disabled) { border-color: var(--accent); }
+  .alt .let { width: 26px; height: 26px; border-radius: 7px; background: var(--bg); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem; flex-shrink: 0; transition: 0.2s; }
+  .alt.selected { border-color: var(--accent); }
+  .alt.selected .let { background: var(--accent); color: white; }
+  .alt.correct { border-color: var(--correct); background: rgba(52,199,89,0.08); }
+  .alt.correct .let { background: var(--correct); color: white; }
+  .alt.wrong { border-color: var(--wrong); background: rgba(255,59,48,0.08); }
+  .alt.wrong .let { background: var(--wrong); color: white; }
+  .alt.show-correct { border-color: var(--correct); background: rgba(52,199,89,0.06); }
+  .alt.show-correct .let { background: var(--correct); color: white; }
+  .alt.disabled { cursor: default; opacity: 0.85; }
+
+  .explicacao {
+    margin-top: 12px; padding: 14px; border-radius: 10px;
+    background: rgba(124,92,252,0.06); border-left: 3px solid var(--accent);
+    display: none; font-size: 0.88rem; line-height: 1.6;
+  }
+  .explicacao.visible { display: block; }
+  .explicacao strong { color: var(--accent2); display: block; margin-bottom: 4px; }
+
+  .actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .btn {
+    padding: 10px 20px; border: none; border-radius: 10px; font-weight: 600;
+    font-size: 0.85rem; cursor: pointer; transition: 0.2s; color: white; flex: 1; min-width: 80px;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-primary { background: var(--accent); }
+  .btn-primary:hover { background: #6a4ae0; }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn-secondary { background: var(--card2); color: var(--text); }
+  .btn-secondary:hover { background: #2a2a44; }
+  .btn-correct { background: var(--correct); }
+  .btn-wrong { background: var(--wrong); }
+
+  /* Resultado */
+  .result { display: none; text-align: center; padding: 30px 20px; }
+  .result.visible { display: block; }
+  .result .big-icon { font-size: 3.5rem; margin-bottom: 12px; }
+  .result h2 { font-size: 1.4rem; margin-bottom: 8px; }
+  .result .score { font-size: 2.8rem; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .result .details { display: flex; justify-content: center; gap: 20px; margin: 16px 0; flex-wrap: wrap; }
+  .result .details .item { background: var(--card); padding: 14px 18px; border-radius: 12px; min-width: 80px; }
+  .result .details .item .num { font-size: 1.3rem; font-weight: 700; }
+  .result .details .item .label { font-size: 0.75rem; color: var(--muted); }
+
+  @media (max-width: 500px) {
+    .question-card { padding: 14px; }
+    .alt { padding: 10px 12px; font-size: 0.85rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="topbar">
+    <a href="index.html">←</a>
+    <div class="info">
+      <div class="title">📝 Simulados</div>
+      <div class="sub" id="pageSub">Carregando simulados...</div>
+    </div>
+  </div>
+
+  <div id="simuladoList"></div>
+  <div id="simuladoView" style="display:none;"></div>
+</div>
+
+<script>
+const STORAGE_KEY = 'hermesmed_simulados';
+
+// ─── Listar simulados ───
+async function listarSimulados() {
+  const el = document.getElementById('simuladoList');
+  const view = document.getElementById('simuladoView');
+  view.style.display = 'none';
+  el.style.display = 'block';
+
+  try {
+    const resp = await fetch('data/simulados/14-simulado.json');
+    const data = await resp.json();
+    const progresso = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    const p14 = progresso['14-simulado'] || {};
+    const respondidas = Object.keys(p14).filter(k => p14[k] !== undefined).length;
+    const acertos = Object.keys(p14).filter(k => p14[k] === true).length;
+    const pct = data.total_questoes > 0 ? Math.round((respondidas / data.total_questoes) * 100) : 0;
+
+    el.innerHTML = `
+      <div class="simulado-card" onclick="abrirSimulado('14-simulado')">
+        <div class="sim-header">
+          <div class="sim-title">${data.simulado}</div>
+          <span class="sim-badge">${data.total_questoes} questões</span>
+        </div>
+        <div class="sim-meta">
+          <span>📅 ${data.data}</span>
+          <span>🏷️ ENAMED</span>
+        </div>
+        <div class="sim-stats">
+          <span class="s">✅ <strong>${acertos}</strong> acertos</span>
+          <span class="s">📊 <strong>${respondidas}</strong>/${data.total_questoes} respondidas</span>
+          <span class="s">🎯 <strong>${pct}%</strong> completo</span>
+        </div>
+        <div class="sim-stats-bar"><div class="fill" style="width:${pct}%"></div></div>
+      </div>
+      <div style="text-align:center;margin-top:12px;">
+        <button class="btn btn-primary" onclick="abrirSimulado('14-simulado')" style="flex:0;padding:12px 24px;display:inline-flex;">
+          🎯 Iniciar Simulado
+        </button>
+      </div>
+    `;
+    document.getElementById('pageSub').textContent = '1 simulado disponível';
+  } catch(e) {
+    el.innerHTML = `
+      <div style="text-align:center;padding:60px 20px;color:var(--muted);">
+        <div style="font-size:3rem;margin-bottom:12px;">📭</div>
+        <strong>Nenhum simulado disponível</strong>
+        <p style="margin-top:8px;font-size:0.9rem;">Adicione arquivos .json na pasta data/simulados/</p>
+      </div>`;
+  }
+}
+
+// ─── Abrir simulado ───
+let questoes = [];
+let currentIndex = 0;
+let acertos = 0;
+let erros = 0;
+let answered = false;
+let selectedLetra = null;
+let areaFiltro = null;
+
+async function abrirSimulado(id, filtroArea) {
+  areaFiltro = filtroArea || null;
+  document.getElementById('simuladoList').style.display = 'none';
+  const view = document.getElementById('simuladoView');
+  view.style.display = 'block';
+
+  try {
+    const resp = await fetch(`data/simulados/${id}.json`);
+    const data = await resp.json();
+    questoes = data.questoes;
+
+    if (areaFiltro) {
+      questoes = questoes.filter(q => q.area === areaFiltro);
+    }
+
+    acertos = 0; erros = 0; currentIndex = 0;
+
+    view.innerHTML = `
+      <div class="stats-bar" id="qStats">
+        <span class="stat">📝 <strong id="qIdx">1</strong>/<span id="qTot">${questoes.length}</span></span>
+        <span class="stat">✅ <strong id="qAcertos">0</strong></span>
+        <span class="stat">❌ <strong id="qErros">0</strong></span>
+        <span class="stat">🎯 <strong id="qPct">0%</strong></span>
+      </div>
+      <div id="qArea" style="margin-bottom:8px;">
+        ${areaFiltro ? `<span class="filter-btn active" style="cursor:default;">📂 ${areaFiltro}</span>` : ''}
+        <button class="filter-btn" onclick="voltarLista()" style="float:right;">← Todos simulados</button>
+      </div>
+      <div id="qCard"></div>
+      <div class="result" id="qResult"></div>
+    `;
+
+    showQuestion(0);
+  } catch(e) {
+    view.innerHTML = `<p style="color:var(--wrong);">Erro ao carregar simulado.</p>`;
+  }
+}
+
+function showQuestion(index) {
+  if (index >= questoes.length) { showResult(); return; }
+  currentIndex = index; answered = false; selectedLetra = null;
+  const q = questoes[index];
+
+  document.getElementById('qIdx').textContent = index + 1;
+  document.getElementById('qTot').textContent = questoes.length;
+  document.getElementById('qAcertos').textContent = acertos;
+  document.getElementById('qErros').textContent = erros;
+  document.getElementById('qPct').textContent = questoes.length > 0 ? Math.round((index / questoes.length) * 100) + '%' : '0%';
+
+  const letras = ['A','B','C','D','E'];
+  let altsHtml = '';
+  (Object.entries(q.alternativas || {})).forEach(([k, v]) => {
+    altsHtml += `<div class="alt" data-let="${k}" onclick="selectAlt('${k}')">
+      <span class="let">${k}</span><span>${v}</span>
+    </div>`;
+  });
+
+  const card = document.getElementById('qCard');
+  card.innerHTML = `
+    <div class="question-card">
+      <div class="q-meta">
+        <span class="tag area-tag">${q.area || ''}</span>
+        <span class="tag">Q${q.numero}</span>
+      </div>
+      <div class="q-num">Questão ${q.numero}</div>
+      <div class="enunciado">${q.enunciado}</div>
+      <div class="alts">${altsHtml}</div>
+      <div class="explicacao" id="qExp">
+        <strong>📖 Resolução</strong>
+        <p id="qExpText">${q.explicacao || 'Resolução não disponível para esta questão.'}</p>
+      </div>
+      <div class="actions" id="qActions">
+        <button class="btn btn-primary" id="btnConfirm" onclick="confirmar()" disabled>Confirmar</button>
+        <button class="btn btn-secondary" id="btnNext" onclick="nextQ()" style="display:none;">Próxima →</button>
+      </div>
+    </div>
+  `;
+
+  card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function selectAlt(letra) {
+  if (answered) return;
+  selectedLetra = letra;
+  document.querySelectorAll('.alt').forEach(a => {
+    a.classList.toggle('selected', a.dataset.let === letra);
+  });
+  document.getElementById('btnConfirm').disabled = false;
+}
+
+function confirmar() {
+  if (!selectedLetra || answered) return;
+  answered = true;
+  const q = questoes[currentIndex];
+  const isCorrect = selectedLetra === q.correta;
+
+  if (isCorrect) acertos++; else erros++;
+
+  document.querySelectorAll('.alt').forEach(a => {
+    a.classList.add('disabled');
+    a.onclick = null;
+    if (a.dataset.let === q.correta) a.classList.add('correct');
+    if (a.dataset.let === selectedLetra && a.dataset.let !== q.correta) a.classList.add('wrong');
+    if (a.dataset.let === q.correta && a.dataset.let !== selectedLetra) a.classList.add('show-correct');
+  });
+
+  document.getElementById('qExp').classList.add('visible');
+  document.getElementById('btnConfirm').style.display = 'none';
+
+  const actions = document.getElementById('qActions');
+  const badge = document.createElement('button');
+  badge.className = `btn ${isCorrect ? 'btn-correct' : 'btn-wrong'}`;
+  badge.disabled = true;
+  badge.textContent = isCorrect ? '✅ Correto!' : `❌ Errado! (Gabarito: ${q.correta})`;
+  actions.insertBefore(badge, document.getElementById('btnNext'));
+  document.getElementById('btnNext').style.display = '';
+
+  // Salvar
+  salvar(q, isCorrect);
+
+  document.getElementById('qAcertos').textContent = acertos;
+  document.getElementById('qErros').textContent = erros;
+}
+
+function nextQ() {
+  showQuestion(currentIndex + 1);
+}
+
+function salvar(q, isCorrect) {
+  const progresso = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  if (!progresso['14-simulado']) progresso['14-simulado'] = {};
+  progresso['14-simulado'][String(q.id)] = isCorrect;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(progresso));
+}
+
+function showResult() {
+  const total = questoes.length;
+  const pct = total > 0 ? Math.round((acertos / total) * 100) : 0;
+  let icon, title;
+  if (pct >= 80) { icon = '🏆'; title = 'Excelente!'; }
+  else if (pct >= 60) { icon = '👏'; title = 'Bom trabalho!'; }
+  else if (pct >= 40) { icon = '💪'; title = 'Continue praticando!'; }
+  else { icon = '📚'; title = 'Hora de revisar!'; }
+
+  document.getElementById('qCard').innerHTML = '';
+  document.getElementById('qStats').style.display = 'none';
+  const result = document.getElementById('qResult');
+  result.classList.add('visible');
+  result.innerHTML = `
+    <div class="big-icon">${icon}</div>
+    <h2>${title}</h2>
+    <div class="score">${pct}%</div>
+    <p>${acertos} de ${total} questões</p>
+    <div class="details">
+      <div class="item"><div class="num" style="color:var(--correct)">${acertos}</div><div class="label">Acertos</div></div>
+      <div class="item"><div class="num" style="color:var(--wrong)">${erros}</div><div class="label">Erros</div></div>
+      <div class="item"><div class="num" style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">${pct}%</div><div class="label">Aproveitamento</div></div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px;">
+      <button class="btn btn-secondary" onclick="voltarLista()" style="flex:0;padding:12px 24px;">← Voltar</button>
+      <button class="btn btn-primary" onclick="location.reload()" style="flex:0;padding:12px 24px;">🔄 Refazer</button>
+    </div>
+  `;
+}
+
+function voltarLista() {
+  document.getElementById('simuladoView').style.display = 'none';
+  document.getElementById('simuladoList').style.display = 'block';
+  listarSimulados();
+}
+
+// ─── Keyboard ───
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    if (!answered && !document.getElementById('btnConfirm')?.disabled) confirmar();
+    else if (answered && document.getElementById('btnNext')?.style.display !== 'none') nextQ();
+  } else if (['1','2','3','4','5'].includes(e.key)) {
+    const alts = document.querySelectorAll('.alt');
+    if (alts[parseInt(e.key)-1]) alts[parseInt(e.key)-1].click();
+  }
+});
+
+// ─── Init ───
+listarSimulados();
+</script>
+</body>
+</html>
